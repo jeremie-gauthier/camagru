@@ -1,9 +1,16 @@
 <?php require "layouts/header.php" ?>
+<link rel="stylesheet" type="text/css" href="./style/home.css">
+<div class="title">
+    <h1 >photorama</h1>
+</div>
 
-<h1>home page</h1>
-
-<?php
-echo "Okay Doug";
-?>
-
+<div class="mid w-100 row"> 
+    <div class="main col-8"> <p>oui</p> </div> 
+    <div class="side col-3"><p>oui</p></div>
+</div>
+<div class="footer">   
+    <?php
+    echo "rien";
+    ?>
+</div>
 <?php require "layouts/footer.php" ?>
