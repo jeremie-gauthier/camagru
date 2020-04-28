@@ -4,23 +4,16 @@ A small Instagram-like project
 
 ## 🔧 Installation
 
-For security reasons, credentials are not visible in source code.
+**Mac OS:** Follow [this tutorial](https://blog.edenpulse.com/apache-mysql-php-sur-osx/) to setup Apache/MySQL/PHP
 
-They are instead defined in local env vars for both PHP and Apache.
-
-### **How to define env vars for Apache**
-
-**Ubuntu**
-
-Edit `/etc/apache2/envvars` and define your variables like this
-
-```bash
-export KEY=VALUE
-```
+For security reasons, credentials are not visible in source code. They are instead defined in local env vars and then accessed in PHP with `getenv(env_var)`.
 
 ### **How to define env vars for PHP**
 
-**Ubuntu**
+<details>
+<summary>
+  <strong>Ubuntu</strong>
+</summary>
 
 First, ensure that environment vars are read by PHP.
 
@@ -49,10 +42,47 @@ If you have edited your `.bashrc`, don't forget to source it
 source .bashrc
 ```
 
-### **Restart Apache**
+</details>
 
-Restart Apache after having defined those variables to take them into account
+<details>
+<summary>
+  <strong>Mac OS</strong>
+</summary>
+
+Just define your variables in shell (or `.bashrc` for persistent data) with the following command
 
 ```bash
-systemctl restart apache2
+export KEY=VALUE
 ```
+
+⚠️ _Please note that **localhost** should be written as **127.0.0.1** on MacOS_ otherwise you'll get some troubles connecting to the database
+
+If you have edited your `.bashrc`, don't forget to source it
+
+```bash
+source .bashrc
+```
+
+</details>
+
+### **How to create MySQL users**
+
+Connect to mysql with root account (you will be asked to type your password)
+
+```bash
+mysql -u root -p
+```
+
+Create your user
+
+```sql
+CREATE USER 'newuser'@'localhost' IDENTIFIED BY 'user_password'
+```
+
+Grant privileges to his account
+
+```sql
+GRANT ALL PRIVILEGES ON database_name.* TO 'db_user'@'localhost'
+```
+
+This new account now have all privileges on `database_name`
