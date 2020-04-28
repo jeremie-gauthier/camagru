@@ -1,7 +1,7 @@
 <?php require "layouts/header.php" ?>
 <link rel="stylesheet" type="text/css" href="./style/home.css">
 <div class="title">
-    <h1 >photorama</h1>
+    <h1 style="margin-left: 20px">Camagru</h1>
 </div>
 
 <div class="mid w-100 row"> 
