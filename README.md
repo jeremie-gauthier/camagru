@@ -4,6 +4,10 @@ A small Instagram-like project
 
 ## 🔧 Installation
 
+**MAC**
+
+Follow this tutorial https://blog.edenpulse.com/apache-mysql-php-sur-osx/
+
 For security reasons, credentials are not visible in source code.
 
 They are instead defined in local env vars for both PHP and Apache.
