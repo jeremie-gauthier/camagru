@@ -1,6 +1,6 @@
 <?php
   session_start();
-  require_once("server/utils/class/Session.php");
+  require_once "server/utils/class/Session.php";
 ?>
 <?php require_once "layouts/header.php" ?>
 <link rel="stylesheet" type="text/css" href="style/auth.css">
