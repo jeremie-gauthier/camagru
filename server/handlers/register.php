@@ -5,7 +5,6 @@ require_once "../utils/validation/pseudo.php";
 require_once "../utils/validation/email.php";
 require_once "../utils/validation/password.php";
 require_once "../utils/class/Session.php";
-require_once "../utils/class/Database.php";
 require_once "../utils/class/Users.php";
 require_once "../../config/database.php";
 
