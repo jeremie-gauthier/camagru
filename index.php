@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <?php require "layouts/header.php" ?>
 <link rel="stylesheet" type="text/css" href="style/home.css">
 
