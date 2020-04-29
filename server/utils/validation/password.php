@@ -1,16 +1,33 @@
 <?php
 
+function isUpper($pwd) {
+  return preg_match('/[A-Z]/', $pwd);
+}
+
+function isLower($pwd) {
+  return preg_match('/[a-z]/', $pwd);
+}
+
+function isDigit($pwd) {
+  return preg_match('/\d/', $pwd);
+}
+
+function isSpecial($pwd) {
+  $specials = '/[ !\"#\$%&\'\(\)\*\+,-\.\/\\:;<=>\?@\[\]\^_`{\|}~]/';
+  return preg_match($specials, $pwd);
+}
+
 function checkPwd($pwd, $confirmPwd) {
   $len = strlen($pwd);
-  $specials = '/[ !\"#\$%&\'\(\)\*\+,-\.\/\\:;<=>\?@\[\]\^_`{\|}~]/';
   
-  $isUpper = function() use ($pwd) { preg_match('/[A-Z]/', $pwd); };
-	$isLower = function() use ($pwd) { preg_match('/[a-z]/', $pwd); };
-  $isDigit = function() use ($pwd) { preg_match('/\d/', $pwd); };
-  $isSpecial = function() use ($pwd) { preg_match($specials, $pwd); };
-	$checkChar = isUpper() && isLower() && isDigit() && isSpecial();
-
-	if ($pwd == "" || $len < 8 || !$checkChar || strcmp($pwd, $confirmPwd) != 0) {
+  if ($pwd == ""
+    || $len < 8
+    || strcmp($pwd, $confirmPwd) != 0
+    || !isUpper($pwd)
+    || !isLower($pwd)
+    || !isDigit($pwd)
+    || !isSpecial($pwd)
+  ) {
     return false;
 	} else {
     return true;
