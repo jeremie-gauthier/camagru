@@ -6,7 +6,9 @@ require_once "../utils/validation/email.php";
 require_once "../utils/validation/password.php";
 require_once "../utils/class/Session.php";
 require_once "../utils/class/Database.php";
+require_once "../utils/class/Users.php";
 require_once "../../config/database.php";
+
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -27,12 +29,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 
   try {
-    $db = new Database($DB_DSN, $DB_USER, $DB_PASSWORD);
-    $query = "SELECT email FROM users WHERE email=:email";
-    $values = [":email" => $email];
-    $db->query($query, $values);
-    $result = $db->get_result();
-    if ($result && count($result) != 0) {
+    $user_cls = new Users($DB_DSN, $DB_USER, $DB_PASSWORD);
+
+    $user = $user_cls->getByMail($email);
+    if ($user && count($user) != 0) {
       Session::set(
         "register-err",
         "Cette adresse email est deja associee a un autre compte"
@@ -40,18 +40,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       header("Location: ../../register.php");
       die(1);  
     }
-
-    // AJOUTER HASH ET VALIDATION MAIL PAR LA SUITE
-    $query = "INSERT INTO users (pseudo, email, password) VALUES (:pseudo, :email, :pwd)";
-    $values = [
-      ":pseudo" => $pseudo,
-      ":email" => $email,
-      ":pwd" => password_hash($pwd, PASSWORD_DEFAULT)
-    ];
-    $db->query($query, $values);
+    
+    $user_cls->create($pseudo, $email, $pwd);
     Session::del("register-err");
     Session::set("pseudo", $pseudo);
     Session::set("email", $email);
+
     header("Location: ../../index.php");
   } catch (Exception $e) {
     Session::set(
