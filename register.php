@@ -1,6 +1,9 @@
 <?php
   session_start();
   require_once "server/utils/class/Session.php";
+  if (Session::exists("pseudo")) {
+    header("Location: index.php");
+  }
 ?>
 <?php require_once "layouts/header.php" ?>
 <link rel="stylesheet" type="text/css" href="style/auth.css">
@@ -11,7 +14,7 @@
 <div class="container">
   <h1>Inscription</h1>
   <hr />
-  <form name="register" method="POST" action="server/handleRegister.php" onsubmit="return submitForm()">
+  <form name="register" method="POST" action="server/handlers/register.php" onsubmit="return submitForm()">
     <div class="form-group no-margin">
       <label for="pseudo">Choisissez un pseudo</label>
       <input type="text" class="form-control" name="pseudo" id="pseudo" maxlength="16" required>

@@ -1,6 +1,9 @@
 <?php
   session_start();
-  require_once("server/utils/class/Session.php");
+  require_once "server/utils/class/Session.php";
+  if (Session::exists("pseudo")) {
+    header("Location: index.php");
+  }
 ?>
 <?php require_once "layouts/header.php" ?>
 <link rel="stylesheet" type="text/css" href="style/auth.css">
@@ -11,7 +14,7 @@
 <div class="container">
   <h1>Connexion</h1>
   <hr />
-  <form name="register" method="POST" action="server/handleRegister.php" onsubmit="return submitForm()">
+  <form name="login" method="POST" action="server/handlers/login.php" onsubmit="return submitForm()">
     <div class="form-group no-margin">
       <label for="email">Adresse mail</label>
       <input type="email" class="form-control" name="email" id="email" required>
@@ -30,10 +33,9 @@
 <?php require_once "layouts/footer.php" ?>
 
 <script>
-  const form = document.forms.register;
+  const form = document.forms.login;
   const [pseudoErr, emailErr, pwdErr] = mapElements([
-    "email-error",
-    "pwd-error"
+    "email-error"
   ]);
 
   window.onload = () => {
