@@ -26,8 +26,12 @@ class Database {
     $this->stmt->execute($values);
   }
 
-  function get_result() {
+  function get_first_result() {
     return $this->stmt->fetch();
+  }
+
+  function get_results() {
+    return $this->stmt->fetchAll();
   }
 
   function close() {
