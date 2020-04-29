@@ -38,8 +38,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       ":pwd" => $pwd
     ];
     $db->query($query, $values);
-    echo "Insertion succeed";
+    // echo "Insertion succeed";
+    Session::del("register-err");
+    Session::set("pseudo", $pseudo);
+    Session::set("email", $email);
+    header("Location: ../index.php");
   } catch (Exception $e) {
+    // Session::set(
+    //   "register-err",
+    //   "Une erreur est survenue lors de la creation de votre compte"
+    // );
+    // header("Location: ../register.php");
     echo ("Une erreur est survenue" . $e);
     die(2);
   }
