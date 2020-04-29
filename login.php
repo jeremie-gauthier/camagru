@@ -27,7 +27,13 @@
     </div>
     <button type="submit" value="Submit" class="btn btn-primary">Connexion</button>
   </form>
-  <span class="text-danger"><?php echo Session::get("register-err") ?></span>
+  <span class="text-danger">
+    <?php
+      if (Session::exists("login-err")) {
+        echo Session::get("login-err");
+      }
+    ?>
+  </span>
 </div>
 
 <?php require_once "layouts/footer.php" ?>
