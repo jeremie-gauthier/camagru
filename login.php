@@ -14,16 +14,14 @@
 <div class="container">
   <h1>Connexion</h1>
   <hr />
-  <form name="login" method="POST" action="server/handlers/login.php" onsubmit="return submitForm()">
-    <div class="form-group no-margin">
+  <form name="login" method="POST" action="server/handlers/login.php">
+    <div class="form-group">
       <label for="email">Adresse mail</label>
       <input type="email" class="form-control" name="email" id="email" required>
-      <span class="text-danger feedback" id="email-error"></span>
     </div>
-    <div class="form-group no-margin">
+    <div class="form-group">
       <label for="pwd">Mot de passe</label>
       <input type="password" class="form-control" name="pwd" id="pwd" minlength='8' required>
-      <span class="text-danger feedback" id="pwd-error"></span>
     </div>
     <button type="submit" value="Submit" class="btn btn-primary">Connexion</button>
   </form>
@@ -37,25 +35,3 @@
 </div>
 
 <?php require_once "layouts/footer.php" ?>
-
-<script>
-  const form = document.forms.login;
-  const [pseudoErr, emailErr, pwdErr] = mapElements([
-    "email-error"
-  ]);
-
-  window.onload = () => {
-    form.email.addEventListener('blur', () =>
-      checkEmail(form.email.value, emailErr)
-    );
-    form['confirm-pwd'].addEventListener('blur', () =>
-      checkPwd(form.pwd.value, form['confirm-pwd'].value, pwdErr)
-    );
-  }
-
-  const submitForm = () => {
-    checkEmail(form.email.value, emailErr);
-    checkPwd(form.pwd.value, form['confirm-pwd'].value, pwdErr);
-    return [emailErr, pwdErr].every((elem) => elem.innerHTML === "");
-  }
-</script>
