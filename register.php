@@ -33,7 +33,13 @@
     </div>
     <button type="submit" value="Submit" class="btn btn-primary">Inscription</button>
   </form>
-  <span class="text-danger"><?php echo Session::get("register-err") ?></span>
+  <span class="text-danger">
+    <?php
+      if (Session::exists("register-err")) {
+        echo Session::get("register-err");
+      }
+    ?>
+  </span>
 </div>
 
 <?php require_once "layouts/footer.php" ?>
