@@ -12,7 +12,7 @@ class Users extends Database{
       $query = "SELECT * FROM users WHERE email=:email";
       $values = [":email" => $email];
       $this->query($query, $values);
-      $user = $this->get_result();
+      $user = $this->get_results();
       return $user;
     } catch (Exception $e) {
       throw $e;
