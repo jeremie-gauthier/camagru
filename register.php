@@ -31,8 +31,8 @@
       <span class="text-danger feedback" id="pwd-error"></span>
     </div>
     <div class="form-group">
-      <label for="confirm-pwd">Confirmation mot de passe</label>
-      <input type="password" class="form-control" name="confirm-pwd" id="confirm-pwd" minlength='8' required>
+      <label for="confirm_pwd">Confirmation mot de passe</label>
+      <input type="password" class="form-control" name="confirm_pwd" id="confirm_pwd" minlength='8' required>
     </div>
     <button type="submit" value="Submit" class="btn btn-primary">Inscription</button>
   </form>
@@ -63,17 +63,17 @@
       checkEmail(form.email.value, emailErr)
     );
     form.pwd.addEventListener('blur', () =>
-      checkPwd(form.pwd.value, form['confirm-pwd'].value, pwdErr)
+      checkPwd(form.pwd.value, form['confirm_pwd'].value, pwdErr)
     );
-    form['confirm-pwd'].addEventListener('blur', () =>
-      checkPwd(form.pwd.value, form['confirm-pwd'].value, pwdErr)
+    form['confirm_pwd'].addEventListener('blur', () =>
+      checkPwd(form.pwd.value, form['confirm_pwd'].value, pwdErr)
     );
   }
 
   const submitForm = () => {
     checkPseudo(form.pseudo.value, pseudoErr);
     checkEmail(form.email.value, emailErr);
-    checkPwd(form.pwd.value, form['confirm-pwd'].value, pwdErr);
+    checkPwd(form.pwd.value, form['confirm_pwd'].value, pwdErr);
     return [pseudoErr, emailErr, pwdErr].every((elem) => elem.innerHTML === "");
   }
 </script>

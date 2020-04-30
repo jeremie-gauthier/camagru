@@ -9,16 +9,13 @@ require_once "../utils/class/Users.php";
 require_once "../../config/database.php";
 
 
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  $pseudo = htmlspecialchars($_POST['pseudo']);
-  $email = htmlspecialchars($_POST['email']);
-  $pwd = htmlspecialchars($_POST['pwd']);
-  $confPwd = htmlspecialchars($_POST['confirm-pwd']);
+  extract(array_map('htmlspecialchars', $_POST));
 
   if (!checkPseudo($pseudo)
     || !checkEmail($email)
-    || !checkPwd($pwd, $confPwd)) {
+    || !checkPwd($pwd, $confirm_pwd)
+  ) {
     Session::set(
       "register-err",
       "Formulaire invalide, veuillez verifier vos informations."
@@ -42,8 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     $user_cls->create($pseudo, $email, $pwd);
     Session::del("register-err");
-    Session::set("pseudo", $pseudo);
-    Session::set("email", $email);
+    Session::multiset(["pseudo" => $pseudo, "email" => $email]);
 
     header("Location: ../../index.php");
   } catch (Exception $e) {
