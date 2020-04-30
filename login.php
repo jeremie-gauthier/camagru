@@ -14,6 +14,13 @@
 <div class="container">
   <h1>Connexion</h1>
   <hr />
+  <span class="text-success">
+    <?php
+      if (Session::exists("login-info")) {
+        echo Session::get("login-info");
+      }
+    ?>
+  </span>
   <form name="login" method="POST" action="server/handlers/login.php">
     <div class="form-group">
       <label for="email">Adresse mail</label>

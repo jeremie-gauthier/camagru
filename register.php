@@ -14,6 +14,13 @@
 <div class="container">
   <h1>Inscription</h1>
   <hr />
+  <span class="text-success">
+    <?php
+      if (Session::exists("register-info")) {
+        echo Session::get("register-info");
+      }
+    ?>
+  </span>
   <form name="register" method="POST" action="server/handlers/register.php" onsubmit="return submitForm()">
     <div class="form-group no-margin">
       <label for="pseudo">Choisissez un pseudo</label>
