@@ -28,6 +28,12 @@ class Session {
     unset($_SESSION[$key]);
   }
 
+  function multidel($keys) {
+    foreach ($keys as $key) {
+      Session::del($key);
+    }
+  }
+
   function exists($key) {
     return array_key_exists($key, $_SESSION);
   }

@@ -43,6 +43,10 @@ Session::method(...args);
 
   _Remove the variable `$key` from the session variables._
 
+* **multidel(\$keys)**
+
+  _Removes all the key contained in the array `$keys` from the session variables._
+
 * **exists(\$key)**
 
   _Return **true** if the variable `$key` is already set, else **false**._
