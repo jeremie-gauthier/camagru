@@ -8,8 +8,7 @@ require_once "../../config/database.php";
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  $email = htmlspecialchars($_POST['email']);
-  $pwd = htmlspecialchars($_POST['pwd']);
+  extract(array_map('htmlspecialchars', $_POST));
 
   if (!checkEmail($email)) {
     Session::set(
@@ -26,8 +25,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user = $user_cls->getByMail($email);
     if ($user && count($user) == 1 && password_verify($pwd, $user[0]["password"])) {
       Session::del("login-err");
-      Session::set("pseudo", $user[0]["pseudo"]);
-      Session::set("email", $user[0]["email"]);
+      Session::multiset([
+        "pseudo" => $user[0]["pseudo"],
+        "email" => $user[0]["email"]
+      ]);
 
       header("Location: ../../index.php");
     } else {
