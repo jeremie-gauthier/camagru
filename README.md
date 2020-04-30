@@ -8,6 +8,8 @@ A small Instagram-like project
 
 For security reasons, credentials are not visible in source code. They are instead defined in local env vars and then accessed in PHP with `getenv(env_var)`.
 
+You'll also need to configure the SMTP options in php.ini file.
+
 ### **How to define env vars for PHP**
 
 <details>
@@ -86,3 +88,23 @@ GRANT ALL PRIVILEGES ON database_name.* TO 'db_user'@'localhost'
 ```
 
 This new account now have all privileges on `database_name`
+
+### **How to configure SMTP**
+
+We'll use gmail as SMTP server.
+
+**Linux:**
+
+In `/etc/php/7.2/apache2/php.ini`, find `[mail function]` and replace the following values:
+
+```ini
+SMTP = localhost
+smtp_port = 25
+```
+
+By:
+
+```ini
+SMTP = smtp.gmail.com
+smtp_port = 587
+```
