@@ -6,7 +6,7 @@ class Mail {
     'From' => self::CAMAGRU_EMAIL,
     'Reply-To' => self::CAMAGRU_EMAIL,
     'MIME-Version' => '1.0',
-    'Content-Type' => 'text/html; charset=iso-8859-1'
+    'Content-Type' => 'text/html;'
   ];
   
   private function send($to, $subject, $message) {
