@@ -1,6 +1,7 @@
 <?php
 
 require_once "Database.php";
+require_once "Mail.php";
 
 class Users extends Database{
   function __construct($DB_DSN, $DB_USER, $DB_PASSWORD) {
@@ -21,13 +22,33 @@ class Users extends Database{
 
   function create($pseudo, $email, $pwd) {
     try {
-      // AJOUTER HASH ET VALIDATION MAIL PAR LA SUITE
-      $query = "INSERT INTO users (pseudo, email, password) VALUES (:pseudo, :email, :pwd)";
+      $hash = md5(time());
+      $query = "INSERT INTO users (pseudo, email, password, secureHash) VALUES (:pseudo, :email, :pwd, :hash)";
       $values = [
         ":pseudo" => $pseudo,
         ":email" => $email,
-        ":pwd" => password_hash($pwd, PASSWORD_DEFAULT)
+        ":pwd" => password_hash($pwd, PASSWORD_DEFAULT),
+        ":hash" => $hash
       ];
+      $this->query($query, $values);
+      Mail::newAccount($email, $hash);
+    } catch (Exception $e) {
+      throw $e;
+    }
+  }
+
+  function confirmAccount($email) {
+    try {
+      $query = "
+        UPDATE
+          users
+        SET
+          confirmedAccount = 1,
+          secureHash = NULL
+        WHERE
+          email=:email
+      ";
+      $values = [":email" => $email];
       $this->query($query, $values);
     } catch (Exception $e) {
       throw $e;
