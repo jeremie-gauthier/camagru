@@ -51,3 +51,7 @@ GRANT ALL PRIVILEGES ON database_name.* TO 'db_user'@'localhost'
 ```
 
 This new account now have all privileges on `database_name`
+
+## TODO
+
+- Mail on Mac
