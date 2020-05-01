@@ -9,22 +9,29 @@ class Mail {
     'Content-Type' => 'text/html;'
   ];
   
+  function __construct() {
+    ini_set("SMTP", "smtp.gmail.com");
+    ini_set("sendmail_from", self::CAMAGRU_EMAIL);
+    ini_set("smtp_port", "587");
+  }
+
   private function send($to, $subject, $message) {
     mail($to, $subject, $message, self::HEADERS);
   }
   
   function newAccount($to, $hash) {
     $subject = "Confirmation de votre compte";
+    $link = "127.0.0.1:8888/server/handlers/confirmation.php?key=" . $hash . "&email=" . $to;
     $message = "
       <html>
         <body>
           <h1>Camagru</h1>
           <hr />
-          <p>Pour confirmer votre inscription, merci de valider votre compte en cliquant sur le lien suivant:</p>
-          <a href='localhost/camagru/server/handlers/confirmation.php?key=" . $hash . "&email=" . $to . "'>Confirmer mon compte</a>
+          <p>Pour confirmer votre inscription, merci de valider votre compte en utilisant le lien suivant:</p>
+          " . $link . "
         </body>
       </html>";
-    Mail::send($to, $subject, $message);
+    $this->send($to, $subject, $message);
   }
 }
 

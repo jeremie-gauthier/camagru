@@ -10,7 +10,14 @@ class Users extends Database{
 
   function getByMail($email) {
     try {
-      $query = "SELECT * FROM users WHERE email=:email";
+      $query = "
+        SELECT
+          *
+        FROM
+          users
+        WHERE
+          email = :email
+      ";
       $values = [":email" => $email];
       $this->query($query, $values);
       $user = $this->get_results();
@@ -23,7 +30,21 @@ class Users extends Database{
   function create($pseudo, $email, $pwd) {
     try {
       $hash = md5(time());
-      $query = "INSERT INTO users (pseudo, email, password, secureHash) VALUES (:pseudo, :email, :pwd, :hash)";
+      $query = "
+        INSERT INTO
+          users (
+            pseudo,
+            email,
+            password,
+            secureHash
+          )
+        VALUES (
+          :pseudo,
+          :email,
+          :pwd,
+          :hash
+        )
+      ";
       $values = [
         ":pseudo" => $pseudo,
         ":email" => $email,
@@ -31,7 +52,8 @@ class Users extends Database{
         ":hash" => $hash
       ];
       $this->query($query, $values);
-      Mail::newAccount($email, $hash);
+      $mailer = new Mail();
+      $mailer->newAccount($email, $hash);
     } catch (Exception $e) {
       throw $e;
     }
