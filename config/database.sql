@@ -9,6 +9,7 @@ CREATE TABLE users (
   pseudo VARCHAR(16) NOT NULL,
   email TINYTEXT NOT NULL,
   password TINYTEXT NOT NULL,
+  confirmedAccount BOOLEAN NOT NULL DEFAULT 0,
   secureHash TINYTEXT,
   regDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
   PRIMARY KEY (idUsers)

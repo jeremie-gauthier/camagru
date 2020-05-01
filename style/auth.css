@@ -1,0 +1,15 @@
+form {
+	margin-top: 50px;
+}
+
+.feedback {
+	margin-left: 0.5rem;
+}
+
+.no-margin {
+	margin-bottom: 0;
+}
+
+.btn {
+	margin-bottom: 10px;
+}

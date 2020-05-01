@@ -1,0 +1,11 @@
+.navbar {
+	justify-content: space-between;
+}
+
+.navbar-bg {
+	background: linear-gradient(45deg, #fe6b8b, #ff8e53);
+}
+
+.navbar-brand {
+	font-weight: bold;
+}

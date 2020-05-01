@@ -2,52 +2,17 @@
 
 A small Instagram-like project
 
-## 🔧 Installation
+## 🚀 Quick start
 
-**Mac OS:** Follow [this tutorial](https://blog.edenpulse.com/apache-mysql-php-sur-osx/) to setup Apache/MySQL/PHP
+```bash
+php -S 127.0.0.1:8888 -c php.ini
+```
+
+## 🔧 Installation
 
 For security reasons, credentials are not visible in source code. They are instead defined in local env vars and then accessed in PHP with `getenv(env_var)`.
 
 ### **How to define env vars for PHP**
-
-<details>
-<summary>
-  <strong>Ubuntu</strong>
-</summary>
-
-First, ensure that environment vars are read by PHP.
-
-You must have the following in your `/etc/php/7.2/cli/php.ini`
-
-```ini
-...
-
-; variables_order
-;   Default Value: "EGPCS"
-;   Development Value: "EGPCS"
-;   Production Value: "EGPCS"
-
-...
-```
-
-Then you simply have to define your variables in shell (or `.bashrc` for persistent data) with the following command
-
-```bash
-export KEY=VALUE
-```
-
-If you have edited your `.bashrc`, don't forget to source it
-
-```bash
-source .bashrc
-```
-
-</details>
-
-<details>
-<summary>
-  <strong>Mac OS</strong>
-</summary>
 
 Just define your variables in shell (or `.bashrc` for persistent data) with the following command
 
@@ -63,7 +28,7 @@ If you have edited your `.bashrc`, don't forget to source it
 source .bashrc
 ```
 
-</details>
+As we are using built-in php server. We can also define them on boot [like this](https://www.php.net/manual/fr/features.commandline.webserver.php#124576).
 
 ### **How to create MySQL users**
 
@@ -86,3 +51,7 @@ GRANT ALL PRIVILEGES ON database_name.* TO 'db_user'@'localhost'
 ```
 
 This new account now have all privileges on `database_name`
+
+## TODO
+
+- Mail on Mac
