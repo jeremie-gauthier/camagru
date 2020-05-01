@@ -8,12 +8,6 @@ class Mail {
     'MIME-Version' => '1.0',
     'Content-Type' => 'text/html;'
   ];
-  
-  function __construct() {
-    ini_set("SMTP", "smtp.gmail.com");
-    ini_set("sendmail_from", self::CAMAGRU_EMAIL);
-    ini_set("smtp_port", "587");
-  }
 
   private function send($to, $subject, $message) {
     mail($to, $subject, $message, self::HEADERS);
@@ -31,7 +25,7 @@ class Mail {
           " . $link . "
         </body>
       </html>";
-    $this->send($to, $subject, $message);
+    Mail::send($to, $subject, $message);
   }
 }
 

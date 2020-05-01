@@ -52,8 +52,7 @@ class Users extends Database{
         ":hash" => $hash
       ];
       $this->query($query, $values);
-      $mailer = new Mail();
-      $mailer->newAccount($email, $hash);
+      Mail::newAccount($email, $hash);
     } catch (Exception $e) {
       throw $e;
     }
