@@ -5,12 +5,8 @@
 <?php require "layouts/navbar.php" ?>
 
 <div class="mid w-100 row"> 
-    <div class="main col-8"> <p>oui</p> </div> 
-    <div class="side col-3"><p>oui</p></div>
+    <div class="main col-9"> <p>oui</p> </div> 
+    <div class="side col-2"><p>oui</p></div>
 </div>
-<div class="footer">   
-    <?php
-    echo "rien";
-    ?>
-</div>
+
 <?php require "layouts/footer.php" ?>
