@@ -1,0 +1,45 @@
+.row {
+	margin: 0;
+}
+
+/* PICTURE */
+.picture-area {
+	height: 500px;
+	/* background-color: blue; */
+}
+.picture {
+	height: 400px;
+	margin: 50px 25px;
+	/* background-color: brown; */
+}
+
+/* EXTRAS */
+.extras {
+	border: 0 !important;
+	background-color: transparent;
+	font-weight: bold;
+}
+
+.extras:hover {
+	background-color: #d59d4c;
+	border-top-left-radius: 0.25rem;
+	border-top-right-radius: 0.25rem;
+}
+
+/* CONTROLS */
+.footer {
+	background-color: #d59d4c;
+	/* display: flex;
+	justify-content: center; */
+}
+
+.btn {
+	margin: 1rem;
+	font-weight: bold;
+}
+
+/* STICKER */
+.sticker-area {
+	height: 500px;
+	background-color: darkviolet;
+}
