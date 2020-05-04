@@ -1,8 +1,10 @@
-const [canvas, picArea, snap, cam] = mapElements([
+const [canvas, picArea, snap, cam, listElems, stickerGlueBtn] = mapElements([
 	"canvas",
 	"picture-area",
 	"snapshot-toggler",
 	"video-toggler",
+	"list-elems",
+	"sticker-glue-toggler",
 ]);
 
 const props = {
@@ -11,18 +13,28 @@ const props = {
 	editing: false,
 	pic: null,
 	original: null,
+	dehydration: false,
+	addingSticker: false,
 	elems: [],
+	id: 0,
 };
 
 const handlers = {
 	set: (obj, prop, value) => {
 		const previous = obj[prop];
 		obj[prop] = value;
-		console.log(prop, previous, value);
+		// console.log(prop, previous, value);
 		if (prop === "recording") {
 			handleRecording(previous, value);
 		} else if (prop === "pic") {
 			handlePic(previous, value);
+		} else if (prop === "addingSticker") {
+			handleStickerAdd(previous, value);
+		} else if (prop === "dehydration") {
+			handleHydration(previous, value);
+			obj[prop] = false;
+		} else if (prop === "elems") {
+			handleElemsChange(previous, value);
 		}
 	},
 };
@@ -48,6 +60,8 @@ const handleRecording = (previous, value) => {
 				id: "stream",
 			}),
 			pic: null,
+			elems: [],
+			id: 0,
 		});
 	} else if (value === false) {
 		cam.innerHTML = "Allumer la camera";
@@ -65,5 +79,29 @@ const handlePic = (previous, value) => {
 	} else {
 		const { ctx, width, height } = value;
 		setState({ original: ctx.getImageData(0, 0, width, height) });
+	}
+};
+
+const handleStickerAdd = (previous, value) => {
+	stickerGlueBtn.disabled = !value;
+};
+
+const handleHydration = (previous, value) => {
+	if (value === false || state.pic === null) return;
+
+	state.pic.sticker.rehydrate();
+};
+
+const handleElemsChange = (previous, value) => {
+	const len = value.length;
+	if (previous.length > len) {
+		if (len > 0) {
+			state.pic.sticker.rehydrate();
+		} else if (len === 0) {
+			for (let i = 0; i <= state.id; i++) {
+				let elem = document.getElementById(`elem${i}`);
+				removeElement(elem);
+			}
+		}
 	}
 };

@@ -1,6 +1,5 @@
-<div id="list-filters" aria-labelledby="btn-elems" hidden>
-<?php
+<link rel="stylesheet" type="text/css" href="picture/styles/elements.css">
 
-  echo "ELEMENTS"
-?>
+<div id="list-elems" aria-labelledby="btn-elems" hidden>
+
 </div>

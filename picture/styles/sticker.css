@@ -36,6 +36,8 @@
 .img-sticker {
 	border-top-left-radius: 0.5rem;
 	border-bottom-left-radius: 0.5rem;
+	height: 50px;
+	width: 50px;
 }
 
 .text-sticker {

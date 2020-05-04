@@ -1,0 +1,27 @@
+.element {
+	height: 50px;
+	width: 100%;
+	border: 0;
+	border-radius: 0.5rem;
+	margin-top: 1rem;
+	background: linear-gradient(45deg, #fe6b8b, #ff8e53);
+	color: inherit;
+	font-weight: bold;
+	font-size: large;
+}
+
+.element:hover {
+	cursor: pointer;
+}
+
+.img-element {
+	border-top-left-radius: 0.5rem;
+	border-bottom-left-radius: 0.5rem;
+	height: 50px;
+	width: 50px;
+}
+
+.text-element {
+	font-size: x-large;
+	padding-left: 1rem;
+}

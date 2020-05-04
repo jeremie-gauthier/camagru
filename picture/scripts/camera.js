@@ -37,6 +37,7 @@ const snapshot = () => {
 			height: height,
 			ctx: ctx,
 			filter: filters(ctx, width, height),
+			sticker: stickers(ctx, width, height),
 		},
 	});
 	stop();

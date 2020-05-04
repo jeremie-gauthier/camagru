@@ -72,13 +72,24 @@
   >
     Prendre une photo
   </button>
+
+  <button
+    type="button"
+    class="btn btn-primary"
+    id="sticker-glue-toggler"
+    onClick="state.pic?.sticker.glue()"
+    disabled
+  >
+    Ajouter ce sticker
+  </button>
 </div>
 
 <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/layouts/footer.php" ?>
 
+<script type="text/javascript" src="scripts/promises.js"></script>
 <script type="text/javascript" src="scripts/DOM.js"></script>
 <script type="text/javascript" src="scripts/navs.js"></script>
 <script type="text/javascript" src="picture/scripts/picture.js"></script>
 <script type="text/javascript" src="picture/scripts/filters.js"></script>
-<script type="text/javascript" src="picture/scripts/camera.js"></script>
 <script type="text/javascript" src="picture/scripts/stickers.js"></script>
+<script type="text/javascript" src="picture/scripts/camera.js"></script>
