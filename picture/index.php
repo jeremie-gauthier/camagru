@@ -79,6 +79,6 @@
 <script type="text/javascript" src="scripts/DOM.js"></script>
 <script type="text/javascript" src="scripts/navs.js"></script>
 <script type="text/javascript" src="picture/scripts/picture.js"></script>
+<script type="text/javascript" src="picture/scripts/filters.js"></script>
 <script type="text/javascript" src="picture/scripts/camera.js"></script>
 <script type="text/javascript" src="picture/scripts/stickers.js"></script>
-<script type="text/javascript" src="picture/scripts/filters.js"></script>

@@ -1,50 +1,44 @@
-const apply = (filter) => {
-	if (!state.pic) return;
-
-	const commit = (firstX, firstY) => {
-		state.hasFilter = true;
-		ctx.putImageData(picData, firstX, firstY);
-		console.log("CHANGE");
-	};
-
-	const normal = () => {
-		state.hasFilter = false;
-		ctx.putImageData(state.original, 0, 0);
-	};
-
-	const grey = () => {
-		for (let i = 0; i < length; i += 4) {
-			let grey = (refPixels[i] + refPixels[i + 1] + refPixels[i + 2]) / 3;
-			data[i] = grey;
-			data[i + 1] = grey;
-			data[i + 2] = grey;
-		}
-		commit(0, 0);
-	};
-
-	const sepia = () => {
-		for (let i = 0; i < length; i += 4) {
-			let [red, green, blue] = [
-				refPixels[i],
-				refPixels[i + 1],
-				refPixels[i + 2],
-			];
-			data[i] = 0.393 * red + 0.769 * green + 0.189 * blue;
-			data[i + 1] = 0.349 * red + 0.686 * green + 0.168 * blue;
-			data[i + 2] = 0.272 * red + 0.534 * green + 0.131 * blue;
-		}
-		commit(0, 0);
-	};
-
-	const { ctx, width, height } = state.pic;
-	const refPixels = state.original.data;
+const filters = (ctx, width, height) => {
 	const picData = ctx.getImageData(0, 0, width, height);
 	const data = picData.data;
 	const length = data.length;
-	const fns = {
-		normal: normal,
-		grey: grey,
-		sepia: sepia,
+
+	return {
+		picData: picData,
+		data: data,
+		length: length,
+		commit: function (firstX, firstY) {
+			ctx.putImageData(picData, firstX, firstY);
+		},
+
+		normal: function () {
+			ctx.putImageData(state.original, 0, 0);
+		},
+
+		grey: function () {
+			const refPixels = state.original.data;
+			for (let i = 0; i < length; i += 4) {
+				let grey = (refPixels[i] + refPixels[i + 1] + refPixels[i + 2]) / 3;
+				data[i] = grey;
+				data[i + 1] = grey;
+				data[i + 2] = grey;
+			}
+			this.commit(0, 0);
+		},
+
+		sepia: function () {
+			const refPixels = state.original.data;
+			for (let i = 0; i < length; i += 4) {
+				let [red, green, blue] = [
+					refPixels[i],
+					refPixels[i + 1],
+					refPixels[i + 2],
+				];
+				data[i] = 0.393 * red + 0.769 * green + 0.189 * blue;
+				data[i + 1] = 0.349 * red + 0.686 * green + 0.168 * blue;
+				data[i + 2] = 0.272 * red + 0.534 * green + 0.131 * blue;
+			}
+			this.commit(0, 0);
+		},
 	};
-	if (filter in fns) fns[filter]();
 };

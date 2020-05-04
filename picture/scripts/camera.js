@@ -25,17 +25,19 @@ const stop = () => {
 
 const snapshot = () => {
 	const { video } = state;
+	const { offsetWidth: width, offsetHeight: height } = video;
+	const ctx = canvas.getContext("2d");
+	canvas.width = width;
+	canvas.height = height;
+	ctx.drawImage(video, 0, 0, width, height);
 	setState({
 		editing: true,
 		pic: {
-			width: video.offsetWidth,
-			height: video.offsetHeight,
-			ctx: canvas.getContext("2d"),
+			width: width,
+			height: height,
+			ctx: ctx,
+			filter: filters(ctx, width, height),
 		},
 	});
-	const { pic } = state;
-	canvas.width = pic.width;
-	canvas.height = pic.height;
-	pic.ctx.drawImage(video, 0, 0, pic.width, pic.height);
 	stop();
 };
