@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href="style/sticker.css">
+<link rel="stylesheet" type="text/css" href="picture/styles/sticker.css">
 
 <div id="list-stickers" aria-labelledby="btn-stickers">
   <div class="sticker" onclick="collage('assets/minion.png', 50, 50)">
