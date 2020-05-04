@@ -8,9 +8,10 @@
 	/* background-color: blue; */
 }
 .picture {
+	border: 1px solid black;
 	height: 400px;
 	margin: 50px 25px;
-	/* background-color: brown; */
+	background-color: brown;
 }
 
 /* EXTRAS */
