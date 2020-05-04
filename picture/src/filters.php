@@ -5,7 +5,7 @@
     type="button"
     class="filter"
     id="no-filter"
-    onclick="state.pic.filter.normal()"
+    onclick="state.pic?.filter.normal()"
   >
     Sans filtre
   </button>
@@ -14,7 +14,7 @@
     type="button"
     class="filter"
     id="grey-filter"
-    onclick="state.pic.filter.grey()"
+    onclick="state.pic?.filter.grey()"
   >
     Filtre gris
   </button>
@@ -23,7 +23,7 @@
     type="button"
     class="filter"
     id="sepia-filter"
-    onclick="state.pic.filter.sepia()"
+    onclick="state.pic?.filter.sepia()"
   >
     Filtre sepia
   </button>
