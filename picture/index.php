@@ -8,12 +8,14 @@
 <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/layouts/navbar.php" ?>
 
 <div class="w-100 row">
-    <div class="picture-area col-md-9" id="picture-area"></div>
+    <div class="picture-area col-md-9" id="picture-area">
+      <canvas class="picture" id="canvas"></canvas>
+    </div>
     <div class="sticker-area col-md-3">
       <ul class="nav nav-tabs">
         <li class="nav-item">
           <button
-            class="nav-link extras"
+            class="nav-link extras active"
             id="btn-stickers"
             onclick="switchNav(this)"
           >
@@ -22,7 +24,7 @@
         </li>
         <li class="nav-item">
           <button
-            class="nav-link extras active"
+            class="nav-link extras"
             id="btn-filters"
             onclick="switchNav(this)"
           >
@@ -63,64 +65,38 @@
   >
     Prendre une photo
   </button>
-
-  <button
-    type="button"
-    class="btn btn-primary"
-    id="no-filter"
-    onclick="state.filter.normal()"
-    disabled
-  >
-    Sans filtre
-  </button>
-
-  <button
-    type="button"
-    class="btn btn-primary"
-    id="grey-filter"
-    onclick="state.filter.grey()"
-    disabled
-  >
-    Filtre gris
-  </button>
-
-  <button
-    type="button"
-    class="btn btn-primary"
-    id="sepia-filter"
-    onclick="state.filter.sepia()"
-    disabled
-  >
-    Filtre sepia
-  </button>
 </div>
 
 <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/layouts/footer.php" ?>
 
 <script>
-  const [picArea, snap, cam, greyFltr, noFltr, sepiaFltr] = mapElements([
+  const [canvas, picArea, snap, cam] = mapElements([
+    "canvas",
     "picture-area",
     "snapshot-toggler",
-    "video-toggler",
-    "grey-filter",
-    "no-filter",
-    "sepia-filter"
+    "video-toggler"
   ]);
   const state = new Proxy(
-    { recording: false, editing: false, pic: null, filter: null },
+    { recording: false, editing: false, pic: null, original: null, hasFilter: false, nbStickers: 0 },
     {
       set: (obj, prop, value) => {
+        const previousValue = obj[prop];
         obj[prop] = value;
         if (prop === "recording") {
           snap.disabled = !value;
           cam.innerHTML = value ? "Eteindre la camera" : "Allumer la camera";
-        } else if (prop === "editing") {
-          greyFltr.disabled = !value;
-          noFltr.disabled = !value;
-          sepiaFltr.disabled = !value;
         } else if (prop === "pic") {
-          state.filter = value ? new Filter(state.pic.ctx, state.pic.width, state.pic.height) : null;
+          const { ctx, width, height } = value;
+          obj.original = ctx.getImageData(0, 0, width, height);
+        } else if (prop === "hasFilter" && previousValue === false) {
+          const { ctx, width, height } = obj.pic;
+          obj.original = ctx.getImageData(0, 0, width, height);
+          console.log("CATCH", obj.original);
         }
+        // } else if (prop === "nbStickers" && !obj.hasFilter) {
+        //   const { ctx, width, height } = obj.pic;
+        //   obj.original = ctx.getImageData(0, 0, width, height);
+        // }
       }
     }
   );
@@ -129,7 +105,7 @@
     if (navigator.mediaDevices) {
       state.recording = true;
       state.editing = false;
-      removeElement(document.getElementById("canvas"));
+      canvas.setAttribute("hidden", "");
       const video = createElement(picArea, "video", {
         "autoplay": "true",
         "class": "picture",
@@ -149,10 +125,7 @@
   const takeSnapshot = () => {
     state.editing = true;
     const stream = document.getElementById("stream");
-    const canvas = createElement(picArea, "canvas", {
-      "class": "picture",
-      "id": "canvas"
-    });
+    canvas.removeAttribute("hidden");
     state.pic = new Picture(stream, canvas);
     stopRecording();
   };
