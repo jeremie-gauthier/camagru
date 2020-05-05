@@ -24,12 +24,12 @@ const filters = (ctx, width, height) => {
 		length: length,
 		commit: function (firstX, firstY) {
 			ctx.putImageData(picData, firstX, firstY);
-			if (state.elems.length > 0) setState({ dehydration: true });
+			setState({ dehydration: true });
 		},
 
 		normal: function () {
 			ctx.putImageData(state.original, 0, 0);
-			if (state.elems.length > 0) setState({ dehydration: true });
+			setState({ dehydration: true });
 		},
 
 		grey: function () {

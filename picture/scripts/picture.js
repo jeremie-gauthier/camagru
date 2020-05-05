@@ -87,7 +87,7 @@ const handleStickerAdd = (previous, value) => {
 };
 
 const handleHydration = (previous, value) => {
-	if (value === false || state.pic === null) return;
+	if (value === false || state.pic === null || !state.elems) return;
 
 	state.pic.sticker.rehydrate();
 };
