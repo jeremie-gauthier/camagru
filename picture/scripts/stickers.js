@@ -10,21 +10,16 @@ const stickers = (ctx, width, height) => {
 
 		handleDragging: function (e, dimX, dimY, offsetX, offsetY) {
 			if (!this.isDragging || !this.sticker) return;
-			const canMouseX = parseInt(e.clientX - offsetX);
-			const canMouseY = parseInt(e.clientY - offsetY * 2);
+			const x = parseInt(e.clientX - offsetX);
+			const y = parseInt(e.clientY - offsetY * 2);
 			ctx.putImageData(this.imgDataBeforeSticker, 0, 0);
-			ctx.drawImage(
-				this.sticker,
-				canMouseX - dimX / 2,
-				canMouseY - dimY / 2,
-				dimX,
-				dimY
-			);
-			this.stickerMeta = { x: canMouseX, y: canMouseY, dimX: dimX, dimY: dimY };
+			ctx.drawImage(this.sticker, x - dimX / 2, y - dimY / 2, dimX, dimY);
+			this.stickerMetaData = { x, y, dimX, dimY };
 		},
 
+		// data use to moves sticker
 		imgDataBeforeSticker: null,
-		stickerMeta: null,
+		stickerMetaData: null,
 		sticker: null,
 
 		add: function (src, dimX, dimY) {
@@ -58,24 +53,34 @@ const stickers = (ctx, width, height) => {
 			setState({
 				elems: [
 					...state.elems,
-					{ id: state.id, src: src, ...this.stickerMeta },
+					{ id: state.id, src: src, ...this.stickerMetaData },
 				],
 				addingSticker: false,
 				id: state.id + 1,
 			});
 			this.imgDataBeforeSticker = null;
-			this.stickerMeta = null;
+			this.stickerMetaData = null;
 			this.sticker = null;
+			this.addStickerToElems(src, name, elemId);
+		},
 
+		addStickerToElems: function (src, name, id) {
 			const elem = createElement(listElems, "div", {
 				class: "element",
-				id: `elem${elemId}`,
+				id: `elem${id}`,
 			});
 			createElement(elem, "img", {
 				class: "img-element",
 				src: src,
 			});
 			createElement(elem, "span", { class: "text-element" }, name);
+			const moveIcon = createElement(
+				elem,
+				"span",
+				{ class: "material-icons" },
+				"open_with"
+			);
+			moveIcon.onclick = () => console.log("RETOUCHE");
 			const delIcon = createElement(
 				elem,
 				"span",
@@ -84,7 +89,7 @@ const stickers = (ctx, width, height) => {
 			);
 			delIcon.onclick = () => {
 				setState({
-					elems: state.elems.filter((elem) => elem.id !== elemId),
+					elems: state.elems.filter((elem) => elem.id !== id),
 				});
 				removeElement(elem);
 			};
