@@ -23,11 +23,13 @@ const filters = (ctx, width, height) => {
 		data: data,
 		length: length,
 		commit: function (firstX, firstY) {
+			setState({ wipeCurrentSticker: true });
 			ctx.putImageData(picData, firstX, firstY);
 			setState({ dehydration: true });
 		},
 
 		normal: function () {
+			setState({ wipeCurrentSticker: true });
 			ctx.putImageData(state.original, 0, 0);
 			setState({ dehydration: true });
 		},

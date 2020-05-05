@@ -1,10 +1,19 @@
-const [canvas, picArea, snap, cam, listElems, stickerGlueBtn] = mapElements([
+const [
+	canvas,
+	picArea,
+	snap,
+	cam,
+	listElems,
+	stickerGlueBtn,
+	stickerWipeBtn,
+] = mapElements([
 	"canvas",
 	"picture-area",
 	"snapshot-toggler",
 	"video-toggler",
 	"list-elems",
 	"sticker-glue-toggler",
+	"sticker-wipe-toggler",
 ]);
 
 const props = {
@@ -13,6 +22,7 @@ const props = {
 	editing: false,
 	pic: null,
 	original: null,
+	wipeCurrentSticker: false,
 	dehydration: false,
 	addingSticker: false,
 	elems: [],
@@ -35,6 +45,9 @@ const handlers = {
 			obj[prop] = false;
 		} else if (prop === "elems") {
 			handleElemsChange(previous, value);
+		} else if (prop === "wipeCurrentSticker") {
+			handleWipe(previous, value);
+			obj[prop] = false;
 		}
 	},
 };
@@ -84,6 +97,7 @@ const handlePic = (previous, value) => {
 
 const handleStickerAdd = (previous, value) => {
 	stickerGlueBtn.disabled = !value;
+	stickerWipeBtn.disabled = !value;
 };
 
 const handleHydration = (previous, value) => {
@@ -104,4 +118,8 @@ const handleElemsChange = (previous, value) => {
 			if (state.dehydration) state.pic?.sticker.rehydrate();
 		}
 	}
+};
+
+const handleWipe = (previous, value) => {
+	state.pic?.sticker.wipe();
 };

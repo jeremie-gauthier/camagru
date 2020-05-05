@@ -88,6 +88,17 @@
   >
     Ajouter ce sticker
   </button>
+
+  <button
+    type="button"
+    class="btn btn-primary"
+    id="sticker-wipe-toggler"
+    onClick="state.pic?.sticker.wipe()"
+    disabled
+  >
+    Supprimer ce sticker
+  </button>
+
 </div>
 
 <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/layouts/footer.php" ?>
