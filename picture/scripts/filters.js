@@ -81,35 +81,6 @@ const filters = (ctx, width, height) => {
 			this.commit(0, 0);
 		},
 
-		dealWithNeighbours: function (predicate) {
-			const refPixels = state.original.data;
-			const bm = bitmap(refPixels, width);
-
-			for (let i = 0; i < length; i += 4) {
-				let initial = [refPixels[i], refPixels[i + 1], refPixels[i + 2]];
-				if (i + width < length) {
-					const bot = bm.bot(i);
-					initial = bm.merge(initial, bot, predicate);
-				} else if (i - width > 0) {
-					const top = bm.top(i);
-					initial = bm.merge(initial, top, predicate);
-				} else if (i + 4 < length) {
-					const right = bm.right(i);
-					initial = bm.merge(initial, right, predicate);
-				} else if (i - 4 > 0) {
-					const left = bm.left(i);
-					initial = bm.merge(initial, left, predicate);
-				}
-				[data[i], data[i + 1], data[i + 2]] = initial;
-			}
-		},
-
-		xor: function () {
-			const xor_predicate = (a, b) => a ^ b;
-			this.dealWithNeighbours(xor_predicate);
-			this.commit(0, 0);
-		},
-
 		inversion: function () {
 			const refPixels = state.original.data;
 			for (let i = 0; i < length; i += 4) {

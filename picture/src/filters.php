@@ -26,10 +26,6 @@
     Sketch
   </button>
 
-  <button type="button" class="filter" onclick="state.pic?.filter.xor()">
-    XOR
-  </button>
-
   <button type="button" class="filter" onclick="state.pic?.filter.inversion()">
     Negatif
   </button>
