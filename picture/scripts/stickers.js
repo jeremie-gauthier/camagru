@@ -44,11 +44,13 @@ const stickers = (ctx, width, height) => {
 				this.handleDragging(e, dimX, dimY, offsetX, offsetY);
 		},
 
+		idleCtx: null,
+
 		glue: function () {
 			setState({ addingSticker: false });
 			canvas.onmousemove = null;
 			const { src, name } = this.sticker;
-			const elemId = state.id;
+			const stickerData = { id: state.id, ...this.stickerMetaData, src, name };
 
 			setState({
 				elems: [
@@ -61,28 +63,46 @@ const stickers = (ctx, width, height) => {
 			this.imgDataBeforeSticker = null;
 			this.stickerMetaData = null;
 			this.sticker = null;
-			this.addStickerToElems(src, name, elemId);
+			this.idleCtx = ctx.getImageData(0, 0, width, height);
+			this._addStickerToElems(stickerData);
 		},
 
 		addStickerToElems: function (src, name, id) {
 			const elem = createElement(listElems, "div", {
 				class: "element",
-				id: `elem${id}`,
+				id: `elem${stickerData.id}`,
 			});
-			createElement(elem, "img", {
+			createElement(divElem, "img", {
 				class: "img-element",
-				src: src,
+				src: stickerData.src,
 			});
-			createElement(elem, "span", { class: "text-element" }, name);
+			createElement(
+				divElem,
+				"span",
+				{ class: "text-element" },
+				stickerData.name
+			);
 			const moveIcon = createElement(
-				elem,
+				divElem,
 				"span",
 				{ class: "material-icons" },
 				"open_with"
 			);
-			moveIcon.onclick = () => console.log("RETOUCHE");
+			moveIcon.onmousedown = () => {
+				const { x, y, dimX, dimY } = stickerData;
+				const topLeftX = x - dimX / 2;
+				const topLeftY = y - dimY / 2;
+
+				ctx.fillStyle = "red";
+				ctx.fillRect(topLeftX - 2, topLeftY - 2, dimX + 2, 2);
+				ctx.fillRect(topLeftX - 2, topLeftY, 2, dimY + 2);
+				ctx.fillRect(topLeftX - 2, topLeftY + dimY + 2, dimX + 2, 2);
+				ctx.fillRect(topLeftX - 2 + dimX, topLeftY, 2, dimY + 2);
+			};
+			moveIcon.onmouseup = () => ctx.putImageData(this.idleCtx, 0, 0);
+
 			const delIcon = createElement(
-				elem,
+				divElem,
 				"span",
 				{ class: "material-icons" },
 				"delete"
@@ -91,7 +111,7 @@ const stickers = (ctx, width, height) => {
 				setState({
 					elems: state.elems.filter((elem) => elem.id !== id),
 				});
-				removeElement(elem);
+				removeElement(divElem);
 			};
 		},
 
@@ -107,6 +127,7 @@ const stickers = (ctx, width, height) => {
 						elem.dimY
 					);
 				});
+				this.idleCtx = ctx.getImageData(0, 0, width, height);
 			} catch (err) {
 				console.error("an error occured =>", err);
 			}
