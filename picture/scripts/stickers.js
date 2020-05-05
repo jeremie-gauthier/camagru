@@ -23,6 +23,7 @@ const stickers = (ctx, width, height) => {
 		sticker: null,
 
 		add: function (src, dimX, dimY) {
+			this.wipe();
 			const offsetX = canvas.offsetLeft;
 			const offsetY = canvas.offsetTop;
 
@@ -67,8 +68,19 @@ const stickers = (ctx, width, height) => {
 			this._addStickerToElems(stickerData);
 		},
 
-		addStickerToElems: function (src, name, id) {
-			const elem = createElement(listElems, "div", {
+		wipe: function () {
+			setState({ addingSticker: false });
+			if (this.imgDataBeforeSticker) {
+				ctx.putImageData(this.imgDataBeforeSticker, 0, 0);
+			}
+			canvas.onmousemove = null;
+			this.imgDataBeforeSticker = null;
+			this.stickerMetaData = null;
+			this.sticker = null;
+		},
+
+		_addStickerToElems: function (stickerData) {
+			const divElem = createElement(listElems, "div", {
 				class: "element",
 				id: `elem${stickerData.id}`,
 			});
@@ -109,7 +121,8 @@ const stickers = (ctx, width, height) => {
 			);
 			delIcon.onclick = () => {
 				setState({
-					elems: state.elems.filter((elem) => elem.id !== id),
+					wipeCurrentSticker: true,
+					elems: state.elems.filter((elem) => elem.id !== stickerData.id),
 				});
 				removeElement(divElem);
 			};
