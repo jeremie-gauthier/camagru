@@ -1,6 +1,4 @@
 const stickers = (ctx, width, height) => {
-	let isDragging = false;
-
 	return {
 		isDragging: false,
 		startDragging: function () {
