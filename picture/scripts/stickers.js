@@ -78,10 +78,23 @@ const stickers = (ctx, width, height) => {
 				src: src,
 			});
 			createElement(elem, "span", { class: "text-element" }, name);
+			const delIcon = createElement(
+				elem,
+				"span",
+				{ class: "material-icons" },
+				"delete"
+			);
+			delIcon.onclick = () => {
+				setState({
+					elems: state.elems.filter((elem) => elem.id !== elemId),
+				});
+				removeElement(elem);
+			};
 		},
 
 		rehydrate: function () {
 			try {
+				console.log("REHYDRATE", state.elems);
 				state.elems.forEach(async (elem) => {
 					const sticker = await imgLoadAsync(elem.src);
 					ctx.drawImage(

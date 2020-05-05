@@ -95,13 +95,13 @@ const handleHydration = (previous, value) => {
 const handleElemsChange = (previous, value) => {
 	const len = value.length;
 	if (previous.length > len) {
-		if (len > 0) {
-			state.pic.sticker.rehydrate();
-		} else if (len === 0) {
+		state.pic?.filter.commit(0, 0);
+		if (len === 0) {
 			for (let i = 0; i <= state.id; i++) {
 				let elem = document.getElementById(`elem${i}`);
 				removeElement(elem);
 			}
+			if (state.dehydration) state.pic?.sticker.rehydrate();
 		}
 	}
 };
