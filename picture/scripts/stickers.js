@@ -92,7 +92,6 @@ const stickers = (ctx, width, height) => {
 
 		rehydrate: function () {
 			try {
-				console.log("REHYDRATE", state.elems);
 				state.elems.forEach(async (elem) => {
 					const sticker = await imgLoadAsync(elem.src);
 					ctx.drawImage(
