@@ -20,7 +20,7 @@ const stop = () => {
 	const tracks = srcObject.getTracks();
 
 	tracks.forEach((track) => track.stop());
-	setState({ recording: false });
+	setState({ recording: false, wipeCurrentSticker: true });
 };
 
 const snapshot = () => {
