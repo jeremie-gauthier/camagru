@@ -14,5 +14,5 @@ const createElement = (parent, element, attrs = {}, innerHTML = null) => {
 };
 
 const removeElement = (element) => {
-	element?.parentNode.removeChild(element);
+	element?.parentNode?.removeChild(element);
 };
