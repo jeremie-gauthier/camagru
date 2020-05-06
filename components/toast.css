@@ -26,6 +26,14 @@
 	margin-right: 2px;
 }
 
+.camagru-toast-success {
+	background-color: #28a745;
+}
+
+.camagru-toast-warning {
+	background-color: #ffc107;
+}
+
 .camagru-toast-error {
 	background-color: #dc3545;
 }
