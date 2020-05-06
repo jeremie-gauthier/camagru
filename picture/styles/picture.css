@@ -1,17 +1,21 @@
+.col-md-9,
+.col-md-3 {
+	padding: 0;
+}
+
 .row {
 	margin: 0;
 }
 
 /* PICTURE */
-.picture-area {
-	height: 500px;
-	/* background-color: blue; */
+.embed-responsive-16by9::before {
+	padding-top: 0%;
 }
-.picture {
-	border: 1px solid black;
-	height: 400px;
-	margin: 50px 25px;
-	background-color: brown;
+
+.embed-responsive {
+	height: 480px;
+	text-align: center;
+	/* background-color: brown; */
 }
 
 .picture:active {
@@ -29,6 +33,11 @@
 	background-color: #d59d4c;
 	border-top-left-radius: 0.25rem;
 	border-top-right-radius: 0.25rem;
+}
+
+.tab-content {
+	padding-left: 1rem;
+	padding-right: 1rem;
 }
 
 /* CONTROLS */
