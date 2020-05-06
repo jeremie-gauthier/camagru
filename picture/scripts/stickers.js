@@ -142,7 +142,7 @@ const stickers = (ctx, width, height) => {
 					);
 				});
 			} catch (err) {
-				console.error("an error occured =>", err);
+				showToast("error", err.message);
 			}
 		},
 	};

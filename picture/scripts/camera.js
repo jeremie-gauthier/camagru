@@ -42,6 +42,6 @@ const snapshot = () => {
 		});
 		stop();
 	} catch (err) {
-		showToast(err);
+		showToast("error", err.message);
 	}
 };
