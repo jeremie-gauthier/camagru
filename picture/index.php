@@ -11,8 +11,10 @@
 <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/layouts/navbar.php" ?>
 
 <div class="w-100 row">
-  <div class="picture-area col-md-9" id="picture-area">
-    <canvas class="picture" id="canvas"></canvas>
+  <div class="col-md-9">
+    <div class="embed-responsive embed-responsive-16by9" id="picture-area">
+      <canvas class="picture" id="canvas"></canvas>
+    </div>
   </div>
   <div class="pimp-area col-md-3">
     <ul class="nav nav-tabs">
