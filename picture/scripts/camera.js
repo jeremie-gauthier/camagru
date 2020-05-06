@@ -1,8 +1,8 @@
 const start = async () => {
 	try {
 		if (navigator.mediaDevices) {
-			setState({ recording: true, editing: false });
 			const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+			setState({ recording: true, editing: false });
 			state.video.srcObject = stream;
 		} else {
 			// set state error that will display msg
@@ -25,20 +25,23 @@ const stop = () => {
 
 const snapshot = () => {
 	const { video } = state;
-	const { offsetWidth: width, offsetHeight: height } = video;
+
+	const width = Math.min(video.videoWidth, window.innerWidth);
+	const height = (width / 4) * 3;
+	setAttributes(canvas, { width: width, height: height });
+
 	const ctx = canvas.getContext("2d");
-	canvas.width = width;
-	canvas.height = height;
 	ctx.drawImage(video, 0, 0, width, height);
+
 	setState({
-		editing: true,
 		pic: {
-			width: width,
-			height: height,
-			ctx: ctx,
+			width,
+			height,
+			ctx,
 			filter: filters(ctx, width, height),
 			sticker: stickers(ctx, width, height),
 		},
+		editing: true,
 	});
 	stop();
 };
