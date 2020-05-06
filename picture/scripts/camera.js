@@ -1,8 +1,8 @@
 const start = async () => {
 	try {
 		if (navigator.mediaDevices) {
-			const stream = await navigator.mediaDevices.getUserMedia({ video: true });
 			setState({ recording: true, editing: false });
+			const stream = await navigator.mediaDevices.getUserMedia({ video: true });
 			state.video.srcObject = stream;
 		} else {
 			// set state error that will display msg
@@ -14,13 +14,14 @@ const start = async () => {
 };
 
 const stop = () => {
-	const {
-		video: { srcObject },
-	} = state;
-	const tracks = srcObject.getTracks();
+	const { video } = state;
 
-	tracks.forEach((track) => track.stop());
-	setState({ recording: false, wipeCurrentSticker: true });
+	if (video.srcObject) {
+		const tracks = video.srcObject.getTracks();
+
+		tracks.forEach((track) => track.stop());
+		setState({ recording: false, wipeCurrentSticker: true });
+	}
 };
 
 const snapshot = () => {
