@@ -10,8 +10,9 @@ const stickers = (ctx, width, height) => {
 
 		handleDragging: function (e, dimX, dimY, offsetX, offsetY) {
 			if (!this.isDragging || !this.sticker) return;
+
 			const x = parseInt(e.clientX - offsetX);
-			const y = parseInt(e.clientY - offsetY * 2);
+			const y = parseInt(e.clientY - dimY);
 			ctx.putImageData(this.imgDataBeforeSticker, 0, 0);
 			ctx.drawImage(this.sticker, x - dimX / 2, y - dimY / 2, dimX, dimY);
 			this.stickerMetaData = { x, y, dimX, dimY };
