@@ -32,6 +32,7 @@ const props = {
 const handlers = {
 	set: (obj, prop, value) => {
 		const previous = obj[prop];
+		// if (previous === value) return;
 		obj[prop] = value;
 		// console.log(prop, previous, value);
 		if (prop === "recording") {
@@ -70,7 +71,6 @@ window.addEventListener("resize", () => {
 /* ----- STATE HANDLERS ----- */
 
 const handleRecording = (previous, value) => {
-	snap.disabled = !value;
 	if (value === true) {
 		cam.innerHTML = "Eteindre la camera";
 		canvas.setAttribute("hidden", "");
@@ -96,6 +96,7 @@ const handlePic = (previous, value) => {
 		}
 	} else {
 		const { ctx, width, height } = value;
+		// console.log("handle pic", width, height, value);
 		setState({ original: ctx.getImageData(0, 0, width, height) });
 	}
 };
