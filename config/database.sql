@@ -21,7 +21,8 @@ CREATE TABLE pictures (
   encoding MEDIUMTEXT NOT NULL,
   legend TINYTEXT,
   regDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
-  PRIMARY KEY (idPictures)
+  PRIMARY KEY (idPictures),
+  FOREIGN KEY (diUsers) REFERENCES users(idUsers),
 ) ENGINE='InnoDB';
 
 CREATE TABLE likes (
@@ -36,7 +37,9 @@ CREATE TABLE comments (
   diPictures INT NOT NULL,
   comment TINYTEXT NOT NULL,
   regDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
-  PRIMARY KEY (idComments) 
+  PRIMARY KEY (idComments),
+  FOREIGN KEY (diUsers) REFERENCES users(idUsers),
+  FOREIGN KEY (diPictures) REFERENCES pictures(idPictures),
 ) ENGINE='InnoDB';
 
 -- TRIGGERS
