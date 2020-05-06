@@ -96,7 +96,6 @@ const handlePic = (previous, value) => {
 		}
 	} else {
 		const { ctx, width, height } = value;
-		// console.log("handle pic", width, height, value);
 		setState({ original: ctx.getImageData(0, 0, width, height) });
 	}
 };
