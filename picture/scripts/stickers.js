@@ -45,8 +45,6 @@ const stickers = (ctx, width, height) => {
 				this.handleDragging(e, dimX, dimY, offsetX, offsetY);
 		},
 
-		idleCtx: null,
-
 		glue: function () {
 			setState({ addingSticker: false });
 			canvas.onmousemove = null;
@@ -64,7 +62,6 @@ const stickers = (ctx, width, height) => {
 			this.imgDataBeforeSticker = null;
 			this.stickerMetaData = null;
 			this.sticker = null;
-			this.idleCtx = ctx.getImageData(0, 0, width, height);
 			this._addStickerToElems(stickerData);
 		},
 
@@ -100,7 +97,11 @@ const stickers = (ctx, width, height) => {
 				{ class: "material-icons" },
 				"open_with"
 			);
+
+			let ctxBeforeSelecting = null;
 			moveIcon.onmousedown = () => {
+				setState({ wipeCurrentSticker: true });
+				ctxBeforeSelecting = ctx.getImageData(0, 0, width, height);
 				const { x, y, dimX, dimY } = stickerData;
 				const topLeftX = x - dimX / 2;
 				const topLeftY = y - dimY / 2;
@@ -111,7 +112,7 @@ const stickers = (ctx, width, height) => {
 				ctx.fillRect(topLeftX - 2, topLeftY + dimY + 2, dimX + 2, 2);
 				ctx.fillRect(topLeftX - 2 + dimX, topLeftY, 2, dimY + 2);
 			};
-			moveIcon.onmouseup = () => ctx.putImageData(this.idleCtx, 0, 0);
+			moveIcon.onmouseup = () => ctx.putImageData(ctxBeforeSelecting, 0, 0);
 
 			const delIcon = createElement(
 				divElem,
@@ -140,7 +141,6 @@ const stickers = (ctx, width, height) => {
 						elem.dimY
 					);
 				});
-				this.idleCtx = ctx.getImageData(0, 0, width, height);
 			} catch (err) {
 				console.error("an error occured =>", err);
 			}
