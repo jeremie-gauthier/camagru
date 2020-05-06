@@ -24,24 +24,24 @@ const stop = () => {
 };
 
 const snapshot = () => {
-	const { video } = state;
+	try {
+		const { video } = state;
 
-	const width = Math.min(video.videoWidth, window.innerWidth);
-	const height = (width / 4) * 3;
-	setAttributes(canvas, { width: width, height: height });
+		const width = Math.min(video.videoWidth, window.innerWidth);
+		const height = (width / 4) * 3;
+		setAttributes(canvas, { width: width, height: height });
 
-	const ctx = canvas.getContext("2d");
-	ctx.drawImage(video, 0, 0, width, height);
+		const ctx = canvas.getContext("2d");
+		ctx.drawImage(video, 0, 0, width, height);
 
-	setState({
-		pic: {
-			width,
-			height,
-			ctx,
-			filter: filters(ctx, width, height),
-			sticker: stickers(ctx, width, height),
-		},
-		editing: true,
-	});
-	stop();
+		const filter = filters(ctx, width, height);
+		const sticker = stickers(ctx, width, height);
+		setState({
+			pic: { width, height, ctx, filter, sticker },
+			editing: true,
+		});
+		stop();
+	} catch (err) {
+		showToast(err);
+	}
 };

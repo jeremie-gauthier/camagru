@@ -14,9 +14,15 @@ const bitmap = (array, width) => {
 };
 
 const filters = (ctx, width, height) => {
-	const picData = ctx.getImageData(0, 0, width, height);
-	const data = picData.data;
-	const length = data.length;
+	let picData, data, length;
+
+	try {
+		picData = ctx.getImageData(0, 0, width, height);
+		data = picData.data;
+		length = data.length;
+	} catch (err) {
+		throw Error("Une erreur est survenue. Veuillez reessayer.");
+	}
 
 	return {
 		picData: picData,

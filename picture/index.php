@@ -15,6 +15,8 @@
     <div class="embed-responsive embed-responsive-16by9" id="picture-area">
       <canvas class="picture" id="canvas"></canvas>
     </div>
+
+  <?php require $_SERVER['DOCUMENT_ROOT'] . "/components/toast.php" ?>
   </div>
   <div class="pimp-area col-md-3">
     <ul class="nav nav-tabs">
@@ -53,6 +55,7 @@
     </div>
   </div>
 </div>
+
 <div class="footer w-100 row">
   <button
     type="button"
@@ -100,7 +103,6 @@
   >
     Supprimer ce sticker
   </button>
-
 </div>
 
 <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/layouts/footer.php" ?>
