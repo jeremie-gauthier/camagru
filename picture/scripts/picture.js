@@ -72,7 +72,7 @@ window.addEventListener("resize", () => {
 
 const handleRecording = (previous, value) => {
 	if (value === true) {
-		cam.innerHTML = "Eteindre la camera";
+		cam.innerHTML = "videocam_off";
 		canvas.setAttribute("hidden", "");
 		setState({
 			video: createElement(picArea, "video", { autoplay: true, id: "stream" }),
@@ -81,7 +81,7 @@ const handleRecording = (previous, value) => {
 			id: 0,
 		});
 	} else if (value === false) {
-		cam.innerHTML = "Allumer la camera";
+		cam.innerHTML = "videocam";
 		removeElement(state.video);
 		setState({ video: null });
 		canvas.removeAttribute("hidden");
