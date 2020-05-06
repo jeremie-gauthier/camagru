@@ -66,12 +66,9 @@
   </button>
 
   <button
-    type="button"
-    class="btn btn-primary"
-    id="video-toggler"
-    onclick="state.recording ? stop() : start()"
-  >
-    Allumer la camera
+    class="floating-btn"
+    onclick="state.recording ? stop() : start()">
+    <span class="material-icons" id="video-toggler">videocam</span>
   </button>
   
   <button
