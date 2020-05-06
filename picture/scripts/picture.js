@@ -59,6 +59,14 @@ const setState = (obj) => {
 	keys.forEach((key) => (state[key] = obj[key]));
 };
 
+window.addEventListener("resize", () => {
+	var w = document.documentElement.clientWidth;
+	var h = document.documentElement.clientHeight;
+
+	// Display result inside a div element
+	console.log("Width: " + w + ", " + "Height: " + h);
+});
+
 /* ----- STATE HANDLERS ----- */
 
 const handleRecording = (previous, value) => {
@@ -67,11 +75,7 @@ const handleRecording = (previous, value) => {
 		cam.innerHTML = "Eteindre la camera";
 		canvas.setAttribute("hidden", "");
 		setState({
-			video: createElement(picArea, "video", {
-				autoplay: "true",
-				class: "picture",
-				id: "stream",
-			}),
+			video: createElement(picArea, "video", { autoplay: true, id: "stream" }),
 			pic: null,
 			elems: [],
 			id: 0,
@@ -82,6 +86,7 @@ const handleRecording = (previous, value) => {
 		setState({ video: null });
 		canvas.removeAttribute("hidden");
 	}
+	snap.disabled = !value;
 };
 
 const handlePic = (previous, value) => {
