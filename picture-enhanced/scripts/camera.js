@@ -5,11 +5,10 @@ const start = async () => {
 			const stream = await navigator.mediaDevices.getUserMedia({ video: true });
 			state.video.srcObject = stream;
 		} else {
-			// set state error that will display msg
+			showToast("error", "Une erreur est survenue");
 		}
 	} catch (err) {
-		// set state error that will display msg
-		console.error("Something went wrong: ", err);
+		showToast("error", err.message);
 	}
 };
 
