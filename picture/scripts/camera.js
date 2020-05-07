@@ -1,7 +1,7 @@
 const start = async () => {
 	try {
 		if (navigator.mediaDevices) {
-			setState({ recording: true, editing: false });
+			setState({ addingSticker: false, recording: true, editing: false });
 			const stream = await navigator.mediaDevices.getUserMedia({ video: true });
 			state.video.srcObject = stream;
 		} else {
@@ -51,6 +51,9 @@ const snapshot = () => {
 };
 
 const upload = async (e) => {
+	stop();
+	setState({ wipeCurrentSticker: true, pic: null, elems: [], id: 0 });
+
 	const file = e?.target?.files[0];
 
 	if (!file || !file.type.match("image.*")) return;

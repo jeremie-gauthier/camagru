@@ -25,7 +25,7 @@ const props = {
 const handlers = {
 	set: (obj, prop, value) => {
 		const previous = obj[prop];
-		// if (previous === value) return;
+		if (previous === value) return;
 		obj[prop] = value;
 		// console.log(prop, previous, value);
 		if (prop === "recording") {
@@ -57,6 +57,7 @@ const setState = (obj) => {
 
 const handleRecording = (previous, value) => {
 	if (value === true) {
+		fileInput.value = null;
 		cam.innerHTML = "videocam_off";
 		canvas.setAttribute("hidden", "");
 		setState({
@@ -76,6 +77,7 @@ const handleRecording = (previous, value) => {
 
 const handlePic = (previous, value) => {
 	if (value === null) {
+		state.original = null;
 		if (previous !== null) {
 			previous.ctx.clearRect(0, 0, previous.width, previous.height);
 		}
