@@ -8,6 +8,12 @@
 }
 
 /* PICTURE */
+#stream {
+	transform: rotateY(180deg);
+	-webkit-transform: rotateY(180deg); /* Safari and Chrome */
+	-moz-transform: rotateY(180deg); /* Firefox */
+}
+
 .embed-responsive-16by9::before {
 	padding-top: 0%;
 }
