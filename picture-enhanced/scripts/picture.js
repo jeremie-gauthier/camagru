@@ -10,6 +10,7 @@ const stickerGlueBtn = document.getElementById("sticker-glue-toggler");
 const stickerWipeBtn = document.getElementById("sticker-wipe-toggler");
 
 const props = {
+	uploadAuthorization: true,
 	video: null,
 	recording: false,
 	editing: false,
@@ -27,7 +28,7 @@ const handlers = {
 		const previous = obj[prop];
 		// if (previous === value) return;
 		obj[prop] = value;
-		// console.log(prop, previous, value);
+		console.log(prop, previous, value);
 		if (prop === "recording") {
 			handleRecording(previous, value);
 		} else if (prop === "pic") {
@@ -42,6 +43,8 @@ const handlers = {
 		} else if (prop === "wipeCurrentSticker") {
 			handleWipe(previous, value);
 			obj[prop] = false;
+		} else if (prop === "uploadAuthorization") {
+			handleUploadAuthorization(previous, value);
 		}
 	},
 };
@@ -53,19 +56,10 @@ const setState = (obj) => {
 	keys.forEach((key) => (state[key] = obj[key]));
 };
 
-// window.addEventListener("resize", () => {
-// 	var w = document.documentElement.clientWidth;
-// 	var h = document.documentElement.clientHeight;
-
-// 	// Display result inside a div element
-// 	console.log("Width: " + w + ", " + "Height: " + h);
-// });
-
 /* ----- STATE HANDLERS ----- */
 
 const handleRecording = (previous, value) => {
 	if (value === true) {
-		uploadBtn.disabled = true;
 		cam.innerHTML = "videocam_off";
 		canvas.setAttribute("hidden", "");
 		setState({
@@ -73,12 +67,12 @@ const handleRecording = (previous, value) => {
 			pic: null,
 			elems: [],
 			id: 0,
+			uploadAuthorization: false,
 		});
 	} else if (value === false) {
-		uploadBtn.disabled = false;
 		cam.innerHTML = "videocam";
 		removeElement(state.video);
-		setState({ video: null });
+		setState({ video: null, uploadAuthorization: !state.editing });
 		canvas.removeAttribute("hidden");
 	}
 	snap.disabled = !value;
@@ -86,12 +80,17 @@ const handleRecording = (previous, value) => {
 
 const handlePic = (previous, value) => {
 	if (value === null) {
+		setState({ uploadAuthorization: true });
 		if (previous !== null) {
 			previous.ctx.clearRect(0, 0, previous.width, previous.height);
 		}
 	} else {
 		const { ctx, width, height } = value;
-		setState({ original: ctx.getImageData(0, 0, width, height) });
+		setState({
+			original: ctx.getImageData(0, 0, width, height),
+			uploadAuthorization: false,
+		});
+		console.log("ICI");
 	}
 };
 
@@ -125,4 +124,8 @@ const handleElemsChange = (previous, value) => {
 
 const handleWipe = (previous, value) => {
 	state.pic?.sticker.wipe();
+};
+
+const handleUploadAuthorization = (previous, value) => {
+	uploadBtn.disabled = !value;
 };
