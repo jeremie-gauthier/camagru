@@ -4,6 +4,7 @@ const [
 	snap,
 	cam,
 	uploadBtn,
+	sendBtn,
 	listElems,
 	stickerGlueBtn,
 	stickerWipeBtn,
@@ -13,6 +14,7 @@ const [
 	"snapshot-toggler",
 	"video-toggler",
 	"upload-toggler",
+	"send-btn-toggler",
 	"list-elems",
 	"sticker-glue-toggler",
 	"sticker-wipe-toggler",
@@ -120,12 +122,15 @@ const handleElemsChange = (previous, value) => {
 	if (previous.length > len) {
 		state.pic?.filter.commit(0, 0);
 		if (len === 0) {
+			sendBtn.disabled = true;
 			for (let i = 0; i <= state.id; i++) {
 				let elem = document.getElementById(`elem${i}`);
 				removeElement(elem);
 			}
 			if (state.dehydration) state.pic?.sticker.rehydrate();
 		}
+	} else if (len >= 1) {
+		sendBtn.disabled = false;
 	}
 };
 

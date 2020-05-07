@@ -108,6 +108,15 @@
     onclick="state.pic?.sticker.wipe()">
     <span class="material-icons">layers_clear</span>
   </button>
+
+  <button
+    disabled
+    type="button"
+    id="send-btn-toggler"
+    class="floating-btn"
+    onclick="send()">
+    <span class="material-icons">send</span>
+  </button>
 </div>
 
 <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/layouts/footer.php" ?>

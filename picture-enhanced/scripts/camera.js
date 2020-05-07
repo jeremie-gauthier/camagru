@@ -48,3 +48,5 @@ const snapshot = () => {
 };
 
 const upload = () => {};
+
+const send = () => {};
