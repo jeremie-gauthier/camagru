@@ -23,6 +23,8 @@
       <div>
         <img src="" />
       </div>
+    </template>
+  </div>
 </div>
 
 <div class="footer w-100 row">
