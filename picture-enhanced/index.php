@@ -6,19 +6,19 @@
   }
   require_once $_SERVER['DOCUMENT_ROOT'] . "/layouts/header.php";
 ?>
-<link rel="stylesheet" type="text/css" href="picture-enhanced/styles/picture.css">
+<link rel="stylesheet" type="text/css" href="picture-enhanced/styles/main.css">
 
 <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/layouts/navbar.php" ?>
 
 <div class="w-100 row">
-  <div class="col-md-9">
+  <div class="col-md-8">
     <div class="embed-responsive embed-responsive-16by9" id="picture-area">
       <canvas class="picture" id="canvas"></canvas>
     </div>
 
   <?php require $_SERVER['DOCUMENT_ROOT'] . "/components/toast.php" ?>
   </div>
-  <div class="pimp-area col-md-3">
+  <div class="pimp-area col-md-4">
     <ul class="nav nav-tabs">
       <li class="nav-item">
         <button
@@ -45,6 +45,15 @@
           onclick="switchNav(this)"
         >
           Mes elements
+        </button>
+      </li>
+      <li class="nav-item">
+        <button
+          class="nav-link extras"
+          id="btn-my-pictures"
+          onclick="switchNav(this)"
+        >
+          Mes photos
         </button>
       </li>
     </ul>
