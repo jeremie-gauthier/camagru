@@ -46,3 +46,5 @@ const snapshot = () => {
 		showToast("error", err.message);
 	}
 };
+
+const upload = () => {};
