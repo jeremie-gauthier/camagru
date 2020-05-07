@@ -113,7 +113,12 @@ const stickers = (ctx, width, height) => {
 				ctx.fillRect(topLeftX - 2, topLeftY + dimY + 2, dimX + 2, 2);
 				ctx.fillRect(topLeftX - 2 + dimX, topLeftY, 2, dimY + 2);
 			};
-			moveIcon.onmouseup = () => ctx.putImageData(ctxBeforeSelecting, 0, 0);
+			moveIcon.onmouseout = () => {
+				if (ctxBeforeSelecting) ctx.putImageData(ctxBeforeSelecting, 0, 0);
+			};
+			moveIcon.onmouseup = () => {
+				if (ctxBeforeSelecting) ctx.putImageData(ctxBeforeSelecting, 0, 0);
+			};
 
 			const delIcon = createElement(
 				divElem,
