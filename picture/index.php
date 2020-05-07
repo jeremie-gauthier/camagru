@@ -30,26 +30,26 @@
 <div class="footer w-100 row">
   <button
     type="button"
-    class="btn btn-primary"
-    id=""
-  >
-    Telecharger une image
+    id="upload-toggler"
+    class="floating-btn"
+    onclick="upload()">
+    <span class="material-icons">publish</span>
   </button>
 
   <button
+    type="button"
     class="floating-btn"
     onclick="state.recording ? stop() : start()">
     <span class="material-icons" id="video-toggler">videocam</span>
   </button>
   
   <button
-    type="button"
-    class="btn btn-primary"
-    id="snapshot-toggler"
-    onclick="snapshot()"
     disabled
-  >
-    Prendre une photo
+    type="button"
+    id="snapshot-toggler"
+    class="floating-btn"
+    onclick="snapshot()">
+    <span class="material-icons">add_a_photo</span>
   </button>
 </div>
 
@@ -60,10 +60,12 @@
 <script type="text/javascript" src="picture/scripts/camera.js"></script>
 
 <script>
-  const [video, cam, snap] = mapElements([
+  const [video, cam, snap, img, uploadImg] = mapElements([
     "stream",
     "video-toggler",
-    "snapshot-toggler"
+    "snapshot-toggler",
+    "img-taken",
+    "upload-toggler",
   ]);
 
   const state = {
