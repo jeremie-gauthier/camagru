@@ -6,57 +6,77 @@
   }
   require_once $_SERVER['DOCUMENT_ROOT'] . "/layouts/header.php";
 ?>
-<link rel="stylesheet" type="text/css" href="picture/styles/stickers.css">
-<link rel="stylesheet" type="text/css" href="picture/styles/stream.css">
-<link rel="stylesheet" type="text/css" href="picture-enhanced/styles/picture.css">
+<link rel="stylesheet" type="text/css" href="picture/styles/main.css">
 
 <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/layouts/navbar.php" ?>
 
 <div class="w-100 row">
-  <div class="col-md-9">
-    <div class="stickers-area">
-      <div class="sticker-box">
-        <input type="checkbox">
-          <img src="assets/Minion.png" width=50 height=50 />
-        </input>
-      </div>
-      <div class="sticker-box">
-        <input type="checkbox">
-          <img src="assets/Cadre.png" width=50 height=50 />
-        </input>
-      </div>
-      <div class="sticker-box">
-        <input type="checkbox">
-          <img src="assets/Sun.png" width=50 height=50 />
-        </input>
-      </div>
-    </div>
+  <div class="col-md-8">
     <div class="embed-responsive embed-responsive-16by9" id="picture-area">
-      <video hidden autoplay id="stream"></video>
+      <canvas class="picture" id="canvas"></canvas>
     </div>
 
   <?php require $_SERVER['DOCUMENT_ROOT'] . "/components/toast.php" ?>
   </div>
-  <div class="pimp-area col-md-3">
-    <template id="img-taken">
-      <div>
-        <img src="" />
-      </div>
-    </template>
+  <div class="pimp-area col-md-4">
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <button
+          class="nav-link extras active"
+          id="btn-stickers"
+          onclick="switchNav(this)"
+        >
+          Stickers
+        </button>
+      </li>
+      <li class="nav-item">
+        <button
+          class="nav-link extras"
+          id="btn-filters"
+          onclick="switchNav(this)"
+        >
+          Filtres
+        </button>
+      </li>
+      <li class="nav-item">
+        <button
+          class="nav-link extras"
+          id="btn-elems"
+          onclick="switchNav(this)"
+        >
+          Mes elements
+        </button>
+      </li>
+      <li class="nav-item">
+        <button
+          class="nav-link extras"
+          id="btn-my-pictures"
+          onclick="switchNav(this)"
+        >
+          Mes photos
+        </button>
+      </li>
+    </ul>
+    <div class="tab-content" id="tab-content">
+      <?php require_once "src/stickers.php" ?>
+      <?php require_once "src/filters.php" ?>
+      <?php require_once "src/elements.php" ?>
+    </div>
   </div>
 </div>
 
 <div class="footer w-100 row">
+  <input type='file' id="file-input" accept="image/png, .jpeg, .jpg" hidden />
   <button
     type="button"
     id="upload-toggler"
     class="floating-btn"
-    onclick="upload()">
+    onclick="document.getElementById('file-input').click()">
     <span class="material-icons">publish</span>
   </button>
 
+
   <button
-    type="button"
     class="floating-btn"
     onclick="state.recording ? stop() : start()">
     <span class="material-icons" id="video-toggler">videocam</span>
@@ -70,25 +90,42 @@
     onclick="snapshot()">
     <span class="material-icons">add_a_photo</span>
   </button>
+
+
+  <button
+    disabled
+    type="button"
+    id="sticker-glue-toggler"
+    class="floating-btn"
+    onclick="state.pic?.sticker.glue()">
+    <span class="material-icons">layers</span>
+  </button>
+
+  <button
+    disabled
+    type="button"
+    id="sticker-wipe-toggler"
+    class="floating-btn"
+    onclick="state.pic?.sticker.wipe()">
+    <span class="material-icons">layers_clear</span>
+  </button>
+
+  <button
+    disabled
+    type="button"
+    id="send-btn-toggler"
+    class="floating-btn"
+    onclick="send()">
+    <span class="material-icons">send</span>
+  </button>
 </div>
 
 <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/layouts/footer.php" ?>
 
 <script type="text/javascript" src="scripts/promises.js"></script>
 <script type="text/javascript" src="scripts/DOM.js"></script>
+<script type="text/javascript" src="scripts/navs.js"></script>
+<script type="text/javascript" src="picture/scripts/picture.js"></script>
+<script type="text/javascript" src="picture/scripts/filters.js"></script>
+<script type="text/javascript" src="picture/scripts/stickers.js"></script>
 <script type="text/javascript" src="picture/scripts/camera.js"></script>
-
-<script>
-  const [video, cam, snap, img, uploadImg] = mapElements([
-    "stream",
-    "video-toggler",
-    "snapshot-toggler",
-    "img-taken",
-    "upload-toggler",
-  ]);
-
-  const state = {
-    recording: false
-  };
-
-</script>
