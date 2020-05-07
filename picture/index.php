@@ -19,8 +19,10 @@
   <?php require $_SERVER['DOCUMENT_ROOT'] . "/components/toast.php" ?>
   </div>
   <div class="pimp-area col-md-3">
-
-  </div>
+    <template id="img-taken">
+      <div>
+        <img src="" />
+      </div>
 </div>
 
 <div class="footer w-100 row">
