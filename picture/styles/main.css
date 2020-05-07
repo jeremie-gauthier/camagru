@@ -36,7 +36,7 @@
 }
 
 .extras:hover {
-	background-color: #d59d4c;
+	background-color: lightgrey;
 	border-top-left-radius: 0.25rem;
 	border-top-right-radius: 0.25rem;
 }
@@ -71,5 +71,4 @@
 /* STICKER */
 .sticker-area {
 	height: 500px;
-	background-color: darkviolet;
 }
