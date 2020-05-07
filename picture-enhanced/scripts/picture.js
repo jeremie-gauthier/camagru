@@ -1,24 +1,13 @@
-const [
-	canvas,
-	picArea,
-	snap,
-	cam,
-	uploadBtn,
-	sendBtn,
-	listElems,
-	stickerGlueBtn,
-	stickerWipeBtn,
-] = mapElements([
-	"canvas",
-	"picture-area",
-	"snapshot-toggler",
-	"video-toggler",
-	"upload-toggler",
-	"send-btn-toggler",
-	"list-elems",
-	"sticker-glue-toggler",
-	"sticker-wipe-toggler",
-]);
+const canvas = document.getElementById("canvas");
+const picArea = document.getElementById("picture-area");
+const snap = document.getElementById("snapshot-toggler");
+const cam = document.getElementById("video-toggler");
+const uploadBtn = document.getElementById("upload-toggler");
+const fileInput = document.getElementById("file-input");
+const sendBtn = document.getElementById("send-btn-toggler");
+const listElems = document.getElementById("list-elems");
+const stickerGlueBtn = document.getElementById("sticker-glue-toggler");
+const stickerWipeBtn = document.getElementById("sticker-wipe-toggler");
 
 const props = {
 	video: null,

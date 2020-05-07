@@ -66,11 +66,12 @@
 </div>
 
 <div class="footer w-100 row">
+  <input type='file' id="file-input" accept="image/png, .jpeg, .jpg" hidden />
   <button
     type="button"
     id="upload-toggler"
     class="floating-btn"
-    onclick="upload()">
+    onclick="document.getElementById('file-input').click()">
     <span class="material-icons">publish</span>
   </button>
 
