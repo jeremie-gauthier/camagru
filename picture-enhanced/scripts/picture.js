@@ -3,6 +3,7 @@ const [
 	picArea,
 	snap,
 	cam,
+	uploadBtn,
 	listElems,
 	stickerGlueBtn,
 	stickerWipeBtn,
@@ -11,6 +12,7 @@ const [
 	"picture-area",
 	"snapshot-toggler",
 	"video-toggler",
+	"upload-toggler",
 	"list-elems",
 	"sticker-glue-toggler",
 	"sticker-wipe-toggler",
@@ -72,6 +74,7 @@ window.addEventListener("resize", () => {
 
 const handleRecording = (previous, value) => {
 	if (value === true) {
+		uploadBtn.disabled = true;
 		cam.innerHTML = "videocam_off";
 		canvas.setAttribute("hidden", "");
 		setState({
@@ -81,6 +84,7 @@ const handleRecording = (previous, value) => {
 			id: 0,
 		});
 	} else if (value === false) {
+		uploadBtn.disabled = false;
 		cam.innerHTML = "videocam";
 		removeElement(state.video);
 		setState({ video: null });

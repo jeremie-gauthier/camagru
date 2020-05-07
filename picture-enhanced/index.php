@@ -59,11 +59,12 @@
 <div class="footer w-100 row">
   <button
     type="button"
-    class="btn btn-primary"
-    id=""
-  >
-    Telecharger une image
+    id="upload-toggler"
+    class="floating-btn"
+    onclick="upload()">
+    <span class="material-icons">publish</span>
   </button>
+
 
   <button
     class="floating-btn"
@@ -72,33 +73,31 @@
   </button>
   
   <button
+    disabled
     type="button"
-    class="btn btn-primary"
     id="snapshot-toggler"
-    onclick="snapshot()"
-    disabled
-  >
-    Prendre une photo
+    class="floating-btn"
+    onclick="snapshot()">
+    <span class="material-icons">add_a_photo</span>
   </button>
 
+
   <button
+    disabled
     type="button"
-    class="btn btn-primary"
     id="sticker-glue-toggler"
-    onClick="state.pic?.sticker.glue()"
-    disabled
-  >
-    Ajouter ce sticker
+    class="floating-btn"
+    onclick="state.pic?.sticker.glue()">
+    <span class="material-icons">layers</span>
   </button>
 
   <button
-    type="button"
-    class="btn btn-primary"
-    id="sticker-wipe-toggler"
-    onClick="state.pic?.sticker.wipe()"
     disabled
-  >
-    Supprimer ce sticker
+    type="button"
+    id="sticker-wipe-toggler"
+    class="floating-btn"
+    onclick="state.pic?.sticker.wipe()">
+    <span class="material-icons">layers_clear</span>
   </button>
 </div>
 
