@@ -7,7 +7,7 @@
   require_once $_SERVER['DOCUMENT_ROOT'] . "/layouts/header.php";
 ?>
 
-<link rel="stylesheet" type="text/css" href="picture/styles/filters.css">
+<link rel="stylesheet" type="text/css" href="picture-enhanced/styles/filters.css">
 
 <div id="list-filters" aria-labelledby="btn-filters" hidden>
   <button type="button" class="filter" onclick="state.pic?.filter.normal()">

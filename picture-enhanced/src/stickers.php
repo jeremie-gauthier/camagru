@@ -7,7 +7,7 @@
   require_once $_SERVER['DOCUMENT_ROOT'] . "/layouts/header.php";
 ?>
 
-<link rel="stylesheet" type="text/css" href="picture/styles/sticker.css">
+<link rel="stylesheet" type="text/css" href="picture-enhanced/styles/sticker.css">
 
 <div id="list-stickers" aria-labelledby="btn-stickers">
   <div class="sticker" onclick="state.pic?.sticker.add('assets/Minion.png', 50, 50)">
