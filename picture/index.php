@@ -6,12 +6,31 @@
   }
   require_once $_SERVER['DOCUMENT_ROOT'] . "/layouts/header.php";
 ?>
+<link rel="stylesheet" type="text/css" href="picture/styles/stickers.css">
+<link rel="stylesheet" type="text/css" href="picture/styles/stream.css">
 <link rel="stylesheet" type="text/css" href="picture-enhanced/styles/picture.css">
 
 <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/layouts/navbar.php" ?>
 
 <div class="w-100 row">
   <div class="col-md-9">
+    <div class="stickers-area">
+      <div class="sticker-box">
+        <input type="checkbox">
+          <img src="assets/Minion.png" width=50 height=50 />
+        </input>
+      </div>
+      <div class="sticker-box">
+        <input type="checkbox">
+          <img src="assets/Cadre.png" width=50 height=50 />
+        </input>
+      </div>
+      <div class="sticker-box">
+        <input type="checkbox">
+          <img src="assets/Sun.png" width=50 height=50 />
+        </input>
+      </div>
+    </div>
     <div class="embed-responsive embed-responsive-16by9" id="picture-area">
       <video hidden autoplay id="stream"></video>
     </div>
