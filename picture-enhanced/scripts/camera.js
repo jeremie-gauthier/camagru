@@ -33,7 +33,11 @@ const snapshot = () => {
 		setAttributes(canvas, { width: width, height: height });
 
 		const ctx = canvas.getContext("2d");
+		ctx.translate(width, 0);
+		ctx.scale(-1, 1);
 		ctx.drawImage(video, 0, 0, width, height);
+		ctx.translate(width, 0);
+		ctx.scale(-1, 1);
 
 		const filter = filters(ctx, width, height);
 		const sticker = stickers(ctx, width, height);
