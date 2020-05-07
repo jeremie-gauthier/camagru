@@ -133,7 +133,7 @@ const stickers = (ctx, width, height) => {
 		rehydrate: function () {
 			try {
 				state.elems.forEach(async (elem) => {
-					const sticker = await imgLoadAsync(elem.src);
+					const sticker = await imgLoader(elem.src);
 					ctx.drawImage(
 						sticker,
 						elem.x - elem.dimX / 2,
