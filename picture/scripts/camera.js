@@ -7,11 +7,10 @@ const start = async () => {
 			video.removeAttribute("hidden");
 			cam.innerHTML = "videocam_off";
 		} else {
-			// set state error that will display msg
+			showToast(err.message);
 		}
 	} catch (err) {
-		// set state error that will display msg
-		console.error("Something went wrong: ", err);
+		showToast(err.message);
 	}
 };
 
