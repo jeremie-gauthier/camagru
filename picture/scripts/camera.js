@@ -15,7 +15,7 @@ const start = async () => {
 const stop = () => {
 	const { video } = state;
 
-	if (video.srcObject) {
+	if (video?.srcObject) {
 		const tracks = video.srcObject.getTracks();
 
 		tracks.forEach((track) => track.stop());
