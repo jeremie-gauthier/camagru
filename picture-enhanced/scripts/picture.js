@@ -64,13 +64,13 @@ const setState = (obj) => {
 	keys.forEach((key) => (state[key] = obj[key]));
 };
 
-window.addEventListener("resize", () => {
-	var w = document.documentElement.clientWidth;
-	var h = document.documentElement.clientHeight;
+// window.addEventListener("resize", () => {
+// 	var w = document.documentElement.clientWidth;
+// 	var h = document.documentElement.clientHeight;
 
-	// Display result inside a div element
-	console.log("Width: " + w + ", " + "Height: " + h);
-});
+// 	// Display result inside a div element
+// 	console.log("Width: " + w + ", " + "Height: " + h);
+// });
 
 /* ----- STATE HANDLERS ----- */
 
