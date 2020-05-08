@@ -30,15 +30,12 @@ const stickers = (ctx, width, height) => {
 			const offsetY = canvas.offsetTop + navbar.offsetHeight;
 
 			setState({ addingSticker: true });
-			if (this.imgDataBeforeSticker === null) {
-				this.imgDataBeforeSticker = ctx.getImageData(0, 0, width, height);
-			} else {
-				ctx.putImageData(this.imgDataBeforeSticker, 0, 0);
-			}
+			this.imgDataBeforeSticker = ctx.getImageData(0, 0, width, height);
 			this.sticker = new Image();
 			this.sticker.src = src;
 			this.sticker.name = src.split("/")[1].split(".")[0];
 			this.sticker.onload = () => ctx.drawImage(this.sticker, 0, 0, dimX, dimY);
+			this.stickerMetaData = { x: dimX / 2, y: dimY / 2, dimX, dimY };
 
 			canvas.onmousedown = () => this.startDragging();
 			canvas.onmouseup = () => this.stopDragging();
@@ -140,7 +137,7 @@ const stickers = (ctx, width, height) => {
 			try {
 				state.elems.forEach(async (elem) => {
 					const sticker = await imgLoader(elem.src);
-					ctx.drawImage(
+					await ctx.drawImage(
 						sticker,
 						elem.x - elem.dimX / 2,
 						elem.y - elem.dimY / 2,
