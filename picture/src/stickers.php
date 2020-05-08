@@ -14,4 +14,12 @@
     <img class="img-sticker" src="assets/Minion.png" />
     <span class="text-sticker">Minion</span>
   </div>
+  <div class="sticker" onclick="state.pic?.sticker.add('assets/Soleil.png', 75, 75)">
+    <img class="img-sticker" src="assets/Soleil.png" />
+    <span class="text-sticker">Soleil</span>
+  </div>
+  <div class="sticker" onclick="state.pic?.sticker.add('assets/Cadre.png', 640, 480)">
+    <img class="img-sticker" src="assets/Cadre.png" />
+    <span class="text-sticker">Cadre</span>
+  </div>
 </div>
