@@ -78,4 +78,21 @@ const upload = async (e) => {
 
 fileInput.addEventListener("change", upload);
 
-const send = () => {};
+const send = async () => {
+	try {
+		const b64img = canvas.toDataURL();
+		const img = await imgLoader(b64img);
+
+		const xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function () {
+			if (this.readyState == 4 && this.status == 200) {
+				showToast("success", this.responseText);
+			}
+		};
+		xhttp.open("POST", "server/handlers/picture.php", true);
+		xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		xhttp.send("picture=" + b64img);
+	} catch (err) {
+		showToast("error", err.message);
+	}
+};
