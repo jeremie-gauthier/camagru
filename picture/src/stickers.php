@@ -30,4 +30,8 @@
     <img class="img-sticker" src="assets/stickers/Ciri.png" />
     <span class="text-sticker">Ciri</span>
   </div>
+  <div class="sticker" onclick="state.pic?.sticker.add('assets/stickers/Witcher.png', 440, 350)">
+    <img class="img-sticker" src="assets/stickers/Witcher.png" />
+    <span class="text-sticker">Witcher</span>
+  </div>
 </div>
