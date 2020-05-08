@@ -22,4 +22,12 @@
     <img class="img-sticker" src="assets/Cadre.png" />
     <span class="text-sticker">Cadre</span>
   </div>
+  <div class="sticker" onclick="state.pic?.sticker.add('assets/Geralt.png', 314, 250)">
+    <img class="img-sticker" src="assets/Geralt.png" />
+    <span class="text-sticker">Geralt</span>
+  </div>
+  <div class="sticker" onclick="state.pic?.sticker.add('assets/Ciri.png', 320, 400)">
+    <img class="img-sticker" src="assets/Ciri.png" />
+    <span class="text-sticker">Ciri</span>
+  </div>
 </div>
