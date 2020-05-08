@@ -3,7 +3,7 @@
 ?>
 <link rel="stylesheet" type="text/css" href="style/navbar.css">
 
-<nav class="navbar navbar-expand-lg sticky-top navbar-light navbar-bg">
+<nav class="navbar navbar-expand-lg sticky-top navbar-light navbar-bg" id="navbar">
   <a class="navbar-brand" href="index.php">Camagru</a>
   <div class="navbar-nav">
     <?php if (Session::exists("pseudo")) { ?>

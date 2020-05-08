@@ -12,7 +12,7 @@ const stickers = (ctx, width, height) => {
 			if (!this.isDragging || !this.sticker) return;
 
 			const x = parseInt(e.clientX - offsetX);
-			const y = parseInt(e.clientY - dimY);
+			const y = parseInt(e.clientY - offsetY);
 			ctx.putImageData(this.imgDataBeforeSticker, 0, 0);
 			ctx.drawImage(this.sticker, x - dimX / 2, y - dimY / 2, dimX, dimY);
 			this.stickerMetaData = { x, y, dimX, dimY };
@@ -25,8 +25,9 @@ const stickers = (ctx, width, height) => {
 
 		add: function (src, dimX, dimY) {
 			this.wipe();
+			const navbar = document.getElementById("navbar");
 			const offsetX = canvas.offsetLeft;
-			const offsetY = canvas.offsetTop;
+			const offsetY = canvas.offsetTop + navbar.offsetHeight;
 
 			setState({ addingSticker: true });
 			if (this.imgDataBeforeSticker === null) {
