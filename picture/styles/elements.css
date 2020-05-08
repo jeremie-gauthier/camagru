@@ -7,11 +7,20 @@
 	background: linear-gradient(45deg, #fe6b8b, #ff8e53);
 	color: inherit;
 	font-weight: bold;
-	font-size: large;
+	font-size: 16px;
+	display: flex;
+	align-items: center;
+	user-select: none;
 }
 
 .element:hover {
 	cursor: pointer;
+	background: linear-gradient(45deg, #ff8e53, #fe6b8b);
+}
+
+.element:hover .text-element {
+	font-size: 1.4rem;
+	transition: 0.25s linear;
 }
 
 .img-element {
@@ -22,6 +31,10 @@
 }
 
 .text-element {
-	font-size: x-large;
+	font-size: 1.25rem;
 	padding-left: 1rem;
+}
+
+.action-icon {
+	margin-left: 1rem;
 }

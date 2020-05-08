@@ -7,30 +7,20 @@
 	background: linear-gradient(45deg, #fe6b8b, #ff8e53);
 	color: inherit;
 	font-weight: bold;
-	font-size: large;
+	display: flex;
+	align-items: center;
+	user-select: none;
 }
 
 .sticker:hover {
 	cursor: pointer;
-	/* margin-top: 0.75rem;
-	margin-bottom: 0.25rem; */
-	font-size: x-large;
 	background: linear-gradient(45deg, #ff8e53, #fe6b8b);
-	transition: 0.5s;
 }
 
-@keyframes movesOut {
-	0% {
-		transform: translateX(0px);
-	}
-
-	100% {
-		transform: translateX(-50px) rotate(-30deg);
-	}
-}
-.sticker:hover .img-sticker {
-	-webkit-animation: movesOut 2s;
-	animation: movesOut 0.5s both;
+.sticker:hover .text-sticker {
+	font-size: 1.4rem;
+	background: none;
+	transition: 0.25s linear;
 }
 
 .img-sticker {
@@ -41,6 +31,6 @@
 }
 
 .text-sticker {
-	font-size: x-large;
+	font-size: 1.25rem;
 	padding-left: 1rem;
 }
