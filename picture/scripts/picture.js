@@ -8,6 +8,7 @@ const sendBtn = document.getElementById("send-btn-toggler");
 const listElems = document.getElementById("list-elems");
 const stickerGlueBtn = document.getElementById("sticker-glue-toggler");
 const stickerWipeBtn = document.getElementById("sticker-wipe-toggler");
+const listPics = document.getElementById("list-pictures");
 
 const props = {
 	video: null,
