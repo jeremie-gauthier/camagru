@@ -11,14 +11,14 @@
 <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/layouts/navbar.php" ?>
 
 <div class="w-100 row">
-  <div class="col-md-8">
+  <div class="col-md-7">
     <div class="embed-responsive embed-responsive-16by9" id="picture-area">
       <canvas class="picture" id="canvas"></canvas>
     </div>
 
   <?php require $_SERVER['DOCUMENT_ROOT'] . "/components/toast.php" ?>
   </div>
-  <div class="pimp-area col-md-4">
+  <div class="pimp-area col-md-5">
     <ul class="nav nav-tabs">
       <li class="nav-item">
         <button
@@ -61,6 +61,7 @@
       <?php require_once "src/stickers.php" ?>
       <?php require_once "src/filters.php" ?>
       <?php require_once "src/elements.php" ?>
+      <?php require_once "src/pictures.php" ?>
     </div>
   </div>
 </div>
@@ -128,4 +129,4 @@
 <script type="text/javascript" src="picture/scripts/picture.js"></script>
 <script type="text/javascript" src="picture/scripts/filters.js"></script>
 <script type="text/javascript" src="picture/scripts/stickers.js"></script>
-<script type="text/javascript" src="picture/scripts/camera.js"></script>
+<script type="text/javascript" src="picture/scripts/controls.js"></script>

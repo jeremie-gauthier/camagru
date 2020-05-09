@@ -7,7 +7,7 @@
   require_once $_SERVER['DOCUMENT_ROOT'] . "/layouts/header.php";
 ?>
 
-<link rel="stylesheet" type="text/css" href="picture/styles/elements.css">
+<link rel="stylesheet" type="text/css" href="picture/styles/pictures.css">
 
 <div id="list-pictures" aria-labelledby="btn-my-pictures" hidden>
 
