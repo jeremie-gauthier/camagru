@@ -33,7 +33,7 @@ const stickers = (ctx, width, height) => {
 			this.imgDataBeforeSticker = ctx.getImageData(0, 0, width, height);
 			this.sticker = new Image();
 			this.sticker.src = src;
-			this.sticker.name = src.split("/")[1].split(".")[0];
+			this.sticker.name = src.split("/")[2].split(".")[0];
 			this.sticker.onload = () => ctx.drawImage(this.sticker, 0, 0, dimX, dimY);
 			this.stickerMetaData = { x: dimX / 2, y: dimY / 2, dimX, dimY };
 
@@ -92,7 +92,7 @@ const stickers = (ctx, width, height) => {
 			);
 			const moveIcon = createElement(
 				divElem,
-				"span",
+				"i",
 				{ class: "material-icons action-icon md-inactive" },
 				"gps_fixed"
 			);
@@ -120,7 +120,7 @@ const stickers = (ctx, width, height) => {
 
 			const delIcon = createElement(
 				divElem,
-				"span",
+				"i",
 				{ class: "material-icons action-icon md-inactive" },
 				"delete"
 			);
