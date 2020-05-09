@@ -13,11 +13,6 @@
 	user-select: none;
 }
 
-.element:hover {
-	cursor: pointer;
-	background: linear-gradient(45deg, #ff8e53, #fe6b8b);
-}
-
 .img-element {
 	border-top-left-radius: 0.5rem;
 	border-bottom-left-radius: 0.5rem;
@@ -36,5 +31,6 @@
 }
 
 .action-icon:hover {
+	cursor: pointer;
 	color: rgba(255, 255, 255, 1);
 }
