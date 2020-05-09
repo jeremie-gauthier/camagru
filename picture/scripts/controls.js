@@ -78,14 +78,29 @@ const upload = async (e) => {
 
 fileInput.addEventListener("change", upload);
 
+const addImgToList = (id, src) => {
+	const divElem = createElement(listPics, "div", {
+		class: "my-picture",
+		id: `my-picture${id}`,
+	});
+	createElement(divElem, "img", { class: "img-picture", src });
+	const delIcon = createElement(
+		divElem,
+		"i",
+		{ class: "material-icons md-inactive picture-action" },
+		"clear"
+	);
+	// add events delIcon
+};
+
 const send = async () => {
 	try {
 		const b64img = canvas.toDataURL();
-		const img = await imgLoader(b64img);
 
 		const xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function () {
 			if (this.readyState == 4 && this.status == 200) {
+				addImgToList(1, b64img);
 				showToast("success", this.responseText);
 			}
 		};
