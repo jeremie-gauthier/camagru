@@ -93,8 +93,8 @@ const stickers = (ctx, width, height) => {
 			const moveIcon = createElement(
 				divElem,
 				"span",
-				{ class: "material-icons action-icon" },
-				"open_with"
+				{ class: "material-icons action-icon md-inactive" },
+				"gps_fixed"
 			);
 
 			let ctxBeforeSelecting = null;
@@ -121,7 +121,7 @@ const stickers = (ctx, width, height) => {
 			const delIcon = createElement(
 				divElem,
 				"span",
-				{ class: "material-icons action-icon" },
+				{ class: "material-icons action-icon md-inactive" },
 				"delete"
 			);
 			delIcon.onclick = () => {
