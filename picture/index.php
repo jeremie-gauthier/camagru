@@ -123,6 +123,7 @@
 
 <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/layouts/footer.php" ?>
 
+<script type="text/javascript" src="scripts/AsyncRequest.js"></script>
 <script type="text/javascript" src="scripts/promises.js"></script>
 <script type="text/javascript" src="scripts/DOM.js"></script>
 <script type="text/javascript" src="scripts/navs.js"></script>
