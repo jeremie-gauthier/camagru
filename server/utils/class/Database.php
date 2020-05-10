@@ -34,6 +34,10 @@ class Database {
     return $this->stmt->fetchAll();
   }
 
+  function get_last_inserted_id() {
+    return $this->pdo->lastInsertId();
+  }
+
   function close() {
     $this->pdo = null;
   }
