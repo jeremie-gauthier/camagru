@@ -33,10 +33,11 @@ class AsyncRequest {
 		return new Promise((resolve, reject) => {
 			const xhr = AsyncRequest.#XHRInstance();
 			xhr.open("POST", url, true);
-			xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+			xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
 			xhr.onload = () => {
 				try {
+					console.log(xhr.responseText);
 					const response = JSON.parse(xhr.responseText);
 					resolve(response);
 				} catch (err) {
@@ -45,7 +46,7 @@ class AsyncRequest {
 			};
 
 			const json = JSON.stringify(data);
-			xhr.send(json);
+			xhr.send("data=" + json);
 		});
 	}
 
@@ -53,7 +54,7 @@ class AsyncRequest {
 		return new Promise((resolve, reject) => {
 			const xhr = AsyncRequest.#XHRInstance();
 			xhr.open("PUT", url, true);
-			xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+			xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
 			xhr.onload = () => {
 				try {
@@ -65,7 +66,7 @@ class AsyncRequest {
 			};
 
 			const json = JSON.stringify(data);
-			xhr.send(json);
+			xhr.send("data=" + json);
 		});
 	}
 
