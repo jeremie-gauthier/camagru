@@ -108,8 +108,8 @@ const send = async () => {
 		const url = "server/handlers/picture.php";
 		const data = { picture: b64img };
 
-		const { message } = await AsyncRequest.post(url, data);
-		addImgToList(1, b64img);
+		const { message, imgId } = await AsyncRequest.post(url, data);
+		addImgToList(imgId, b64img);
 		showToast("success", message);
 	} catch (err) {
 		showToast("error", err.message);
