@@ -9,6 +9,10 @@
 
 <link rel="stylesheet" type="text/css" href="picture/styles/pictures.css">
 
-<div id="list-pictures" class="list-pictures" aria-labelledby="btn-my-pictures" hidden>
-
+<div
+  id="list-pictures"
+  class="list-pictures"
+  aria-labelledby="btn-my-pictures"
+  hidden
+>
 </div>
