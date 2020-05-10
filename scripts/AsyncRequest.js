@@ -37,7 +37,6 @@ class AsyncRequest {
 
 			xhr.onload = () => {
 				try {
-					console.log(xhr.responseText);
 					const response = JSON.parse(xhr.responseText);
 					resolve(response);
 				} catch (err) {
