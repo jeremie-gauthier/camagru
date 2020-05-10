@@ -78,13 +78,11 @@ const handleRecording = (previous, value) => {
 
 const handlePic = (previous, value) => {
 	if (value === null) {
-		sendBtn.disabled = true;
 		state.original = null;
 		if (previous !== null) {
 			previous.ctx.clearRect(0, 0, previous.width, previous.height);
 		}
 	} else {
-		sendBtn.disabled = false;
 		const { ctx, width, height } = value;
 		setState({ original: ctx.getImageData(0, 0, width, height) });
 	}
