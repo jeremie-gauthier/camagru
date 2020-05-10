@@ -51,39 +51,47 @@ const snapshot = () => {
 };
 
 const upload = async (e) => {
-	stop();
-	setState({ wipeCurrentSticker: true, pic: null, elems: [], id: 0 });
+	try {
+		stop();
+		setState({ wipeCurrentSticker: true, pic: null, elems: [], id: 0 });
 
-	const file = e?.target?.files[0];
+		const file = e?.target?.files[0];
 
-	if (!file || !file.type.match("image.*")) return;
+		if (!file) return;
+		if (!file.type.match("image.*")) {
+			showToast("error", "Not a valid file");
+			return;
+		}
 
-	const data = await fileReader(file);
-	const img = await imgLoader(data);
+		const data = await fileReader(file);
+		const img = await imgLoader(data);
 
-	const width = Math.min(640, window.innerWidth);
-	const height = (width / 4) * 3;
-	setAttributes(canvas, { width: width, height: height });
+		const width = Math.min(640, window.innerWidth);
+		const height = (width / 4) * 3;
+		setAttributes(canvas, { width: width, height: height });
 
-	const ctx = canvas.getContext("2d");
+		const ctx = canvas.getContext("2d");
 
-	ctx.drawImage(img, 0, 0, width, height);
-	const filter = filters(ctx, width, height);
-	const sticker = stickers(ctx, width, height);
-	setState({
-		pic: { width, height, ctx, filter, sticker },
-		editing: true,
-	});
+		ctx.drawImage(img, 0, 0, width, height);
+		const filter = filters(ctx, width, height);
+		const sticker = stickers(ctx, width, height);
+		setState({
+			pic: { width, height, ctx, filter, sticker },
+			editing: true,
+		});
+	} catch (err) {
+		showToast("error", err.message);
+	}
 };
 
 fileInput.addEventListener("change", upload);
 
 const addImgToList = (id, src) => {
 	const divElem = createElement(listPics, "div", {
-		class: "my-picture",
+		class: "picture-container",
 		id: `my-picture${id}`,
 	});
-	createElement(divElem, "img", { class: "img-picture", src });
+	createElement(divElem, "img", { class: "picture-img", src });
 	const delIcon = createElement(
 		divElem,
 		"i",
@@ -91,22 +99,18 @@ const addImgToList = (id, src) => {
 		"clear"
 	);
 	// add events delIcon
+	delIcon.addEventListener("click", () => console.log(`Delete: ${id}`));
 };
 
 const send = async () => {
 	try {
 		const b64img = canvas.toDataURL();
+		const url = "server/handlers/picture.php";
+		const data = { picture: b64img };
 
-		const xhttp = new XMLHttpRequest();
-		xhttp.onreadystatechange = function () {
-			if (this.readyState == 4 && this.status == 200) {
-				addImgToList(1, b64img);
-				showToast("success", this.responseText);
-			}
-		};
-		xhttp.open("POST", "server/handlers/picture.php", true);
-		xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-		xhttp.send("picture=" + b64img);
+		const { message } = await AsyncRequest.post(url, data);
+		addImgToList(1, b64img);
+		showToast("success", message);
 	} catch (err) {
 		showToast("error", err.message);
 	}
