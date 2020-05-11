@@ -7,19 +7,22 @@ class Pictures extends Database{
     parent::__construct($DB_DSN, $DB_USER, $DB_PASSWORD);
   }
 
-  function create($userId) {
+  function create($userId, $legend) {
     try {
       $query = "
         INSERT INTO
           pictures (
-            diUsers
+            diUsers,
+            legend
           )
         VALUES (
-          :userId
+          :userId,
+          :legend
         )
       ";
       $values = [
-        ":userId" => $userId
+        ":userId" => $userId,
+        ":legend" => $legend
       ];
       $this->query($query, $values);
       $inserted_id = $this->get_last_inserted_id();

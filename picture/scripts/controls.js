@@ -53,7 +53,14 @@ const snapshot = () => {
 const upload = async (e) => {
 	try {
 		stop();
-		setState({ wipeCurrentSticker: true, pic: null, elems: [], id: 0 });
+		setState({
+			wipeCurrentSticker: true,
+			pic: null,
+			legend: null,
+			elems: [],
+			id: 0,
+		});
+		comment.value = "";
 
 		const file = e?.target?.files[0];
 
@@ -107,12 +114,23 @@ const send = async () => {
 		setState({ wipeCurrentSticker: true });
 		const b64img = canvas.toDataURL();
 		const url = "server/handlers/picture.php";
-		const data = { picture: b64img };
+		const data = { picture: b64img, legend: state.legend };
 
 		const { message, imgId } = await AsyncRequest.post(url, data);
 		showToast("success", message);
 		addImgToList(imgId, b64img);
+		setState({ legend: null });
+		comment.value = "";
 	} catch (err) {
 		showToast("error", err.message);
 	}
+};
+
+const show_comment = () => {
+	overlay.hidden = false;
+};
+
+const add_comment = () => {
+	overlay.hidden = true;
+	setState({ legend: comment.value });
 };

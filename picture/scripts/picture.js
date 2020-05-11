@@ -5,16 +5,19 @@ const cam = document.getElementById("video-toggler");
 const uploadBtn = document.getElementById("upload-toggler");
 const fileInput = document.getElementById("file-input");
 const sendBtn = document.getElementById("send-btn-toggler");
+const commentBtn = document.getElementById("comment-btn-toggler");
 const listElems = document.getElementById("list-elems");
 const stickerGlueBtn = document.getElementById("sticker-glue-toggler");
 const stickerWipeBtn = document.getElementById("sticker-wipe-toggler");
 const listPics = document.getElementById("list-pictures");
+const overlay = document.getElementById("overlay-container");
 
 const props = {
 	video: null,
 	recording: false,
 	editing: false,
 	pic: null,
+	legend: null,
 	original: null,
 	wipeCurrentSticker: false,
 	dehydration: false,
@@ -64,9 +67,11 @@ const handleRecording = (previous, value) => {
 		setState({
 			video: createElement(picArea, "video", { autoplay: true, id: "stream" }),
 			pic: null,
+			legend: null,
 			elems: [],
 			id: 0,
 		});
+		comment.value = "";
 	} else if (value === false) {
 		cam.innerHTML = "videocam";
 		removeElement(state.video);
@@ -105,6 +110,7 @@ const handleElemsChange = (previous, value) => {
 		state.pic?.filter.commit(0, 0);
 		if (len === 0) {
 			sendBtn.disabled = true;
+			commentBtn.disabled = true;
 			for (let i = 0; i <= state.id; i++) {
 				let elem = document.getElementById(`elem${i}`);
 				removeElement(elem);
@@ -113,6 +119,7 @@ const handleElemsChange = (previous, value) => {
 		}
 	} else if (len >= 1) {
 		sendBtn.disabled = false;
+		commentBtn.disabled = false;
 	}
 };
 

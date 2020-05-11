@@ -20,7 +20,7 @@
   );
   
   $pic_cls = new Pictures($DB_DSN, $DB_USER, $DB_PASSWORD);
-  $imgId = $pic_cls->create(Session::get("userId"));
+  $imgId = $pic_cls->create(Session::get("userId"), $legend);
 
   $baseURL = $_SERVER['DOCUMENT_ROOT'] . "/assets/users/";
   file_put_contents($baseURL . $imgId . ".png", base64_decode($img));

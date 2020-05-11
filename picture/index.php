@@ -7,6 +7,7 @@
   require_once $_SERVER['DOCUMENT_ROOT'] . "/layouts/header.php";
 ?>
 <link rel="stylesheet" type="text/css" href="picture/styles/main.css">
+<link rel="stylesheet" type="text/css" href="picture/styles/overlay.css">
 
 <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/layouts/navbar.php" ?>
 
@@ -114,11 +115,41 @@
   <button
     disabled
     type="button"
+    id="comment-btn-toggler"
+    class="floating-btn"
+    onclick="show_comment()">
+    <span class="material-icons">chat</span>
+  </button>
+
+  <button
+    disabled
+    type="button"
     id="send-btn-toggler"
     class="floating-btn"
     onclick="send()">
     <span class="material-icons">send</span>
   </button>
+</div>
+
+<div id="overlay-container" hidden>
+  <div class="overlay-content">
+    <h1 class="overlay-title">Ajoutez une l&eacute;gende<h1>
+    <div id="overlay-counter">0/255</div>
+    <textarea
+      autofocus
+      id="overlay-text"
+      name="comment"
+      rows='10'
+      column='50'
+      maxlength="255"
+      placeholder="Ajoutez une l&eacute;gende..."
+    ></textarea>
+    <button
+      type="button"
+      id="overlay-btn"
+      onclick="add_comment()"
+    >Enregistrer</button>
+  </div>
 </div>
 
 <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/layouts/footer.php" ?>
@@ -128,6 +159,7 @@
 <script type="text/javascript" src="scripts/DOM.js"></script>
 <script type="text/javascript" src="scripts/navs.js"></script>
 <script type="text/javascript" src="picture/scripts/picture.js"></script>
+<script type="text/javascript" src="picture/scripts/overlay.js"></script>
 <script type="text/javascript" src="picture/scripts/filters.js"></script>
 <script type="text/javascript" src="picture/scripts/stickers.js"></script>
 <script type="text/javascript" src="picture/scripts/controls.js"></script>
