@@ -18,7 +18,7 @@ CREATE TABLE users (
 CREATE TABLE pictures (
   idPictures INT UNSIGNED AUTO_INCREMENT,
   diUsers INT UNSIGNED NOT NULL,
-  legend TINYTEXT,
+  legend VARCHAR(255) DEFAULT "",
   regDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
   PRIMARY KEY (idPictures),
   FOREIGN KEY (diUsers) REFERENCES `users`(`idUsers`)
