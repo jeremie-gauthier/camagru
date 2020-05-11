@@ -104,13 +104,14 @@ const addImgToList = (id, src) => {
 
 const send = async () => {
 	try {
+		setState({ wipeCurrentSticker: true });
 		const b64img = canvas.toDataURL();
 		const url = "server/handlers/picture.php";
 		const data = { picture: b64img };
 
 		const { message, imgId } = await AsyncRequest.post(url, data);
-		addImgToList(imgId, b64img);
 		showToast("success", message);
+		addImgToList(imgId, b64img);
 	} catch (err) {
 		showToast("error", err.message);
 	}
