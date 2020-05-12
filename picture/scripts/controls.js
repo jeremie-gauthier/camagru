@@ -111,6 +111,7 @@ const addImgToList = (id, src) => {
 			const url = `picture/src/handler.php?id=${id}`;
 			await AsyncRequest.delete(url);
 			removeElement(divElem);
+			showToast("success", "Image supprimée");
 		} catch (err) {
 			showToast("error", err.message ?? err);
 		}
