@@ -11,6 +11,13 @@ class AsyncRequest {
 		}
 	};
 
+	static #XHRSetHeaders = (xhr, headers) => {
+		const headers_array = Object.entries(headers);
+		headers_array.forEach(([header, value]) =>
+			xhr.setRequestHeader(header, value)
+		);
+	};
+
 	static #XHROnLoad = (xhr, resolve, reject) => {
 		try {
 			if (xhr.status >= 400) {
@@ -27,10 +34,14 @@ class AsyncRequest {
 		}
 	};
 
-	static get(url) {
+	static get(url, headers = null) {
 		return new Promise((resolve, reject) => {
 			const xhr = AsyncRequest.#XHRInstance();
+
 			xhr.open("GET", url, true);
+			if (headers) {
+				AsyncRequest.#XHRSetHeaders(xhr, headers);
+			}
 
 			xhr.onload = () => AsyncRequest.#XHROnLoad(xhr, resolve, reject);
 
@@ -38,11 +49,14 @@ class AsyncRequest {
 		});
 	}
 
-	static post(url, data) {
+	static post(url, data, headers = null) {
 		return new Promise((resolve, reject) => {
 			const xhr = AsyncRequest.#XHRInstance();
+
 			xhr.open("POST", url, true);
-			xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			if (headers) {
+				AsyncRequest.#XHRSetHeaders(xhr, headers);
+			}
 
 			xhr.onload = () => AsyncRequest.#XHROnLoad(xhr, resolve, reject);
 
@@ -51,11 +65,14 @@ class AsyncRequest {
 		});
 	}
 
-	static put(url, data) {
+	static put(url, data, headers = null) {
 		return new Promise((resolve, reject) => {
 			const xhr = AsyncRequest.#XHRInstance();
+
 			xhr.open("PUT", url, true);
-			xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			if (headers) {
+				AsyncRequest.#XHRSetHeaders(xhr, headers);
+			}
 
 			xhr.onload = () => AsyncRequest.#XHROnLoad(xhr, resolve, reject);
 
@@ -64,10 +81,14 @@ class AsyncRequest {
 		});
 	}
 
-	static delete(url) {
+	static delete(url, headers = null) {
 		return new Promise((resolve, reject) => {
 			const xhr = AsyncRequest.#XHRInstance();
+
 			xhr.open("DELETE", url, true);
+			if (headers) {
+				AsyncRequest.#XHRSetHeaders(xhr, headers);
+			}
 
 			xhr.onload = () => AsyncRequest.#XHROnLoad(xhr, resolve, reject);
 
