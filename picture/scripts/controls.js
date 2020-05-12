@@ -106,7 +106,15 @@ const addImgToList = (id, src) => {
 		"clear"
 	);
 	// add events delIcon
-	delIcon.addEventListener("click", () => console.log(`Delete: ${id}`));
+	delIcon.addEventListener("click", async () => {
+		try {
+			const url = `server/handlers/picture.php?id=${id}`;
+			await AsyncRequest.delete(url);
+			removeElement(divElem);
+		} catch (err) {
+			showToast("error", err.message ?? err);
+		}
+	});
 };
 
 const send = async () => {
