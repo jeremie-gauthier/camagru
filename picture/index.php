@@ -75,11 +75,11 @@
 
 <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/components/layouts/footer.php" ?>
 
-<script type="text/javascript" src="utils/scripts/AsyncRequest.js"></script>
-<script type="text/javascript" src="utils/scripts/promises/fileReader.js"></script>
-<script type="text/javascript" src="utils/scripts/promises/imgLoader.js"></script>
-<script type="text/javascript" src="utils/scripts/DOM.js"></script>
-<script type="text/javascript" src="utils/scripts/navs.js"></script>
+<script type="text/javascript" src="/utils/scripts/AsyncRequest.js"></script>
+<script type="text/javascript" src="/utils/scripts/promises/fileReader.js"></script>
+<script type="text/javascript" src="/utils/scripts/promises/imgLoader.js"></script>
+<script type="text/javascript" src="/utils/scripts/DOM.js"></script>
+<script type="text/javascript" src="/utils/scripts/navs.js"></script>
 <script type="text/javascript" src="/picture/scripts/picture.js"></script>
 <script type="text/javascript" src="/picture/scripts/overlay.js"></script>
 <script type="text/javascript" src="/picture/scripts/filters.js"></script>
