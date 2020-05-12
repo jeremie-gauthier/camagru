@@ -30,7 +30,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
         Session::multidel(["login-err", "login-info", "register-info"]);
         Session::multiset([
           "pseudo" => $user[0]["pseudo"],
-          "email" => $user[0]["email"]
+          "email" => $user[0]["email"],
+          "userId" => $user[0]["idUsers"]
         ]);
 
         header("Location: ../../index.php");

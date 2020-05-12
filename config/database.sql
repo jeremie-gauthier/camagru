@@ -17,26 +17,28 @@ CREATE TABLE users (
 
 CREATE TABLE pictures (
   idPictures INT UNSIGNED AUTO_INCREMENT,
-  diUsers INT NOT NULL,
-  encoding MEDIUMTEXT NOT NULL,
-  legend TINYTEXT,
+  diUsers INT UNSIGNED NOT NULL,
+  legend VARCHAR(255) DEFAULT "",
   regDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
-  PRIMARY KEY (idPictures)
+  PRIMARY KEY (idPictures),
+  FOREIGN KEY (diUsers) REFERENCES `users`(`idUsers`)
 ) ENGINE='InnoDB';
 
 CREATE TABLE likes (
-  diUsers INT NOT NULL,
-  diPictures INT NOT NULL,
+  diUsers INT UNSIGNED NOT NULL,
+  diPictures INT UNSIGNED NOT NULL,
   PRIMARY KEY (diUsers, diPictures)
 ) ENGINE='InnoDB';
 
 CREATE TABLE comments (
   idComments INT UNSIGNED AUTO_INCREMENT,
-  diUsers INT NOT NULL,
-  diPictures INT NOT NULL,
+  diUsers INT UNSIGNED NOT NULL,
+  diPictures INT UNSIGNED NOT NULL,
   comment TINYTEXT NOT NULL,
   regDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
-  PRIMARY KEY (idComments) 
+  PRIMARY KEY (idComments),
+  FOREIGN KEY (diUsers) REFERENCES users(idUsers),
+  FOREIGN KEY (diPictures) REFERENCES pictures(idPictures)
 ) ENGINE='InnoDB';
 
 -- TRIGGERS

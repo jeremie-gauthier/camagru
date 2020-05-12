@@ -1,0 +1,21 @@
+.filter {
+	height: 3rem;
+	width: 100%;
+	border: 0;
+	border-radius: 0.5rem;
+	margin-top: 1rem;
+	background: linear-gradient(45deg, #fe6b8b, #ff8e53);
+	color: inherit;
+	font-weight: bold;
+	font-size: 1.25rem;
+	user-select: none;
+}
+
+.filter:hover {
+	cursor: pointer;
+	margin-top: 0.75rem;
+	margin-bottom: 0.25rem;
+	font-size: 1.4rem;
+	background: linear-gradient(45deg, #ff8e53, #fe6b8b);
+	transition: 0.25s linear;
+}

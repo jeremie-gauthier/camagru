@@ -34,6 +34,14 @@ class Database {
     return $this->stmt->fetchAll();
   }
 
+  function get_last_inserted_id() {
+    return $this->pdo->lastInsertId();
+  }
+
+  function affected_rows() {
+    return $this->stmt->rowCount();
+  }
+
   function close() {
     $this->pdo = null;
   }

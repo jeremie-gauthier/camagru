@@ -1,0 +1,49 @@
+.camagru-toast {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 300px;
+	border: 1px grey solid;
+	background-color: white;
+	box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.25);
+	border-radius: 4px;
+	margin: 10px;
+	padding: 10px;
+}
+
+.camagru-toast-header {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	border-bottom: 1px lightgrey solid;
+	margin-bottom: 2px;
+}
+
+.camagru-toast-sign {
+	border-radius: 3px;
+	width: 20px;
+	height: 20px;
+	margin-right: 2px;
+}
+
+.camagru-toast-success {
+	background-color: #28a745;
+}
+
+.camagru-toast-warning {
+	background-color: #ffc107;
+}
+
+.camagru-toast-error {
+	background-color: #dc3545;
+}
+
+.camagru-toast-title {
+	color: grey;
+	font-weight: bold;
+	font-size: 16px;
+}
+
+.camagru-toast-text {
+	font-size: 14px;
+}

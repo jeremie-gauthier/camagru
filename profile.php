@@ -4,9 +4,6 @@
 
 <?php require "layouts/navbar.php" ?>
 
-<div class="mid w-100 row"> 
-    <div class="main col-9"> <p>oui</p> </div> 
-    <div class="side col-2"><p>oui</p></div>
-</div>
+<a href="picture">Ajouter une photo</a>
 
 <?php require "layouts/footer.php" ?>
