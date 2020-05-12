@@ -38,6 +38,10 @@ class Database {
     return $this->pdo->lastInsertId();
   }
 
+  function affected_rows() {
+    return $this->stmt->rowCount();
+  }
+
   function close() {
     $this->pdo = null;
   }
