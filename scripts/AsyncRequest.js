@@ -1,3 +1,8 @@
+/**
+ * A class to make RESTful Promise-based AJAX requests.
+ * No need to instantiate this class with the `new` keyword
+ * as it contains only static methods.
+ */
 class AsyncRequest {
 	static #XHRInstance = () => {
 		try {
@@ -34,6 +39,10 @@ class AsyncRequest {
 		}
 	};
 
+	/**
+	 * @type {string} url
+	 * @type {object|undefined} headers
+	 */
 	static get(url, headers = null) {
 		return new Promise((resolve, reject) => {
 			const xhr = AsyncRequest.#XHRInstance();
@@ -49,6 +58,11 @@ class AsyncRequest {
 		});
 	}
 
+	/**
+	 * @type {string} url
+	 * @type {object} data
+	 * @type {object|undefined} headers
+	 */
 	static post(url, data, headers = null) {
 		return new Promise((resolve, reject) => {
 			const xhr = AsyncRequest.#XHRInstance();
@@ -65,6 +79,11 @@ class AsyncRequest {
 		});
 	}
 
+	/**
+	 * @type {string} url
+	 * @type {object} data
+	 * @type {object|undefined} headers
+	 */
 	static put(url, data, headers = null) {
 		return new Promise((resolve, reject) => {
 			const xhr = AsyncRequest.#XHRInstance();
@@ -81,6 +100,10 @@ class AsyncRequest {
 		});
 	}
 
+	/**
+	 * @type {string} url
+	 * @type {object|undefined} headers
+	 */
 	static delete(url, headers = null) {
 		return new Promise((resolve, reject) => {
 			const xhr = AsyncRequest.#XHRInstance();
