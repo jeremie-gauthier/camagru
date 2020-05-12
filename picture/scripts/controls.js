@@ -99,13 +99,13 @@ const addImgToList = (id, src) => {
 		id: `my-picture${id}`,
 	});
 	createElement(divElem, "img", { class: "picture-img", src });
+
 	const delIcon = createElement(
 		divElem,
 		"i",
 		{ class: "material-icons md-inactive picture-action" },
 		"clear"
 	);
-	// add events delIcon
 	delIcon.addEventListener("click", async () => {
 		try {
 			const url = `server/handlers/picture.php?id=${id}`;
@@ -123,8 +123,9 @@ const send = async () => {
 		const b64img = canvas.toDataURL();
 		const url = "server/handlers/picture.php";
 		const data = { picture: b64img, legend: state.legend };
+		const headers = { "Content-type": "application/x-www-form-urlencoded" };
 
-		const { message, imgId } = await AsyncRequest.post(url, data);
+		const { message, imgId } = await AsyncRequest.post(url, data, headers);
 		showToast("success", message);
 		addImgToList(imgId, b64img);
 		setState({ legend: null });
