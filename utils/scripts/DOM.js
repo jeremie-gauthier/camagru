@@ -1,7 +1,3 @@
-const mapElements = (ids) => {
-	return ids.map((id) => document.getElementById(id));
-};
-
 const setAttributes = (element, attributes) => {
 	const attrs = Object.entries(attributes);
 	for (const [attr, value] of attrs) {

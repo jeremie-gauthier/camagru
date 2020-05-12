@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href="components/toast.css">
+<link rel="stylesheet" type="text/css" href="/components/toast.css">
 
 <div class="camagru-toast" id="toast" hidden>
 	<div class="camagru-toast-header">

@@ -1,15 +1,15 @@
 <?php
   session_start();
-  require_once "server/utils/class/Session.php";
+  require_once $_SERVER['DOCUMENT_ROOT'] . "/utils/class/Session.php";
   if (Session::exists("pseudo")) {
-    header("Location: index.php");
+    header("Location: /");
   }
 ?>
-<?php require_once "layouts/header.php" ?>
-<link rel="stylesheet" type="text/css" href="style/auth.css">
-<script type="text/javascript" src="scripts/formValidation.js"></script>
+<?php require_once $_SERVER['DOCUMENT_ROOT'] . "/components/layouts/header.php" ?>
+<link rel="stylesheet" type="text/css" href="/auth/auth.css">
+<script type="text/javascript" src="/utils/scripts/formValidation.js"></script>
 
-<?php require_once "layouts/navbar.php" ?>
+<?php require_once $_SERVER['DOCUMENT_ROOT'] . "/components/layouts/navbar.php" ?>
 
 <div class="container">
   <h1>Inscription</h1>
@@ -21,7 +21,7 @@
       }
     ?>
   </span>
-  <form name="register" method="POST" action="server/handlers/register.php" onsubmit="return submitForm()">
+  <form name="register" method="POST" action="/auth/register/handler.php" onsubmit="return submitForm()">
     <div class="form-group no-margin">
       <label for="pseudo">Choisissez un pseudo</label>
       <input type="text" class="form-control" name="pseudo" id="pseudo" maxlength="16" required>
@@ -29,17 +29,17 @@
     </div>
     <div class="form-group no-margin">
       <label for="email">Adresse mail</label>
-      <input type="email" class="form-control" name="email" id="email" required>
+      <input type="email" class="form-control" name="email" id="email" required />
       <span class="text-danger feedback" id="email-error"></span>
     </div>
     <div class="form-group no-margin">
       <label for="pwd">Mot de passe</label>
-      <input type="password" class="form-control" name="pwd" id="pwd" minlength='8' required>
+      <input type="password" class="form-control" name="pwd" id="pwd" minlength='8' required />
       <span class="text-danger feedback" id="pwd-error"></span>
     </div>
     <div class="form-group">
       <label for="confirm_pwd">Confirmation mot de passe</label>
-      <input type="password" class="form-control" name="confirm_pwd" id="confirm_pwd" minlength='8' required>
+      <input type="password" class="form-control" name="confirm_pwd" id="confirm_pwd" minlength='8' required />
     </div>
     <button type="submit" value="Submit" class="btn btn-primary">Inscription</button>
   </form>
@@ -52,15 +52,13 @@
   </span>
 </div>
 
-<?php require_once "layouts/footer.php" ?>
+<?php require_once $_SERVER['DOCUMENT_ROOT'] . "/components/layouts/footer.php" ?>
 
 <script>
   const form = document.forms.register;
-  const [pseudoErr, emailErr, pwdErr] = mapElements([
-    "pseudo-error",
-    "email-error",
-    "pwd-error"
-  ]);
+  const pseudoErr = "pseudo-error";
+  const emailErr = "email-error";
+  const pwdErr = "pwd-error";
 
   window.onload = () => {
     form.pseudo.addEventListener('blur', () =>

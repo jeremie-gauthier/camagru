@@ -1,10 +1,5 @@
-// let navs;
-// let contents;
-
-// window.onload = () => {
 const navs = document.getElementsByClassName("extras");
 const contents = document.getElementById("tab-content").children;
-// };
 
 const switchNav = (element) => {
 	const current = document.getElementsByClassName("active")[0];

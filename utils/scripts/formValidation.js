@@ -1,7 +1,3 @@
-const mapElements = (ids) => {
-	return ids.map((id) => document.getElementById(id));
-};
-
 const checkPseudo = (pseudo, err) => {
 	const pattern = /[^a-zA-Z\d\-]/;
 

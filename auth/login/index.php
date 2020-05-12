@@ -1,15 +1,15 @@
 <?php
   session_start();
-  require_once "server/utils/class/Session.php";
+  require_once $_SERVER['DOCUMENT_ROOT'] . "/utils/class/Session.php";
   if (Session::exists("pseudo")) {
-    header("Location: index.php");
+    header("Location: /");
   }
 ?>
-<?php require_once "layouts/header.php" ?>
-<link rel="stylesheet" type="text/css" href="style/auth.css">
-<script type="text/javascript" src="scripts/formValidation.js"></script>
+<?php require_once $_SERVER['DOCUMENT_ROOT'] . "/components/layouts/header.php" ?>
+<link rel="stylesheet" type="text/css" href="/auth/auth.css">
+<script type="text/javascript" src="/utils/scripts/formValidation.js"></script>
 
-<?php require_once "layouts/navbar.php" ?>
+<?php require_once $_SERVER['DOCUMENT_ROOT'] . "/components/layouts/navbar.php" ?>
 
 <div class="container">
   <h1>Connexion</h1>
@@ -21,7 +21,7 @@
       }
     ?>
   </span>
-  <form name="login" method="POST" action="server/handlers/login.php">
+  <form name="login" method="POST" action="/auth/login/handler.php">
     <div class="form-group">
       <label for="email">Adresse mail</label>
       <input type="email" class="form-control" name="email" id="email" required>
@@ -41,4 +41,4 @@
   </span>
 </div>
 
-<?php require_once "layouts/footer.php" ?>
+<?php require_once $_SERVER['DOCUMENT_ROOT'] . "/components/layouts/footer.php" ?>

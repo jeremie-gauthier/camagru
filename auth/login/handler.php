@@ -1,11 +1,11 @@
 <?php
 
 session_start();
-require_once "../utils/validation/email.php";
-require_once "../utils/class/Session.php";
-require_once "../utils/class/Users.php";
-require_once "../utils/class/Mail.php";
-require_once "../../config/database.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/utils/validation/email.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/utils/class/Session.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/utils/class/Users.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/utils/class/Mail.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/config/database.php";
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
       "login-err",
       "Connexion impossible, veuillez verifier vos informations"
     );
-    header("Location: ../../login.php");
+    header("Location: /auth/login");
     die(1);  
   }
 
@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
           "userId" => $user[0]["idUsers"]
         ]);
 
-        header("Location: ../../index.php");
+        header("Location: /");
       } else {
         Mail::newAccount($user[0]['email'], $user[0]['secureHash']);
         Session::del("login-info");
@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
           "login-err",
           "Merci de confirmer votre compte. Un nouveau mail vient de vous etre envoye."
         );
-        header("Location: ../../login.php");
+        header("Location: /auth/login");
         die(1);
       }
     } else {
@@ -51,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
         "login-err",
         "Adresse mail ou mot de passe incorrect. Veuillez reessayer."
       );
-      header("Location: ../../login.php");
+      header("Location: /auth/login");
       die(1);
     }
   } catch (Exception $e) {
@@ -60,14 +60,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
       "login-err",
       "Une erreur est survenue, veuillez reessayer plus tard"
     );
-    header("Location: ../../login.php");
+    header("Location: /auth/login");
     die(2);
   }
 
 } else {
-  header("Location: ../../login.php");
+  header("Location: /auth/login");
   die(2);
 }
-
 
 ?>

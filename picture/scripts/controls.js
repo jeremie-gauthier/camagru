@@ -108,7 +108,7 @@ const addImgToList = (id, src) => {
 	);
 	delIcon.addEventListener("click", async () => {
 		try {
-			const url = `server/handlers/picture.php?id=${id}`;
+			const url = `picture/src/handler.php?id=${id}`;
 			await AsyncRequest.delete(url);
 			removeElement(divElem);
 		} catch (err) {
@@ -121,7 +121,7 @@ const send = async () => {
 	try {
 		setState({ wipeCurrentSticker: true });
 		const b64img = canvas.toDataURL();
-		const url = "server/handlers/picture.php";
+		const url = "picture/src/handler.php";
 		const data = { picture: b64img, legend: state.legend };
 		const headers = { "Content-type": "application/x-www-form-urlencoded" };
 

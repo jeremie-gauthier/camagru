@@ -1,8 +1,8 @@
 <?php
   session_start();
-  require_once "../utils/class/Pictures.php";
-  require_once "../utils/class/Session.php";
-  require_once "../../config/database.php";
+  require_once $_SERVER['DOCUMENT_ROOT'] . "/utils/class/Pictures.php";
+  require_once $_SERVER['DOCUMENT_ROOT'] . "/utils/class/Session.php";
+  require_once $_SERVER['DOCUMENT_ROOT'] . "/config/database.php";
 
   header("Content-Type: application/json; charset=UTF-8");
 

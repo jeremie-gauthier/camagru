@@ -15,7 +15,7 @@ class Mail {
   
   function newAccount($to, $hash) {
     $subject = "Confirmation de votre compte";
-    $link = "127.0.0.1:8888/server/handlers/confirmation.php?key=" . $hash . "&email=" . $to;
+    $link = "127.0.0.1:8888/auth/register/confirmation.php?key=" . $hash . "&email=" . $to;
     $message = "
       <html>
         <body>

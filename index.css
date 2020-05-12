@@ -16,14 +16,11 @@
 	background-color: blue;
 	margin: 20px;
 	margin-left: 3%;
-	/* float: left; */
 }
 .side {
 	height: 400px;
 	margin: 20px;
-	/* margin-left: 68%; */
 	background-color: darkviolet;
-	/* grid: 50%;   */
 }
 .footer {
 	width: 100%;
