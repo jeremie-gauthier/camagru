@@ -52,6 +52,7 @@
         type="submit"
         id="btn-confirm"
         class="btn btn-primary"
+        disabled
       >Confirmer</button>
       <button
         type="button"
@@ -74,4 +75,5 @@
 <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/components/layouts/footer.php" ?>
 
 <script type="text/javascript" src="/utils/scripts/formValidation.js"></script>
+<script type="text/javascript" src="/utils/scripts/AsyncRequest.js"></script>
 <script type="text/javascript" src="/account/settings/main.js"></script>
