@@ -13,7 +13,7 @@
 <div class="container">
   <h1>Mon compte</h1>
   <hr />
-  <span class="text-success">
+  <span class="text-success" id="settings-info">
     <?php
       if (Session::exists("settings-info")) {
         echo Session::get("settings-info");
@@ -28,6 +28,7 @@
         value="<?php echo Session::get('pseudo') ?>"
         class="form-control"
         id="pseudo"
+        name="pseudo"
         maxlength="16"
         required
         disabled
@@ -41,6 +42,7 @@
         value="<?php echo Session::get('email') ?>"
         class="form-control"
         id="email"
+        name="email"
         required
         disabled
       />
@@ -63,7 +65,7 @@
       >Modifier mes informations</button>
     </div>
   </form>
-  <button type="button" onclick="">Changer de mot de passe</button>
+  <button type="button" onclick="changePassword()">Changer de mot de passe</button>
   <span class="text-danger">
     <?php
       if (Session::exists("settings-err")) {
