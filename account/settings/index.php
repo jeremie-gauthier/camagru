@@ -11,12 +11,12 @@
 <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/components/layouts/navbar.php" ?>
 
 <div class="container">
-  <h1>Inscription</h1>
+  <h1>Mon compte</h1>
   <hr />
   <span class="text-success">
     <?php
-      if (Session::exists("register-info")) {
-        echo Session::get("register-info");
+      if (Session::exists("settings-info")) {
+        echo Session::get("settings-info");
       }
     ?>
   </span>
@@ -40,7 +40,6 @@
         type="email"
         value="<?php echo Session::get('email') ?>"
         class="form-control"
-        name="email"
         id="email"
         required
         disabled
@@ -58,14 +57,15 @@
         type="button"
         class="btn btn-primary"
         id="btn-modify"
+        onclick="modifyBtnToggler()"
       >Modifier mes informations</button>
     </div>
   </form>
   <button type="button" onclick="">Changer de mot de passe</button>
   <span class="text-danger">
     <?php
-      if (Session::exists("register-err")) {
-        echo Session::get("register-err");
+      if (Session::exists("settings-err")) {
+        echo Session::get("settings-err");
       }
     ?>
   </span>
