@@ -4,6 +4,11 @@
   require_once $_SERVER['DOCUMENT_ROOT'] . "/utils/class/Session.php";
   require_once $_SERVER['DOCUMENT_ROOT'] . "/config/database.php";
 
+  if (!Session::exists("pseudo")) {
+    http_response_code(401);
+    die(2);
+  }
+
   header("Content-Type: application/json; charset=UTF-8");
 
   $baseURL = $_SERVER['DOCUMENT_ROOT'] . "/assets/users/";
@@ -55,6 +60,6 @@
   // NOT A VALID REQUEST
   else {
     http_response_code(401);
-    header("Location: /");
+    die(2);
   }
 ?>
