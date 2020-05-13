@@ -57,7 +57,7 @@ const submitForm = async () => {
 			modifyBtnToggler();
 			showToast("success", "Modifications enregistrées");
 		} catch (err) {
-			showToast("error", err.message);
+			showToast("error", err.message ?? err);
 		}
 	}
 };
@@ -77,5 +77,18 @@ const modifyBtnToggler = () => {
 		form.email.disabled = true;
 		state.pseudo = state.origPseudo;
 		state.email = state.origEmail;
+	}
+};
+
+const changePassword = () => {
+	try {
+		const info = document.getElementById("settings-info");
+		const url = `/account/settings/handler.php?email=${state.origEmail}`;
+
+		AsyncRequest.get(url);
+		info.innerHTML =
+			"Un mail contenant des instructions de reinitialisation vient de vous etre envoye";
+	} catch (err) {
+		showToast("error", err.message);
 	}
 };
