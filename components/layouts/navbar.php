@@ -7,8 +7,8 @@
   <a class="navbar-brand" href="/">Camagru</a>
   <div class="navbar-nav">
     <?php if (Session::exists("pseudo")) { ?>
-      <a class="nav-item nav-link" href="/profile">Profil</a>
-      <a class="nav-item nav-link" href="#">Mon Compte</a>
+      <a class="nav-item nav-link" href="/gallery">Galerie</a>
+      <a class="nav-item nav-link" href="/account">Mon Compte</a>
       <a class="nav-item nav-link" href="/auth/logout.php">Deconnexion</a>
     <?php } else { ?>
       <a class="nav-item nav-link" href="/auth/login">Connexion</a>
