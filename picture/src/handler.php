@@ -51,4 +51,10 @@
       http_response_code(403);
     }
   }
+
+  // NOT A VALID REQUEST
+  else {
+    http_response_code(401);
+    header("Location: /");
+  }
 ?>

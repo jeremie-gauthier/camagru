@@ -1,3 +1,12 @@
+<?php
+  session_start();
+  require_once $_SERVER['DOCUMENT_ROOT'] . "/utils/class/Session.php";
+  if (!Session::exists("pseudo")) {
+    header("Location: /");
+  }
+  require_once $_SERVER['DOCUMENT_ROOT'] . "/components/layouts/header.php";
+?>
+
 <input type='file' id="file-input" accept="image/png, .jpeg, .jpg" hidden />
   <button
     type="button"
