@@ -61,6 +61,31 @@ class Users extends Database{
     }
   }
 
+  function update($pseudo, $email, $userId) {
+    try {
+      $query = "
+        UPDATE
+          users
+        SET
+          pseudo = :pseudo,
+          email = :email
+        WHERE
+          idUsers = :userId
+      ";
+      $values = [
+        ":pseudo" => $pseudo,
+        ":email" => $email,
+        ":userId" => $userId
+      ];
+      $this->query($query, $values);
+      if ($this->affected_rows() != 1) {
+        throw new Exception("User not found");
+      }
+    } catch (Exception $e) {
+      throw $e;
+    }
+  }
+
   function confirmAccount($email) {
     try {
       $query = "
