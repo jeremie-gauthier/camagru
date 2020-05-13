@@ -41,10 +41,25 @@ form.email.onkeyup = () => {
 	checkEmail(state.email, emailErr);
 };
 
-const submitForm = () => {
+const submitForm = async () => {
 	checkPseudo(state.pseudo, pseudoErr);
 	checkEmail(state.email, emailErr);
-	return [pseudoErr, emailErr].every((elem) => elem.innerHTML === "");
+
+	if ([pseudoErr, emailErr].every((elem) => elem.innerHTML === "")) {
+		try {
+			const url = "/account/settings/handler.php";
+			const data = { pseudo: state.pseudo, email: state.email };
+			const headers = { "Content-type": "application/x-www-form-urlencoded" };
+
+			await AsyncRequest.put(url, data, headers);
+			state.origPseudo = state.pseudo;
+			state.origEmail = state.email;
+			modifyBtnToggler();
+			showToast("success", "Modifications enregistrées");
+		} catch (err) {
+			showToast("error", err.message);
+		}
+	}
 };
 
 const modifyBtnToggler = () => {
