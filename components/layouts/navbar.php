@@ -8,7 +8,7 @@
   <div class="navbar-nav">
     <?php if (Session::exists("pseudo")) { ?>
       <a class="nav-item nav-link" href="/gallery">Galerie</a>
-      <a class="nav-item nav-link" href="/account/settings">Mon Compte</a>
+      <a class="nav-item nav-link" href="/account/settings">Mon compte</a>
       <a class="nav-item nav-link" href="/auth/logout.php">Deconnexion</a>
     <?php } else { ?>
       <a class="nav-item nav-link" href="/auth/login">Connexion</a>
