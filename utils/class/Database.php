@@ -22,28 +22,49 @@ class Database {
   function query($query, $values = null) {
     if ($this->pdo == null) return;
 
-    $this->stmt = $this->pdo->prepare($query);
-    $this->stmt->execute($values);
+    try {
+      $this->stmt = $this->pdo->prepare($query);
+      $this->stmt->execute($values);
+    } catch (Exception $e) {
+      throw $e;
+    }
   }
 
   function get_first_result() {
-    return $this->stmt->fetch();
+    try {
+      return $this->stmt->fetch();
+    } catch (Exception $e) {
+      throw $e;
+    }
   }
 
   function get_results() {
-    return $this->stmt->fetchAll();
+    try {
+      return $this->stmt->fetchAll();
+    } catch (Exception $e) {
+      throw $e;
+    }
   }
 
   function get_last_inserted_id() {
-    return $this->pdo->lastInsertId();
+    try {
+      return $this->pdo->lastInsertId();
+    } catch (Exception $e) {
+      throw $e;
+    }      
   }
 
   function affected_rows() {
+  try {
     return $this->stmt->rowCount();
+    } catch (Exception $e) {
+      throw $e;
+    }
   }
 
   function close() {
     $this->pdo = null;
   }
 }
+
 ?>
