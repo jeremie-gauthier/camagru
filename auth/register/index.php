@@ -7,7 +7,6 @@
 ?>
 <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/components/layouts/header.php" ?>
 <link rel="stylesheet" type="text/css" href="/auth/auth.css">
-<script type="text/javascript" src="/utils/scripts/formValidation.js"></script>
 
 <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/components/layouts/navbar.php" ?>
 
@@ -54,11 +53,12 @@
 
 <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/components/layouts/footer.php" ?>
 
+<script type="text/javascript" src="/utils/scripts/formValidation.js"></script>
 <script>
   const form = document.forms.register;
-  const pseudoErr = "pseudo-error";
-  const emailErr = "email-error";
-  const pwdErr = "pwd-error";
+  const pseudoErr = document.getElementById("pseudo-error");
+  const emailErr = document.getElementById("email-error");
+  const pwdErr = document.getElementById("pwd-error");
 
   window.onload = () => {
     form.pseudo.addEventListener('blur', () =>
