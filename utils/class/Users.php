@@ -86,6 +86,30 @@ class Users extends Database{
     }
   }
 
+  function updatePassword($pwd, $userId) {
+    try {
+      $query = "
+        UPDATE
+          users
+        SET
+          password = :pwd,
+          secureHash = NULL
+        WHERE
+          idUsers = :userId
+      ";
+      $values = [
+        ":pwd" => password_hash($pwd, PASSWORD_DEFAULT),
+        ":userId" => $userId
+      ];
+      $this->query($query, $values);
+      if ($this->affected_rows() != 1) {
+        throw new Exception("User not found");
+      }
+    } catch (Exception $e) {
+      throw $e;
+    }
+  }
+
   function confirmAccount($email) {
     try {
       $query = "
@@ -99,6 +123,29 @@ class Users extends Database{
       ";
       $values = [":email" => $email];
       $this->query($query, $values);
+    } catch (Exception $e) {
+      throw $e;
+    }
+  }
+
+  function bindHash($userId, $hash) {
+    try {
+      $query = "
+        UPDATE
+          users
+        SET
+          secureHash = :hash
+        WHERE
+          idUsers = :userId
+      ";
+      $values = [
+        ":hash" => $hash,
+        ":userId" => $userId
+      ];
+      $this->query($query, $values);
+      if ($this->affected_rows() != 1) {
+        throw new Exception("User not found");
+      }
     } catch (Exception $e) {
       throw $e;
     }
