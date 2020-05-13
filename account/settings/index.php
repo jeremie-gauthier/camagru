@@ -20,7 +20,7 @@
       }
     ?>
   </span>
-  <form name="settings" onsubmit="return submitForm()">
+  <form name="settings">
     <div class="form-group no-margin">
       <label for="pseudo">Votre pseudo</label>
       <input
@@ -49,10 +49,11 @@
     <div class="inline-btn">
       <button
         hidden
-        type="submit"
+        type="button"
         id="btn-confirm"
         class="btn btn-primary"
         disabled
+        onclick="submitForm()"
       >Confirmer</button>
       <button
         type="button"
@@ -71,6 +72,8 @@
     ?>
   </span>
 </div>
+
+<?php require $_SERVER['DOCUMENT_ROOT'] . "/components/toast.php" ?>
 
 <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/components/layouts/footer.php" ?>
 
