@@ -2,7 +2,7 @@
   session_start();
   require_once $_SERVER['DOCUMENT_ROOT'] . "/utils/class/Session.php";
   if (!Session::exists("pseudo")) {
-    header("Location: index.php");
+    header("Location: /");
   }
   require_once $_SERVER['DOCUMENT_ROOT'] . "/components/layouts/header.php";
 ?>
