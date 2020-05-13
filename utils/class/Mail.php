@@ -27,6 +27,21 @@ class Mail {
       </html>";
     Mail::send($to, $subject, $message);
   }
+  
+  function newPassword($to, $hash) {
+    $subject = "Reinitialisation de votre mot de passe";
+    $link = "127.0.0.1:8888/account/password?key=" . $hash;
+    $message = "
+      <html>
+        <body>
+          <h1>Camagru</h1>
+          <hr />
+          <p>Pour reinitialiser votre mot de passe, merci d'utiliser le lien suivant:</p>
+          " . $link . "
+        </body>
+      </html>";
+    Mail::send($to, $subject, $message);
+  }
 }
 
 ?>
