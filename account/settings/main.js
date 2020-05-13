@@ -18,3 +18,17 @@ const submitForm = () => {
 	checkEmail(form.email.value, emailErr);
 	return [pseudoErr, emailErr].every((elem) => elem.innerHTML === "");
 };
+
+const modifyBtnToggler = () => {
+	if (confirmBtn.hidden === true) {
+		modifyBtn.innerHTML = "Annuler";
+		confirmBtn.hidden = false;
+		form.pseudo.disabled = false;
+		form.email.disabled = false;
+	} else {
+		modifyBtn.innerHTML = "Modifier mes informations";
+		confirmBtn.hidden = true;
+		form.pseudo.disabled = true;
+		form.email.disabled = true;
+	}
+};
