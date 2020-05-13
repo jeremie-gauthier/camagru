@@ -7,7 +7,6 @@
 ?>
 <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/components/layouts/header.php" ?>
 <link rel="stylesheet" type="text/css" href="/auth/auth.css">
-<script type="text/javascript" src="/utils/scripts/formValidation.js"></script>
 
 <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/components/layouts/navbar.php" ?>
 
