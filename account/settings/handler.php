@@ -9,6 +9,7 @@
     die(2);
   }
 
+  Session::del("settings-info");
   if ($_SERVER["REQUEST_METHOD"] === "PUT") {
     try {
       require_once $_SERVER['DOCUMENT_ROOT'] . "/utils/validation/pseudo.php";

@@ -9,6 +9,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/utils/class/Users.php";
 if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
   extract(array_map('htmlspecialchars', $_POST));
   
+  Session::del("settings-info");
   if (!checkPwd($pwd, $confirm_pwd)) {
     Session::set(
       "password-err",
