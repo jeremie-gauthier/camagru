@@ -21,6 +21,7 @@
     ?>
   </span>
   <form name="settings">
+    <h2>Mes informations</h2>
     <div class="form-group no-margin">
       <label for="pseudo">Votre pseudo</label>
       <input
@@ -65,11 +66,6 @@
       >Modifier mes informations</button>
     </div>
   </form>
-  <button
-    type="button"
-    class="btn-link"
-    onclick="changePassword()"
-  >Changer de mot de passe</button>
   <span class="text-danger">
     <?php
       if (Session::exists("settings-err")) {
@@ -77,6 +73,23 @@
       }
     ?>
   </span>
+
+  <h2>Notifications</h2>
+  <p id="notif-info">Les notifications sont actuellement activ&eacute;es.</p>
+  <button
+    type="button"
+    class="btn btn-primary"
+    id="notif-btn"
+    onclick="toggleNotifications()"
+  >D&eacute;sactiver</button>
+
+  <h2>S&eacute;curit&eacute;</h2>
+  <button
+    type="button"
+    class="btn btn-primary"
+    id="pwd-btn"
+    onclick="changePassword()"
+  >Changer de mot de passe</button>
 </div>
 
 <?php require $_SERVER['DOCUMENT_ROOT'] . "/components/toast.php" ?>
