@@ -1,5 +1,5 @@
 form {
-	margin-top: 50px;
+	margin-top: 1rem;
 }
 
 .feedback {
@@ -12,4 +12,11 @@ form {
 
 .btn {
 	margin-bottom: 10px;
+}
+
+.btn-link {
+	border: 0;
+	padding: 0;
+	text-decoration: underline;
+	background-color: inherit;
 }

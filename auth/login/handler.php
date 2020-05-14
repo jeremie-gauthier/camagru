@@ -64,7 +64,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
     header("Location: /auth/login");
     die(2);
   }
+} else if ($_SERVER["REQUEST_METHOD"] === "GET") {
+  try {
+    $email = htmlspecialchars($_REQUEST['email']);
 
+    $user_cls = new Users($DB_DSN, $DB_USER, $DB_PASSWORD);
+    $user = $user_cls->getByMail($email);
+
+    if ($user && count($user) == 0) {
+      http_response_code(404);
+      echo "Utilisateur introuvable";
+      die(2);
+    }
+    Session::multiset([
+      "email" => $email,
+      "userId" => $user[0]["idUsers"]
+    ]);
+
+    $userId = $user[0]["idUsers"];
+    $hash = md5(time());
+    $user_cls->bindHash($userId, $hash);
+    Mail::newPassword($email, $hash);
+    http_response_code(200);
+    Session::del("login-err");
+    Session::set(
+      "login-info",
+      "Un mail contenant les instructions de r&eacute;initialisation de votre mot de passe vient de vous etre envoy&eacute;."
+    );
+    echo "Un mail contenant les instructions de r&eacute;initialisation de votre mot de passe vient de vous etre envoy&eacute;.";
+  } catch (Exception $e) {
+    http_response_code(500);
+    echo $e->getMessage();
+    die(2);
+  }
 } else {
   header("Location: /auth/login");
   die(2);
