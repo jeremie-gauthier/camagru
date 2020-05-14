@@ -52,6 +52,29 @@ class Pictures extends Database{
       throw $e->getMessage();
     }
   }
+
+  function getAllFrom($userId) {
+    try {
+      $query = "
+        SELECT
+          *
+        FROM
+          pictures
+        WHERE
+          diUsers = :userId
+        ORDER BY
+          regDate
+        DESC
+      ";
+      $values = [
+        ":userId" => $userId
+      ];
+      $this->query($query, $values);
+      return $this->get_results();
+    } catch (Exception $e) {
+      throw $e;
+    }
+  }
 }
 
 ?>
