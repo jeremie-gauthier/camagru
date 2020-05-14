@@ -2,7 +2,7 @@
   session_start();
   require_once $_SERVER['DOCUMENT_ROOT'] . "/utils/class/Session.php";
   if (!Session::exists("pseudo")) {
-    header("Location: /");
+    header("Location: /auth/login");
   }
   require_once $_SERVER['DOCUMENT_ROOT'] . "/components/layouts/header.php";
 ?>
@@ -72,7 +72,7 @@
 
 <div id="overlay-container" hidden>
   <div class="overlay-content">
-    <h1 class="overlay-title">Ajoutez une l&eacute;gende<h1>
+    <h1 class="overlay-title">Ajoutez une l&eacute;gende</h1>
     <div id="overlay-counter">0/255</div>
     <textarea
       autofocus

@@ -3,7 +3,7 @@
 
   require_once $_SERVER['DOCUMENT_ROOT'] . "/utils/class/Session.php";
   if (!Session::exists("email")) {
-    header("Location: /account/settings");
+    header("Location: /auth/login");
     die(2);
   }
   require_once $_SERVER['DOCUMENT_ROOT'] . "/config/database.php";
