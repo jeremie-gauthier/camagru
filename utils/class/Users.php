@@ -53,9 +53,7 @@ class Users extends Database{
       ];
       $this->query($query, $values);
 
-      // TODO: MAIL ON MAC
-      $this->confirmAccount($email);
-      // Mail::newAccount($email, $hash);
+      Mail::newAccount($email, $hash);
     } catch (Exception $e) {
       throw $e;
     }
