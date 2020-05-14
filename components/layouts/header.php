@@ -16,4 +16,4 @@
   />
   <title>Camagru</title>
 </head>
-<body style="overflow: hidden;">
+<body>
