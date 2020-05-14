@@ -31,7 +31,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
         Session::multiset([
           "pseudo" => $user[0]["pseudo"],
           "email" => $user[0]["email"],
-          "userId" => $user[0]["idUsers"]
+          "userId" => $user[0]["idUsers"],
+          "notifs" => $user[0]["notifications"]
         ]);
 
         header("Location: /");
