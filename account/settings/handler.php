@@ -56,7 +56,7 @@
     try {
       require_once $_SERVER['DOCUMENT_ROOT'] . "/utils/class/Mail.php";
 
-      $email = $_REQUEST['email'];
+      $email = htmlspecialchars($_REQUEST['email']);
       $userId = Session::get("userId");
       $hash = md5(time());
 
