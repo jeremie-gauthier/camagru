@@ -1,0 +1,19 @@
+.list-pictures {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.btn {
+	font-weight: bold;
+}
+
+.card {
+	margin-bottom: 3rem;
+}
+
+.inline {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+}
