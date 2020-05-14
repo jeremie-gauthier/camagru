@@ -65,7 +65,7 @@
       Mail::newPassword($email, $hash);
     } catch (Exception $e) {
       http_response_code(500);
-      echo $e;
+      echo $e->getMessage();
       die(2);
     }
   }
