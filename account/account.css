@@ -1,5 +1,5 @@
-form {
-	margin-top: 50px;
+h2 {
+	margin-top: 1rem;
 }
 
 .feedback {
@@ -14,6 +14,15 @@ form {
 	margin: 0.5rem;
 }
 
+#notif-btn,
+#pwd-btn {
+	margin: 0;
+}
+
+#notif-info {
+	font-style: italic;
+}
+
 .btn:hover:disabled {
 	cursor: not-allowed;
 }
@@ -25,10 +34,4 @@ form {
 .inline-btn {
 	display: flex;
 	justify-content: center;
-}
-
-.btn-link {
-	border: 0;
-	text-decoration: underline;
-	background-color: inherit;
 }
