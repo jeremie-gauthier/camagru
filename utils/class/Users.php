@@ -126,6 +126,29 @@ class Users extends Database{
     }
   }
 
+  function notifications($notif, $userId) {
+    try {
+      $query = "
+        UPDATE
+          users
+        SET
+          notifications = :notif
+        WHERE
+          idUsers = :userId
+      ";
+      $values = [
+        ":notif" => $notif,
+        ":userId" => $userId
+      ];
+      $this->query($query, $values);
+      if ($this->affected_rows() != 1) {
+        throw new Exception("User not found");
+      }
+    } catch (Exception $e) {
+      throw $e;
+    }  
+  }
+
   function bindHash($userId, $hash) {
     try {
       $query = "

@@ -75,13 +75,30 @@
   </span>
 
   <h2>Notifications</h2>
-  <p id="notif-info">Les notifications sont actuellement activ&eacute;es.</p>
+  <p id="notif-info">
+    <?php
+      if (Session::get("notifs") == 1) {
+        echo "Les notifications sont actuellement activ&eacute;es.";
+      } else {
+        echo "Les notifications sont actuellement d&eacute;sactiv&eacute;es.";
+      }
+    ?>
+  </p>
   <button
     type="button"
     class="btn btn-primary"
     id="notif-btn"
+    value="<?php echo Session::get('notifs'); ?>"
     onclick="toggleNotifications()"
-  >D&eacute;sactiver</button>
+  >
+    <?php
+      if (Session::get("notifs") == 1) {
+        echo "D&eacute;sactiver";
+      } else {
+        echo "Activer";
+      }
+    ?>
+  </button>
 
   <h2>S&eacute;curit&eacute;</h2>
   <button

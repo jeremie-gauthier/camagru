@@ -89,6 +89,43 @@ const changePassword = () => {
 		info.innerHTML =
 			"Un mail contenant des instructions de reinitialisation vient de vous etre envoye";
 	} catch (err) {
-		showToast("error", err.message);
+		showToast("error", err.message ?? err);
+	}
+};
+
+const toggleNotifications = async () => {
+	const notifInfo = document.getElementById("notif-info");
+	const notifBtn = document.getElementById("notif-btn");
+
+	const activate = () => {
+		notifBtn.value = 1;
+		notifBtn.innerHTML = "D&eacute;sactiver";
+		notifInfo.innerHTML =
+			"Les notifications sont actuellement activ&eacute;es.";
+	};
+
+	const deactivate = () => {
+		notifBtn.value = 0;
+		notifBtn.innerHTML = "Activer";
+		notifInfo.innerHTML =
+			"Les notifications sont actuellement d&eacute;sactiv&eacute;es.";
+	};
+
+	try {
+		const url = "/account/settings/notifications.php";
+		let data = {};
+
+		if (notifBtn.value == 1) {
+			data.notif = 0;
+			deactivate();
+		} else {
+			data.notif = 1;
+			activate();
+		}
+		await AsyncRequest.put(url, data);
+	} catch (err) {
+		showToast("error", err.message ?? err);
+		if (notifBtn.value == 1) deactivate();
+		else activate();
 	}
 };
