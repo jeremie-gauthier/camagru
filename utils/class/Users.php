@@ -77,7 +77,7 @@ class Users extends Database{
       ];
       $this->query($query, $values);
       if ($this->affected_rows() != 1) {
-        throw new Exception("User not found");
+        throw new Exception("Utilisateur introuvable");
       }
     } catch (Exception $e) {
       throw $e;
@@ -101,7 +101,7 @@ class Users extends Database{
       ];
       $this->query($query, $values);
       if ($this->affected_rows() != 1) {
-        throw new Exception("User not found");
+        throw new Exception("Utilisateur introuvable");
       }
     } catch (Exception $e) {
       throw $e;
@@ -142,7 +142,7 @@ class Users extends Database{
       ];
       $this->query($query, $values);
       if ($this->affected_rows() != 1) {
-        throw new Exception("User not found");
+        throw new Exception("Utilisateur introuvable");
       }
     } catch (Exception $e) {
       throw $e;
@@ -165,7 +165,7 @@ class Users extends Database{
       ];
       $this->query($query, $values);
       if ($this->affected_rows() != 1) {
-        throw new Exception("User not found");
+        throw new Exception("Utilisateur introuvable");
       }
     } catch (Exception $e) {
       throw $e;
