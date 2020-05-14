@@ -26,3 +26,9 @@ form {
 	display: flex;
 	justify-content: center;
 }
+
+.btn-link {
+	border: 0;
+	text-decoration: underline;
+	background-color: inherit;
+}

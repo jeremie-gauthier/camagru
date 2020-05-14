@@ -65,7 +65,11 @@
       >Modifier mes informations</button>
     </div>
   </form>
-  <button type="button" onclick="changePassword()">Changer de mot de passe</button>
+  <button
+    type="button"
+    class="btn-link"
+    onclick="changePassword()"
+  >Changer de mot de passe</button>
   <span class="text-danger">
     <?php
       if (Session::exists("settings-err")) {
