@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
   try {
     $userId = Session::get("userId");
     $user_cls = new Users($DB_DSN, $DB_USER, $DB_PASSWORD);
-    $user_cls->updatePassword($email, $userId);
+    $user_cls->updatePassword($pwd, $userId);
     Session::del("password-err");
     Session::set("settings-info", "Votre mot de passe a ete modifie");
 
