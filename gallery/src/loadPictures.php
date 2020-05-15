@@ -42,6 +42,17 @@ try {
           id="legend-card<?php echo $picture['idPictures'] ?>"
         ><?php echo $picture['legend'] ?></p>
 
+        <div
+          class="inline no-space"
+          id="comments-toggler"
+          onclick="toggleComments(<?php echo $picture['idPictures'] ?>)"
+        >
+          <span class="card-comments-btn">Afficher les commentaires</span>
+          <span class="material-icons arrow-up">play_arrow</span>
+        </div>
+
+        <div id="list-comments" hidden></div>
+
         <!-- Buttons -->
         <div class="btn-actions">
           <div>
@@ -59,13 +70,7 @@ try {
           <!-- Date -->
             <div>Publi&eacute;e le 
               <?php echo 
-                substr(
-                  date_format(
-                    new DateTime($picture['regDate']),
-                    'd/m/Y H:i:s'),
-                  0,
-                  -3
-                )
+                  date_format(new DateTime($picture['regDate']), 'd/m/Y H:i')
               ?>
             </div>
         </div>
@@ -80,3 +85,53 @@ try {
 
 ?>
 
+<script>
+  const comToggler = document.getElementById("comments-toggler");
+  const listComs = document.getElementById("list-comments");
+  const cache = [];
+
+  const toggleComments = async (pictureId) => {
+    const arrow = comToggler.children[1];
+
+    if (arrow.classList.contains("arrow-up")) {
+      arrow.classList.remove("arrow-up");
+      arrow.classList.add("arrow-down");
+      listComs.hidden = false;
+      if (!cache.includes(pictureId)) {
+        const comments = await fetchComments(pictureId);
+        commentsToDOM(comments);
+      }
+    } else if (arrow.classList.contains("arrow-down")) {
+      arrow.classList.remove("arrow-down");
+      arrow.classList.add("arrow-up");
+      listComs.hidden = true;
+    }
+  };
+
+  const fetchComments = async (pictureId) => {
+    try {
+      const url = `/gallery/src/comments.php?pictureId=${pictureId}`;
+
+      const comments = await AsyncRequest.get(url);
+      cache.push(pictureId);
+      return comments;
+    } catch (err) {
+      showToast("error", err.message ?? err);
+    }
+  };
+
+  const commentsToDOM = (comments) => {
+    const formatDate = (date) => {
+      const d = new Date(date);
+      return d.toDateString();
+    }
+
+    comments.forEach((comment) => {
+      const comDiv = createElement(listComs, "div", { class: "comment-block" });
+      createElement(comDiv, "strong", { class: "comment-author" }, comment.author);
+      createElement(comDiv, "p", { class: "comment-txt" }, comment.comment);
+      createElement(comDiv, "span", { class: "comment-date" }, comment.regDate);
+    });
+  };
+
+</script>
