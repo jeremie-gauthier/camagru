@@ -1,6 +1,7 @@
 <?php session_start(); ?>
 <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/components/layouts/header.php" ?>
-<link rel="stylesheet" type="text/css" href="/gallery/gallery.css">
+<link rel="stylesheet" type="text/css" href="/gallery/styles/gallery.css">
+<link rel="stylesheet" type="text/css" href="/gallery/styles/overlay.css">
 
 <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/components/layouts/navbar.php" ?>
 
@@ -8,12 +9,65 @@
   <h1>Ma galerie</h1>
   <hr />
 
-  <a href="/picture">Ajouter une photo</a>
-  <?php require $_SERVER['DOCUMENT_ROOT'] . "/components/toast.php" ?>
-  <div class="list-pictures">
-    <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/gallery/loadPictures.php" ?>
+  <a href="/picture" class="material-icons add-a-photo">add_a_photo</a>
+
+  <div id="no-picture" hidden>Vous n'avez partag&eacute; aucune photo.</div>
+  <div id="list-pictures">
+    <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/gallery/src/loadPictures.php" ?>
   </div>
 
+  <div id="overlay-legend-container" class="overlay-container" hidden>
+    <div class="overlay-content">
+      <h1 class="overlay-title">L&eacute;gende</h1>
+      <div id="overlay-legend-counter" class="overlay-counter">0/255</div>
+      <textarea
+        autofocus
+        id="overlay-legend-text"
+        class="overlay-text"
+        name="legend"
+        rows='10'
+        column='50'
+        maxlength="255"
+        placeholder="Ajoutez une l&eacute;gende..."
+      ></textarea>
+      <button
+        type="button"
+        id="overlay-legend-btn"
+        class="overlay-btn"
+        onclick="putLegend()"
+      >Enregistrer</button>
+    </div>
+  </div>
+
+  <div id="overlay-comment-container" class="overlay-container" hidden>
+    <div class="overlay-content">
+      <h1 class="overlay-title">Ajoutez un commentaire</h1>
+      <div id="overlay-comment-counter" class="overlay-counter">0/255</div>
+      <textarea
+        autofocus
+        id="overlay-comment-text"
+        class="overlay-text"
+        name="comment"
+        rows='10'
+        column='50'
+        maxlength="255"
+        placeholder="Ajoutez un commentaire..."
+      ></textarea>
+      <button
+        type="button"
+        id="overlay-comment-btn"
+        class="overlay-btn"
+        onclick="add_comment()"
+      >Enregistrer</button>
+    </div>
+  </div>
+
+  <?php require $_SERVER['DOCUMENT_ROOT'] . "/components/toast.php" ?>
 </div>
 
 <?php require $_SERVER['DOCUMENT_ROOT'] . "/components/layouts/footer.php" ?>
+
+<script type="text/javascript" src="/utils/scripts/DOM.js"></script>
+<script type="text/javascript" src="/utils/scripts/AsyncRequest.js"></script>
+<script type="text/javascript" src="/gallery/scripts/overlay.js"></script>
+<script type="text/javascript" src="/gallery/scripts/main.js"></script>
