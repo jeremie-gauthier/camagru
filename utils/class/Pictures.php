@@ -27,9 +27,31 @@ class Pictures extends Database{
       $this->query($query, $values);
       $inserted_id = $this->get_last_inserted_id();
       return $inserted_id;
-    } catch (PDOException $e) {
-      throw $e->getMessage();
+    } catch (Exception $e) {
+      throw $e;
     }
+  }
+
+  function update($userId, $pictureId, $legend) {
+    try {
+      $query = "
+        UPDATE
+          pictures
+        SET
+          legend = :legend
+        WHERE
+          diUsers = :userId
+          AND idPictures = :pictureId
+      ";
+      $values = [
+        ":legend" => $legend,
+        ":userId" => $userId,
+        ":pictureId" => $pictureId
+      ];
+      $this->query($query, $values);
+    } catch (Exception $e) {
+      throw $e;
+    }  
   }
 
   function delete($imgId, $userId) {
@@ -48,8 +70,8 @@ class Pictures extends Database{
       $this->query($query, $values);
       $count = $this->affected_rows();
       return $count == 1;
-    } catch (PDOException $e) {
-      throw $e->getMessage();
+    } catch (Exception $e) {
+      throw $e;
     }
   }
 
@@ -57,7 +79,32 @@ class Pictures extends Database{
     try {
       $query = "
         SELECT
-          *
+          *,
+          (
+            SELECT
+              COUNT(likes.diUsers)
+            FROM
+              likes
+            WHERE
+              likes.diPictures = pictures.idPictures
+          ) AS likes,
+          (
+            SELECT
+              COUNT(likes.diUsers)
+            FROM
+              likes
+            WHERE
+              likes.diPictures = pictures.idPictures
+              AND likes.diUsers = 1
+          ) AS alreadyLiked,
+          (
+            SELECT
+              COUNT(comments.diUsers)
+            FROM
+              comments
+            WHERE
+              comments.diPictures = pictures.idPictures
+          ) AS comments
         FROM
           pictures
         WHERE
