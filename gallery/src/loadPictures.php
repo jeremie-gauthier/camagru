@@ -22,19 +22,17 @@ try {
               onclick="likePicture(this)"
             >favorite<?php if ($picture['alreadyLiked'] == 0) echo "_border" ?></span>
             <span
-              id="sum-likes-card<?php echo $picture['idPictures'] ?>">
-                <?php echo $picture['likes'] ?>
-            </span>
+              id="sum-likes-card<?php echo $picture['idPictures'] ?>"
+            ><?php echo $picture['likes'] ?></span>
 
             <span
               class="material-icons comment-icon"
               id="comment-card<?php echo $picture['idPictures'] ?>"
-              onclick="commentPicture(this)"
+              onclick="openComment(<?php echo $picture['idPictures'] ?>)"
             >chat</span>
             <span
-              id="sum-comments-card<?php echo $picture['idPictures'] ?>">
-                <?php echo $picture['comments'] ?>
-            </span>
+              id="sum-comments-card<?php echo $picture['idPictures'] ?>"
+            ><?php echo $picture['comments'] ?></span>
           </div>
 
         </span>
@@ -50,7 +48,7 @@ try {
             <?php if (Session::get("userId") == $picture['diUsers']) { ?>
               <button
                 class="btn btn-primary"
-                onclick="editLegend(<?php echo $picture['idPictures'] ?>)"
+                onclick="openLegend(<?php echo $picture['idPictures'] ?>)"
               >Modifier</button>
               <button
                 class="btn btn-danger"
