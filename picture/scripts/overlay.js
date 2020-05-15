@@ -1,7 +1,7 @@
 const comment = document.getElementById("overlay-text");
 const counter = document.getElementById("overlay-counter");
 
-overlay.onclick = (e) => {
+overlay.onmousedown = (e) => {
 	if (e.target.id === overlay.id) {
 		overlay.hidden = true;
 	}
