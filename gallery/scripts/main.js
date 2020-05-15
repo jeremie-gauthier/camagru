@@ -36,7 +36,7 @@ const likePicture = async (elem) => {
 	}
 };
 
-const editLegend = (pictureId) => {
+const openLegend = (pictureId) => {
 	try {
 		const pictureLegend = document.getElementById(`legend-card${pictureId}`);
 
@@ -88,5 +88,34 @@ const delPicture = async (pictureId) => {
 		card.hidden = false;
 		nbPictures++;
 		noPicInfo.hidden = true;
+	}
+};
+
+const openComment = (pictureId) => {
+	try {
+		current = pictureId;
+		overlayCom.hidden = false;
+		overlayTextCom.focus();
+	} catch (err) {
+		showToast("error", err.message ?? err);
+	}
+};
+
+const addComment = async () => {
+	const counter = document.getElementById(`sum-comments-card${current}`);
+
+	try {
+		const url = `/gallery/src/handler.php`;
+		const data = { pictureId: current, comment: overlayTextCom.value };
+		const headers = { "Content-type": "application/x-www-form-urlencoded" };
+
+		overlayCom.hidden = true;
+		overlayCom.value = "";
+		current = null;
+		counter.innerHTML = parseInt(counter.innerHTML) + 1;
+		await AsyncRequest.post(url, data, headers);
+	} catch (err) {
+		showToast("error", err.message ?? err);
+		counter.innerHTML = parseInt(counter.innerHTML) - 1;
 	}
 };
