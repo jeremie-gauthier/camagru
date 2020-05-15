@@ -34,6 +34,31 @@ class Comments extends Database{
       throw $e;
     }
   }
+
+  function getAllFrom($pictureId) {
+    try {
+      $query = "
+        SELECT
+          comments.*, users.pseudo AS author
+        FROM
+          comments
+        INNER JOIN users
+          ON comments.diUsers = users.idUsers
+        WHERE
+          diPictures = :pictureId
+        ORDER BY
+          comments.regDate ASC
+      ";
+      $values = [
+        ":pictureId" => $pictureId
+      ];
+      $this->query($query, $values);
+      $comments = $this->get_results();
+      return $comments;
+    } catch (Exception $e) {
+      throw $e;
+    }
+  }
 }
 
 ?>
