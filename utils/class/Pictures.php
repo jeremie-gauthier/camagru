@@ -7,6 +7,27 @@ class Pictures extends Database{
     parent::__construct($DB_DSN, $DB_USER, $DB_PASSWORD);
   }
 
+  function getById($id) {
+    try {
+      $query = "
+        SELECT
+          *
+        FROM
+          pictures
+        WHERE
+          idPictures = :id
+      ";
+      $values = [
+        ":id" => $id
+      ];
+      $this->query($query, $values);
+      $picture = $this->get_results();
+      return $picture;
+    } catch (Exception $e) {
+      throw $e;
+    }
+  }
+
   function create($userId, $legend) {
     try {
       $query = "

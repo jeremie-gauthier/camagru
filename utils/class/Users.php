@@ -27,6 +27,26 @@ class Users extends Database{
     }
   }
 
+  function getById($id) {
+    try {
+      $query = "
+        SELECT
+          *
+        FROM
+          users
+        WHERE
+          idUsers = :id
+      ";
+      $values = [":id" => $id];
+      $this->query($query, $values);
+      $user = $this->get_results();
+      return $user;
+    } catch (Exception $e) {
+      throw $e;
+    }
+  }
+
+
   function create($pseudo, $email, $pwd) {
     try {
       $hash = md5(time());
