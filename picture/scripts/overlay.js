@@ -7,8 +7,8 @@ overlay.onmousedown = (e) => {
 	}
 };
 
-overlay.onkeyup = (e) => {
-	if (e.key === "Escape") {
+overlay.onkeyup = ({ key }) => {
+	if (key === "Escape") {
 		overlay.hidden = true;
 	}
 };
