@@ -57,8 +57,8 @@
         type="button"
         id="overlay-comment-btn"
         class="overlay-btn"
-        onclick="add_comment()"
-      >Enregistrer</button>
+        onclick="addComment()"
+      >Envoyer</button>
     </div>
   </div>
 
