@@ -25,7 +25,7 @@ class Database {
     try {
       $this->stmt = $this->pdo->prepare($query);
       $this->stmt->execute($values);
-    } catch (Exception $e) {
+    } catch (PDOException $e) {
       throw $e;
     }
   }
@@ -33,7 +33,7 @@ class Database {
   function get_first_result() {
     try {
       return $this->stmt->fetch();
-    } catch (Exception $e) {
+    } catch (PDOException $e) {
       throw $e;
     }
   }
@@ -41,7 +41,7 @@ class Database {
   function get_results() {
     try {
       return $this->stmt->fetchAll();
-    } catch (Exception $e) {
+    } catch (PDOException $e) {
       throw $e;
     }
   }
@@ -49,7 +49,7 @@ class Database {
   function get_last_inserted_id() {
     try {
       return $this->pdo->lastInsertId();
-    } catch (Exception $e) {
+    } catch (PDOException $e) {
       throw $e;
     }      
   }
@@ -57,7 +57,7 @@ class Database {
   function affected_rows() {
   try {
     return $this->stmt->rowCount();
-    } catch (Exception $e) {
+    } catch (PDOException $e) {
       throw $e;
     }
   }
