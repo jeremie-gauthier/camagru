@@ -1,6 +1,8 @@
 <?php
 
 session_start();
+require_once $_SERVER['DOCUMENT_ROOT'] . "/utils/class/Mail.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/utils/class/Users.php";
 require_once $_SERVER['DOCUMENT_ROOT'] . "/utils/class/Likes.php";
 require_once $_SERVER['DOCUMENT_ROOT'] . "/utils/class/Pictures.php";
 require_once $_SERVER['DOCUMENT_ROOT'] . "/utils/class/Comments.php";
@@ -79,6 +81,24 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
 
     $com_cls = new Comments($DB_DSN, $DB_USER, $DB_PASSWORD);
     $com_cls->create($userId, $pictureId, $comment);
+
+    $pic_cls = new Pictures($DB_DSN, $DB_USER, $DB_PASSWORD);
+    $picture = $pic_cls->getById($pictureId);
+    if (count($picture) != 1) {
+      http_response_code(404);
+      return;
+    }
+
+    $usr_cls = new Users($DB_DSN, $DB_USER, $DB_PASSWORD);
+    $user = $usr_cls->getById($picture[0]["diUsers"]);
+    if (count($user) != 1) {
+      http_response_code(404);
+      return;
+    }
+
+    if ($user[0]["notifications"] == 1) {
+      Mail::notifNewComment($user[0]["email"], Session::get("pseudo"));
+    }
     http_response_code(204);
   } catch (Exception $e) {
     http_response_code(500);

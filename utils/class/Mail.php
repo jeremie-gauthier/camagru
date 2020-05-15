@@ -42,6 +42,20 @@ class Mail {
       </html>";
     Mail::send($to, $subject, $message);
   }
+
+  function notifNewComment($to, $author) {
+    $subject = "Vous avez recu un nouveau commentaire";
+    $message = "
+      <html>
+        <body>
+          <h1>Camagru</h1>
+          <hr />
+          <p><strong>" . $author . "</strong> a comment&eacute; l'une de vos photos.</p>
+          <p>Connectez-vous pour consulter ce commentaire.</p>
+        </body>
+      </html>";
+    Mail::send($to, $subject, $message);
+  }
 }
 
 ?>
