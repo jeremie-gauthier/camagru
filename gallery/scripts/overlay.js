@@ -45,3 +45,49 @@ overlayText.oninput = (e) => {
 		}
 	}
 };
+
+const overlayCom = document.getElementById("overlay-comment-container");
+const overlayTextCom = document.getElementById("overlay-comment-text");
+const counterCom = document.getElementById("overlay-comment-counter");
+
+overlayCom.onmousedown = ({ target }) => {
+	if (target.id === overlayCom.id) {
+		overlayCom.hidden = true;
+		current = null;
+	}
+};
+
+overlayCom.onkeyup = ({ key }) => {
+	if (key === "Escape") {
+		overlayCom.hidden = true;
+		current = null;
+	}
+};
+
+overlayTextCom.onkeydown = () => {
+	previousOverlayText = overlayTextCom.value;
+};
+
+overlayTextCom.oninput = (e) => {
+	const {
+		target: { textLength },
+		data,
+		inputType,
+	} = e;
+
+	if (inputType === "insertFromPaste") {
+		overlayTextCom.value = previousOverlayText;
+		return;
+	}
+
+	if (forbiddenInputs.includes(data)) {
+		overlayTextCom.value = overlayTextCom.value.slice(0, -1);
+	} else {
+		counterCom.innerHTML = textLength + "/255";
+		if (textLength === 255) {
+			counterCom.style.color = "red";
+		} else {
+			counterCom.style.color = "white";
+		}
+	}
+};
