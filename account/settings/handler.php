@@ -63,6 +63,7 @@
       $user_cls = new Users($DB_DSN, $DB_USER, $DB_PASSWORD);
       $user_cls->bindHash($userId, $hash);
       Mail::newPassword($email, $hash);
+      http_response_code(204);
     } catch (Exception $e) {
       http_response_code(500);
       echo $e->getMessage();
