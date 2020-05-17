@@ -54,6 +54,7 @@ const addPicturesToDOM = (element, pictures) => {
 
 		const btnComments = clone.getElementById("comments-toggler");
 		const commentsContainer = clone.getElementById("list-comments");
+		commentsContainer.id += idPictures;
 		btnComments.onclick = () =>
 			toggleComments(commentsContainer, btnComments.children[1], idPictures);
 
@@ -118,7 +119,7 @@ const delPicture = async (element, pictureId) => {
 		if (nbPictures === 0) {
 			noPicInfo.hidden = false;
 		}
-		// await AsyncRequest.delete(url);
+		await AsyncRequest.delete(url);
 		showToast("success", "Image supprim&eacute;e");
 	} catch (err) {
 		showToast("error", err.message ?? err);
