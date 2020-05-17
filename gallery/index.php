@@ -74,6 +74,7 @@
 <?php require $_SERVER['DOCUMENT_ROOT'] . "/components/layouts/footer.php" ?>
 
 <script type="text/javascript" src="/utils/scripts/DOM.js"></script>
+<script type="text/javascript" src="/utils/scripts/throttle.js"></script>
 <script type="text/javascript" src="/utils/scripts/AsyncRequest.js"></script>
 <script type="text/javascript" src="/gallery/scripts/overlay.js"></script>
 <script type="text/javascript" src="/gallery/scripts/main.js"></script>
@@ -81,17 +82,25 @@
 <script type="text/javascript">
   const listDiv = document.getElementById("list-pictures");
 
-  document.addEventListener("DOMContentLoaded", async () => {
+  const loadPictures = async () => {
     try {
-      await fetchCards(listDiv, "<?php echo Session::get("pseudo") ?>");
+      const hasMore = await fetchCards(listDiv, "<?php echo Session::get("pseudo") ?>");
+      if (hasMore === false) {
+        window.removeEventListener("scroll", loadPicturesOnScroll);
+      }
     } catch (err) {
       showToast("error", err.message ?? err);
     }
-  });
+  }
+  const throttledLoading = throttle(loadPictures, 500);
 
-  window.onscroll = (ev) => {
+  const loadPicturesOnScroll = () => {
     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-      alert("you're at the bottom of the page")
+      throttledLoading();
     }
-  };
+  }
+  
+  document.addEventListener("DOMContentLoaded", throttledLoading);
+  window.addEventListener("scroll", loadPicturesOnScroll);
+
 </script>
