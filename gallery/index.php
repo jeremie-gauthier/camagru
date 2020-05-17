@@ -19,7 +19,7 @@
 
   <div id="no-picture" hidden>Vous n'avez partag&eacute; aucune photo.</div>
   <div id="list-pictures">
-    <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/gallery/src/loadPictures.php" ?>
+    <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/components/card/index.php" ?>
   </div>
 
   <div id="overlay-legend-container" class="overlay-container" hidden>
@@ -77,3 +77,21 @@
 <script type="text/javascript" src="/utils/scripts/AsyncRequest.js"></script>
 <script type="text/javascript" src="/gallery/scripts/overlay.js"></script>
 <script type="text/javascript" src="/gallery/scripts/main.js"></script>
+
+<script type="text/javascript">
+  const listDiv = document.getElementById("list-pictures");
+
+  window.onload = async () => {
+    try {
+      await fetchCards(listDiv, "<?php echo Session::get("pseudo") ?>");
+    } catch (err) {
+      showToast("error", err.message ?? err);
+    }
+  }
+
+  window.onscroll = (ev) => {
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+      alert("you're at the bottom of the page")
+    }
+  };
+</script>
