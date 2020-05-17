@@ -81,13 +81,13 @@
 <script type="text/javascript">
   const listDiv = document.getElementById("list-pictures");
 
-  window.onload = async () => {
+  document.addEventListener("DOMContentLoaded", async () => {
     try {
       await fetchCards(listDiv, "<?php echo Session::get("pseudo") ?>");
     } catch (err) {
       showToast("error", err.message ?? err);
     }
-  }
+  });
 
   window.onscroll = (ev) => {
     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
