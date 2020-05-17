@@ -143,6 +143,103 @@ class Pictures extends Database{
       throw $e;
     }
   }
+
+  function getMoreFrom($userId, $offset, $limit) {
+    try {
+      $query = "
+        SELECT
+          *,
+          (
+            SELECT
+              COUNT(likes.diUsers)
+            FROM
+              likes
+            WHERE
+              likes.diPictures = pictures.idPictures
+          ) AS likes,
+          (
+            SELECT
+              COUNT(likes.diUsers)
+            FROM
+              likes
+            WHERE
+              likes.diPictures = pictures.idPictures
+              AND likes.diUsers = 1
+          ) AS alreadyLiked,
+          (
+            SELECT
+              COUNT(comments.diUsers)
+            FROM
+              comments
+            WHERE
+              comments.diPictures = pictures.idPictures
+          ) AS comments
+        FROM
+          pictures
+        WHERE
+          diUsers = :userId
+        ORDER BY
+          regDate
+        DESC
+        LIMIT "
+        . filter_var(htmlspecialchars($offset), FILTER_SANITIZE_NUMBER_INT)
+        . ", " . filter_var(htmlspecialchars($limit), FILTER_SANITIZE_NUMBER_INT)
+      ;
+      $values = [
+        ":userId" => $userId
+      ];
+      $this->query($query, $values);
+      return $this->get_results();
+    } catch (Exception $e) {
+      throw $e;
+    }
+  }
+
+  function getMore($offset, $limit) {
+    try {
+      $query = "
+        SELECT
+          *,
+          (
+            SELECT
+              COUNT(likes.diUsers)
+            FROM
+              likes
+            WHERE
+              likes.diPictures = pictures.idPictures
+          ) AS likes,
+          (
+            SELECT
+              COUNT(likes.diUsers)
+            FROM
+              likes
+            WHERE
+              likes.diPictures = pictures.idPictures
+              AND likes.diUsers = 1
+          ) AS alreadyLiked,
+          (
+            SELECT
+              COUNT(comments.diUsers)
+            FROM
+              comments
+            WHERE
+              comments.diPictures = pictures.idPictures
+          ) AS comments
+        FROM
+          pictures
+        ORDER BY
+          regDate
+        DESC
+        LIMIT "
+        . filter_var(htmlspecialchars($offset), FILTER_SANITIZE_NUMBER_INT)
+        . ", " . filter_var(htmlspecialchars($limit), FILTER_SANITIZE_NUMBER_INT)
+      ;
+      $this->query($query);
+      return $this->get_results();
+    } catch (Exception $e) {
+      throw $e;
+    }
+  }
 }
 
 ?>
