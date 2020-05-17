@@ -54,6 +54,7 @@ overlayCom.onmousedown = ({ target }) => {
 	if (target.id === overlayCom.id) {
 		overlayCom.hidden = true;
 		current = null;
+		overlayTextCom.value = "";
 	}
 };
 
@@ -61,6 +62,7 @@ overlayCom.onkeyup = ({ key }) => {
 	if (key === "Escape") {
 		overlayCom.hidden = true;
 		current = null;
+		overlayTextCom.value = "";
 	}
 };
 
