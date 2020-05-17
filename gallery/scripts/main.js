@@ -110,7 +110,7 @@ const addComment = async () => {
 		const headers = { "Content-type": "application/x-www-form-urlencoded" };
 
 		overlayCom.hidden = true;
-		overlayCom.value = "";
+		overlayTextCom.value = "";
 		current = null;
 		counter.innerHTML = parseInt(counter.innerHTML) + 1;
 		await AsyncRequest.post(url, data, headers);
