@@ -4,6 +4,7 @@
   <?php } else { ?>
     const currentUser = null;
   <?php } ?>
+  let currentOffset = 5;
 </script>
 
 <?php
@@ -12,7 +13,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/config/database.php";
 
 try {
   $pic_cls = new Pictures($DB_DSN, $DB_USER, $DB_PASSWORD);
-  $pictures = $pic_cls->getAllFrom(Session::get("userId"));
+  $pictures = $pic_cls->getMoreFrom(Session::get("userId"), 0, 5);
 
   foreach ($pictures as $picture) { ?>
 
@@ -88,7 +89,7 @@ try {
   <?php }
 
 } catch (Exception $e) {
-  echo "Une erreur est survenue";
+  echo "Une erreur est survenue" . $e;
 }
 
 ?>
@@ -157,4 +158,9 @@ try {
     });
   };
 
+  window.onscroll = (ev) => {
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+      alert("you're at the bottom of the page")
+    }
+  };
 </script>
