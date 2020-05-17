@@ -6,36 +6,6 @@ if (nbPictures === 0) {
 	noPicInfo.hidden = false;
 }
 
-const likePicture = async (elem) => {
-	const add = () => {
-		elem.innerHTML = "favorite";
-		counter.innerHTML = parseInt(counter.innerHTML) + 1;
-	};
-
-	const del = () => {
-		elem.innerHTML = "favorite_border";
-		counter.innerHTML = parseInt(counter.innerHTML) - 1;
-	};
-
-	const pictureId = elem.id.split("like-card")[1];
-	const url = `/gallery/src/handler.php?pictureId=${pictureId}`;
-	const counter = document.getElementById(`sum-likes-card${pictureId}`);
-
-	try {
-		if (elem.innerHTML == "favorite_border") {
-			add();
-			await AsyncRequest.get(url);
-		} else {
-			del();
-			await AsyncRequest.delete(url);
-		}
-	} catch (err) {
-		showToast("error", err.message ?? err);
-		if (elem.innerHTML === "favorite_border") add();
-		else del();
-	}
-};
-
 const openLegend = (pictureId) => {
 	try {
 		const pictureLegend = document.getElementById(`legend-card${pictureId}`);
@@ -88,53 +58,5 @@ const delPicture = async (pictureId) => {
 		card.hidden = false;
 		nbPictures++;
 		noPicInfo.hidden = true;
-	}
-};
-
-const openComment = (pictureId) => {
-	try {
-		current = pictureId;
-		overlayCom.hidden = false;
-		overlayTextCom.focus();
-	} catch (err) {
-		showToast("error", err.message ?? err);
-	}
-};
-
-const addComment = async () => {
-	const counter = document.getElementById(`sum-comments-card${current}`);
-
-	try {
-		const url = "/gallery/src/comments.php";
-		const data = { pictureId: current, comment: overlayTextCom.value };
-		const headers = { "Content-type": "application/x-www-form-urlencoded" };
-
-		overlayCom.hidden = true;
-		overlayTextCom.value = "";
-		current = null;
-		counter.innerHTML = parseInt(counter.innerHTML) + 1;
-		await AsyncRequest.post(url, data, headers);
-	} catch (err) {
-		showToast("error", err.message ?? err);
-		counter.innerHTML = parseInt(counter.innerHTML) - 1;
-	}
-};
-
-const delComment = async (pictureId, comDiv, commentId, userId) => {
-	if (userId === null) {
-		window.location.href = "http://127.0.0.1:8888/auth/login";
-	}
-	const counter = document.getElementById(`sum-comments-card${pictureId}`);
-
-	try {
-		const url = `/gallery/src/comments.php?commentId=${commentId}&currentUser=${userId}`;
-
-		comDiv.hidden = true;
-		counter.innerHTML = parseInt(counter.innerHTML) - 1;
-		await AsyncRequest.delete(url);
-	} catch (err) {
-		showToast("error", err.message ?? err);
-		comDiv.hidden = false;
-		counter.innerHTML = parseInt(counter.innerHTML) + 1;
 	}
 };
