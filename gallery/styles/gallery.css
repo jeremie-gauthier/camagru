@@ -117,3 +117,11 @@
 	font-style: italic;
 	font-size: 12px;
 }
+
+.comment-delIcon {
+	font-size: 20px;
+}
+
+.comment-delIcon:hover {
+	cursor: pointer;
+}

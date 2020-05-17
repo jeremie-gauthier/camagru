@@ -1,3 +1,11 @@
+<script type="text/javascript">
+  <?php if (Session::exists("pseudo")) { ?>
+    const currentUser = "<?php echo Session::get("pseudo") ?>";
+  <?php } else { ?>
+    const currentUser = null;
+  <?php } ?>
+</script>
+
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . "/utils/class/Pictures.php";
 require_once $_SERVER['DOCUMENT_ROOT'] . "/config/database.php";
@@ -85,7 +93,7 @@ try {
 
 ?>
 
-<script>
+<script type="text/javascript">
   const comToggler = document.getElementById("comments-toggler");
   const listComs = document.getElementById("list-comments");
   const cache = [];
@@ -99,7 +107,7 @@ try {
       listComs.hidden = false;
       if (!cache.includes(pictureId)) {
         const comments = await fetchComments(pictureId);
-        commentsToDOM(comments);
+        commentsToDOM(pictureId, comments);
       }
     } else if (arrow.classList.contains("arrow-down")) {
       arrow.classList.remove("arrow-down");
@@ -120,7 +128,7 @@ try {
     }
   };
 
-  const commentsToDOM = (comments) => {
+  const commentsToDOM = (pictureId, comments) => {
     const formatDate = (date) => {
       const d = new Date(date);
       return d.toDateString();
@@ -128,7 +136,22 @@ try {
 
     comments.forEach((comment) => {
       const comDiv = createElement(listComs, "div", { class: "comment-block" });
-      createElement(comDiv, "strong", { class: "comment-author" }, comment.author);
+      const headerDiv = createElement(comDiv, "div", { class: "comment-header inline"});
+      createElement(headerDiv, "strong", { class: "comment-author" }, comment.author);
+      if (currentUser !== null && comment.author === currentUser) {
+        const delIcon = createElement(
+          headerDiv,
+          "i",
+          { class: "material-icons comment-delIcon" },
+          "clear"
+        );
+        delIcon.onclick = () => delComment(
+          pictureId,
+          comDiv,
+          comment.idComments,
+          currentUser
+        );
+      }
       createElement(comDiv, "p", { class: "comment-txt" }, comment.comment);
       createElement(comDiv, "span", { class: "comment-date" }, comment.regDate);
     });

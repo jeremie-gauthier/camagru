@@ -35,6 +35,25 @@ class Comments extends Database{
     }
   }
 
+  function delete($commentId, $userId) {
+    try {
+      $query = "
+        DELETE FROM
+          comments
+        WHERE
+          idComments = :commentId
+          AND diUsers = :userId
+      ";
+      $values = [
+        ":commentId" => $commentId,
+        ":userId" => $userId
+      ];
+      $this->query($query, $values);
+    } catch (Exception $e) {
+      throw $e;
+    }
+  }
+
   function getAllFrom($pictureId) {
     try {
       $query = "

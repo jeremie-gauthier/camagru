@@ -119,3 +119,22 @@ const addComment = async () => {
 		counter.innerHTML = parseInt(counter.innerHTML) - 1;
 	}
 };
+
+const delComment = async (pictureId, comDiv, commentId, userId) => {
+	if (userId === null) {
+		window.location.href = "http://127.0.0.1:8888/auth/login";
+	}
+	const counter = document.getElementById(`sum-comments-card${pictureId}`);
+
+	try {
+		const url = `/gallery/src/comments.php?commentId=${commentId}&currentUser=${userId}`;
+
+		comDiv.hidden = true;
+		counter.innerHTML = parseInt(counter.innerHTML) - 1;
+		await AsyncRequest.delete(url);
+	} catch (err) {
+		showToast("error", err.message ?? err);
+		comDiv.hidden = false;
+		counter.innerHTML = parseInt(counter.innerHTML) + 1;
+	}
+};
