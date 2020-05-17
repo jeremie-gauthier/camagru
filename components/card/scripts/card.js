@@ -48,6 +48,82 @@ const addPicturesToDOM = (element, pictures) => {
 		const comment = clone.getElementById("comment-card");
 		comment.onclick = () => isUserLogged(openComment)(idPictures);
 
+		const cardLegend = clone.getElementById("legend-card");
+		cardLegend.id += idPictures;
+		cardLegend.innerHTML = legend;
+
+		const btnComments = clone.getElementById("comments-toggler");
+		const commentsContainer = clone.getElementById("list-comments");
+		btnComments.onclick = () =>
+			toggleComments(commentsContainer, btnComments.children[1], idPictures);
+
+		if (currentUser !== null) {
+			const card = clone.getElementById("card");
+
+			clone.getElementById("card-owner-actions").hidden = false;
+			clone.getElementById("action-update").onclick = () =>
+				openLegend(cardLegend, idPictures);
+			clone.getElementById("action-delete").onclick = () =>
+				delPicture(card, idPictures);
+		}
+
+		clone.getElementById("card-img-date").innerHTML = regDate;
+
 		element.appendChild(clone);
 	});
+};
+
+/*
+ ** CARD ACTIONS
+ */
+
+const openLegend = (legend, pictureId) => {
+	try {
+		overlay.hidden = false;
+		overlayText.focus();
+		overlayText.value = legend.innerHTML;
+		overlayText.selectionStart = overlayText.textLength;
+		counter.innerHTML = overlayText.textLength + "/255";
+		current = pictureId;
+	} catch (err) {
+		showToast("error", err.message ?? err);
+	}
+};
+
+const putLegend = async () => {
+	const pictureLegend = document.getElementById(`legend-card${current}`);
+	const tmp = pictureLegend.innerHTML;
+
+	try {
+		const url = "/gallery/src/handler.php";
+		const data = { pictureId: current, legend: overlayText.value };
+		const headers = { "Content-type": "application/x-www-form-urlencoded" };
+
+		pictureLegend.innerHTML = overlayText.value;
+		overlay.hidden = true;
+		current = null;
+		await AsyncRequest.put(url, data, headers);
+	} catch (err) {
+		showToast("error", err.message ?? err);
+		pictureLegend.innerHTML = tmp;
+	}
+};
+
+const delPicture = async (element, pictureId) => {
+	try {
+		const url = `picture/src/handler.php?id=${pictureId}`;
+
+		element.hidden = true;
+		nbPictures--;
+		if (nbPictures === 0) {
+			noPicInfo.hidden = false;
+		}
+		// await AsyncRequest.delete(url);
+		showToast("success", "Image supprim&eacute;e");
+	} catch (err) {
+		showToast("error", err.message ?? err);
+		element.hidden = false;
+		nbPictures++;
+		noPicInfo.hidden = true;
+	}
 };

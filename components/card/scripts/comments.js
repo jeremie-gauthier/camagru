@@ -1,22 +1,19 @@
-const comToggler = document.getElementById("comments-toggler");
 const listComs = document.getElementById("list-comments");
 const cache = [];
 
-const toggleComments = async (pictureId) => {
-	const arrow = comToggler.children[1];
-
-	if (arrow.classList.contains("arrow-up")) {
-		arrow.classList.remove("arrow-up");
-		arrow.classList.add("arrow-down");
-		listComs.hidden = false;
+const toggleComments = async (commentsContainer, arrowIcon, pictureId) => {
+	if (arrowIcon.classList.contains("arrow-up")) {
+		arrowIcon.classList.remove("arrow-up");
+		arrowIcon.classList.add("arrow-down");
+		commentsContainer.hidden = false;
 		if (!cache.includes(pictureId)) {
 			const comments = await fetchComments(pictureId);
-			commentsToDOM(pictureId, comments);
+			commentsToDOM(commentsContainer, pictureId, comments);
 		}
-	} else if (arrow.classList.contains("arrow-down")) {
-		arrow.classList.remove("arrow-down");
-		arrow.classList.add("arrow-up");
-		listComs.hidden = true;
+	} else if (arrowIcon.classList.contains("arrow-down")) {
+		arrowIcon.classList.remove("arrow-down");
+		arrowIcon.classList.add("arrow-up");
+		commentsContainer.hidden = true;
 	}
 };
 
@@ -32,9 +29,11 @@ const fetchComments = async (pictureId) => {
 	}
 };
 
-const commentsToDOM = (pictureId, comments) => {
+const commentsToDOM = (commentsContainer, pictureId, comments) => {
 	comments.forEach((comment) => {
-		const comDiv = createElement(listComs, "div", { class: "comment-block" });
+		const comDiv = createElement(commentsContainer, "div", {
+			class: "comment-block",
+		});
 		const headerDiv = createElement(comDiv, "div", {
 			class: "comment-header inline",
 		});

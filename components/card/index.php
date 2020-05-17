@@ -27,8 +27,8 @@
       <!-- Buttons -->
       <div class="btn-actions">
         <div id="card-owner-actions" hidden>
-          <button class="btn btn-primary" id="modify">Modifier</button>
-          <button class="btn btn-danger">Supprimer</button>
+          <button class="btn btn-primary" id="action-update">Modifier</button>
+          <button class="btn btn-danger" id="action-delete">Supprimer</button>
         </div>
         <!-- Date -->
         <div id="card-img-date"></div>
@@ -39,18 +39,20 @@
 
 <script type="text/javascript">
   <?php if (Session::exists("pseudo") === true) { ?>
-    const isLogged = true;
+    const currentUser = "<?php echo Session::get("pseudo") ?>";
   <?php } else { ?>
-    const isLogged = false;
+    const currentUser = null;
   <?php } ?>
+  
+  let current = null;
 
   function isUserLogged(wrapped) {
     return function() {
-      if (isLogged) {
+      if (currentUser === null) {
+		    window.location.href = "http://127.0.0.1:8888/auth/login";
+      } else {
         const result = wrapped.apply(this, arguments);
         return result;
-      } else {
-		    window.location.href = "http://127.0.0.1:8888/auth/login";
       }
     }
   }
