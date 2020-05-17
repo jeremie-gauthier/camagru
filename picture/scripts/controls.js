@@ -138,6 +138,7 @@ const send = async () => {
 
 const show_comment = () => {
 	overlay.hidden = false;
+	comment.focus();
 };
 
 const add_comment = () => {
