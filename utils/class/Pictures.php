@@ -148,7 +148,7 @@ class Pictures extends Database{
     try {
       $query = "
         SELECT
-          *,
+          pictures.*, users.pseudo AS author,
           (
             SELECT
               COUNT(likes.diUsers)
@@ -176,10 +176,12 @@ class Pictures extends Database{
           ) AS comments
         FROM
           pictures
+        INNER JOIN users
+          ON pictures.diUsers = users.idUsers
         WHERE
-          diUsers = :userId
+          pictures.diUsers = :userId
         ORDER BY
-          regDate
+          pictures.regDate
         DESC
         LIMIT "
         . filter_var(htmlspecialchars($offset), FILTER_SANITIZE_NUMBER_INT)
@@ -199,7 +201,7 @@ class Pictures extends Database{
     try {
       $query = "
         SELECT
-          *,
+          pictures.*, users.pseudo AS author,
           (
             SELECT
               COUNT(likes.diUsers)
@@ -227,8 +229,10 @@ class Pictures extends Database{
           ) AS comments
         FROM
           pictures
+        INNER JOIN users
+          ON pictures.diUsers = users.idUsers
         ORDER BY
-          regDate
+          pictures.regDate
         DESC
         LIMIT "
         . filter_var(htmlspecialchars($offset), FILTER_SANITIZE_NUMBER_INT)
