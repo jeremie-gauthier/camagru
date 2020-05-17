@@ -6,8 +6,8 @@ const fetchCards = async (element, user = null) => {
 		const url = `/components/card/request.php?offset=${currentOffset}&limit=5&user=${user}`;
 		currentOffset += 5;
 		const pictures = await AsyncRequest.get(url);
-		console.log(pictures);
 		addPicturesToDOM(element, pictures);
+		return pictures.length === 5;
 	} catch (err) {
 		currentOffset -= 5;
 		throw err;
