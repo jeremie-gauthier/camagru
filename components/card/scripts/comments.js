@@ -93,7 +93,6 @@ const addComment = async () => {
 			const cardComments = document.getElementById(
 				`list-comments${rehydrate.id}`
 			);
-			console.log(comment);
 			commentsToDOM(cardComments, rehydrate.id, [
 				{ ...comment, author: currentUser },
 			]);
