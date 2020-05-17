@@ -105,7 +105,7 @@ const addComment = async () => {
 	const counter = document.getElementById(`sum-comments-card${current}`);
 
 	try {
-		const url = "/gallery/src/handler.php";
+		const url = "/gallery/src/comments.php";
 		const data = { pictureId: current, comment: overlayTextCom.value };
 		const headers = { "Content-type": "application/x-www-form-urlencoded" };
 
