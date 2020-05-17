@@ -35,6 +35,27 @@ class Comments extends Database{
     }
   }
 
+  function getById($commentId) {
+    try {
+      $query = "
+        SELECT
+          *
+        FROM
+          comments
+        WHERE
+          idComments = :commentId
+      ";
+      $values = [
+        ":commentId" => $commentId
+      ];
+      $this->query($query, $values);
+      $comment = $this->get_first_result();
+      return $comment;
+    } catch (Exception $e) {
+      throw $e;
+    }
+  }
+
   function delete($commentId, $userId) {
     try {
       $query = "
