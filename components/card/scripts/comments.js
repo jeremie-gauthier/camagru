@@ -70,17 +70,34 @@ const openComment = (pictureId) => {
 
 const addComment = async () => {
 	const counter = document.getElementById(`sum-comments-card${current}`);
+	const rehydrate = {
+		state: false,
+		id: null,
+	};
 
 	try {
 		const url = "/gallery/src/comments.php";
 		const data = { pictureId: current, comment: overlayTextCom.value };
 		const headers = { "Content-type": "application/x-www-form-urlencoded" };
 
+		if (cache.includes(current)) {
+			rehydrate.state = true;
+			rehydrate.id = current;
+		}
+		current = null;
 		overlayCom.hidden = true;
 		overlayTextCom.value = "";
-		current = null;
 		counter.innerHTML = parseInt(counter.innerHTML) + 1;
-		await AsyncRequest.post(url, data, headers);
+		const { comment } = await AsyncRequest.post(url, data, headers);
+		if (rehydrate.state) {
+			const cardComments = document.getElementById(
+				`list-comments${rehydrate.id}`
+			);
+			console.log(comment);
+			commentsToDOM(cardComments, rehydrate.id, [
+				{ ...comment, author: currentUser },
+			]);
+		}
 	} catch (err) {
 		showToast("error", err.message ?? err);
 		counter.innerHTML = parseInt(counter.innerHTML) - 1;
