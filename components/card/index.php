@@ -37,5 +37,25 @@
   </div>
 </template>
 
-<script type="text/javascript" src="/components/card/card.js"></script>
-<script type="text/javascript" src="/components/card/comments.js"></script>
+<script type="text/javascript">
+  <?php if (Session::exists("pseudo") === true) { ?>
+    const isLogged = true;
+  <?php } else { ?>
+    const isLogged = false;
+  <?php } ?>
+
+  function isUserLogged(wrapped) {
+    return function() {
+      if (isLogged) {
+        const result = wrapped.apply(this, arguments);
+        return result;
+      } else {
+		    window.location.href = "http://127.0.0.1:8888/auth/login";
+      }
+    }
+  }
+</script>
+
+<script type="text/javascript" src="/components/card/scripts/card.js"></script>
+<script type="text/javascript" src="/components/card/scripts/like.js"></script>
+<script type="text/javascript" src="/components/card/scripts/comments.js"></script>
