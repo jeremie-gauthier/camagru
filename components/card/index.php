@@ -26,9 +26,9 @@
 
       <!-- Buttons -->
       <div class="btn-actions">
-        <div id="card-owner-actions" hidden>
-          <button class="btn btn-primary" id="action-update">Modifier</button>
-          <button class="btn btn-danger" id="action-delete">Supprimer</button>
+        <div id="card-owner-actions">
+          <button class="btn btn-primary" id="action-update" hidden>Modifier</button>
+          <button class="btn btn-danger" id="action-delete" hidden>Supprimer</button>
         </div>
         <!-- Date -->
         <div id="card-img-date"></div>
