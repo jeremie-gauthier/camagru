@@ -8,8 +8,11 @@
 <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/components/layouts/header.php" ?>
 <link rel="stylesheet" type="text/css" href="/gallery/styles/gallery.css">
 <link rel="stylesheet" type="text/css" href="/gallery/styles/overlay.css">
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v7.0"></script>
 
 <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/components/layouts/navbar.php" ?>
+
 
 <div class="container">
   <h1>Ma galerie</h1>
