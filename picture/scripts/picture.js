@@ -31,7 +31,7 @@ const handlers = {
 		const previous = obj[prop];
 		if (previous === value) return;
 		obj[prop] = value;
-		// console.log(prop, previous, value);
+
 		if (prop === "recording") {
 			handleRecording(previous, value);
 		} else if (prop === "pic") {
