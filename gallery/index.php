@@ -84,7 +84,7 @@
 
   const loadPictures = async () => {
     try {
-      const hasMore = await fetchCards(listDiv, "<?php echo Session::get("pseudo") ?>");
+      const hasMore = await fetchCards(listDiv, "<?php echo Session::get("pseudo") ?>", true);
       if (hasMore === false) {
         window.removeEventListener("scroll", loadPicturesOnScroll);
       }

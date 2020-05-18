@@ -15,8 +15,13 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
     );
 
     $pic_cls = new Pictures($DB_DSN, $DB_USER, $DB_PASSWORD);
-    if ($user == null) {
-      $pictures = $pic_cls->getMore($offset, $limit);
+    if ($self == "false") {
+      if (Session::exists("userId")) {
+        $userId = Session::get("userId");
+      } else {
+        $userId = null;
+      }
+      $pictures = $pic_cls->getMore($userId, $offset, $limit);
     } else {
       $userId = Session::get("userId");
       $pictures = $pic_cls->getMoreFrom($userId, $offset, $limit);

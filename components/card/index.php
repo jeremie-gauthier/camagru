@@ -39,7 +39,10 @@
 
 <script type="text/javascript">
   <?php if (Session::exists("pseudo") === true) { ?>
-    const currentUser = "<?php echo Session::get("pseudo") ?>";
+    const currentUser = {
+      pseudo: "<?php echo Session::get("pseudo") ?>",
+      id: "<?php echo Session::get("userId") ?>"
+    };
   <?php } else { ?>
     const currentUser = null;
   <?php } ?>

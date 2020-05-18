@@ -7,11 +7,6 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/utils/class/Pictures.php";
 require_once $_SERVER['DOCUMENT_ROOT'] . "/utils/class/Session.php";
 require_once $_SERVER['DOCUMENT_ROOT'] . "/config/database.php";
 
-if (!Session::exists("pseudo")) {
-  http_response_code(401);
-  die(2);
-}
-
 if ($_SERVER["REQUEST_METHOD"] === "GET") {
   try {
     extract(
@@ -35,6 +30,9 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
     echo $e->getMessage();
     die(2);
   }
+} else if (!Session::exists("pseudo")) {
+  http_response_code(401);
+  die(2);
 } else if ($_SERVER["REQUEST_METHOD"] === "POST") {
   try {
     extract(
@@ -85,11 +83,10 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
         $_REQUEST
       )
     );
-    if ($currentUser != Session::get("pseudo")) {
+    if ($userId != Session::get("userId")) {
       http_response_code(403);
       return;
     }
-    $userId = Session::get("userId");
 
     $com_cls = new Comments($DB_DSN, $DB_USER, $DB_PASSWORD);
     $com_cls->delete($commentId, $userId);

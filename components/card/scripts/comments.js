@@ -43,7 +43,7 @@ const commentsToDOM = (commentsContainer, pictureId, comments) => {
 			{ class: "comment-author" },
 			comment.author
 		);
-		if (currentUser !== null && comment.author === currentUser) {
+		if (currentUser !== null && comment.author === currentUser.pseudo) {
 			const delIcon = createElement(
 				headerDiv,
 				"i",
@@ -51,7 +51,7 @@ const commentsToDOM = (commentsContainer, pictureId, comments) => {
 				"clear"
 			);
 			delIcon.onclick = () =>
-				delComment(pictureId, comDiv, comment.idComments, currentUser);
+				delComment(pictureId, comDiv, comment.idComments, currentUser.id);
 		}
 		createElement(comDiv, "p", { class: "comment-txt" }, comment.comment);
 		createElement(comDiv, "span", { class: "comment-date" }, comment.regDate);
@@ -94,7 +94,7 @@ const addComment = async () => {
 				`list-comments${rehydrate.id}`
 			);
 			commentsToDOM(cardComments, rehydrate.id, [
-				{ ...comment, author: currentUser },
+				{ ...comment, author: currentUser.pseudo },
 			]);
 		}
 	} catch (err) {
@@ -110,7 +110,7 @@ const delComment = async (pictureId, comDiv, commentId, userId) => {
 	const counter = document.getElementById(`sum-comments-card${pictureId}`);
 
 	try {
-		const url = `/gallery/src/comments.php?commentId=${commentId}&currentUser=${userId}`;
+		const url = `/gallery/src/comments.php?commentId=${commentId}&userId=${userId}`;
 
 		comDiv.hidden = true;
 		counter.innerHTML = parseInt(counter.innerHTML) - 1;

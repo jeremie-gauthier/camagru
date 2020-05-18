@@ -1,9 +1,9 @@
 const template = document.getElementById("template-card");
 let currentOffset = 0;
 
-const fetchCards = async (element, user = null) => {
+const fetchCards = async (element, user = null, self = false) => {
 	try {
-		const url = `/components/card/request.php?offset=${currentOffset}&limit=5&user=${user}`;
+		const url = `/components/card/request.php?offset=${currentOffset}&limit=5&user=${user}&self=${self}`;
 		currentOffset += 5;
 		const pictures = await AsyncRequest.get(url);
 		addPicturesToDOM(element, pictures);
@@ -58,14 +58,15 @@ const addPicturesToDOM = (element, pictures) => {
 		btnComments.onclick = () =>
 			toggleComments(commentsContainer, btnComments.children[1], idPictures);
 
-		if (currentUser !== null) {
+		if (currentUser !== null && currentUser.id === diUsers) {
+			const cardActions = clone.getElementById("card-owner-actions");
+			const [updateBtn, delBtn] = cardActions.children;
 			const card = clone.getElementById("card");
 
-			clone.getElementById("card-owner-actions").hidden = false;
-			clone.getElementById("action-update").onclick = () =>
-				openLegend(cardLegend, idPictures);
-			clone.getElementById("action-delete").onclick = () =>
-				delPicture(card, idPictures);
+			updateBtn.onclick = () => openLegend(cardLegend, idPictures);
+			delBtn.onclick = () => delPicture(card, idPictures);
+			updateBtn.hidden = false;
+			delBtn.hidden = false;
 		}
 
 		clone.getElementById("card-img-date").innerHTML = regDate;
