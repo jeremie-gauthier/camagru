@@ -55,3 +55,4 @@ This new account now have all privileges on `database_name`
 ## TODO
 
 - Mail on Mac
+- Project on rpi4 to test fb share
