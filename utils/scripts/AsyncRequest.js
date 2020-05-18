@@ -26,7 +26,11 @@ class AsyncRequest {
 	static #XHROnLoad = (xhr, resolve, reject) => {
 		try {
 			if (xhr.status >= 400) {
-				reject(xhr.responseText ?? new Error(xhr.statusText));
+				if (xhr.responseText && xhr.responseText != "") {
+					reject(xhr.responseText);
+				} else {
+					reject(new Error(xhr.statusText));
+				}
 			} else {
 				try {
 					resolve(JSON.parse(xhr.responseText));
