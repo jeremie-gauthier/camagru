@@ -14,6 +14,30 @@
     rel="stylesheet"
     href="https://fonts.googleapis.com/icon?family=Material+Icons"
   />
+  <style>
+    .fullpage {
+      position: fixed;
+      top: 0px;
+      left: 0px;
+      z-index: 3000; 
+      height: 100%;
+      width: 100%;
+      background-color: white;
+    }
+    .nojs-text {
+      height: inherit;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      padding: 0 1rem;
+    }
+  </style>
   <title>Camagru</title>
 </head>
 <body>
+<noscript>
+    <div class="fullpage">
+    <p class="nojs-text">Ce site requiert l'utilisation de javascript pour fonctionner correctement.</p>
+    </div>
+</noscript>
