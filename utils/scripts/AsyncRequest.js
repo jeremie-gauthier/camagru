@@ -4,7 +4,7 @@
  * as it contains only static methods.
  */
 class AsyncRequest {
-	static #XHRInstance = () => {
+	static _XHRInstance = () => {
 		try {
 			return new XMLHttpRequest();
 		} catch (e) {
@@ -16,14 +16,14 @@ class AsyncRequest {
 		}
 	};
 
-	static #XHRSetHeaders = (xhr, headers) => {
+	static _XHRSetHeaders = (xhr, headers) => {
 		const headers_array = Object.entries(headers);
 		headers_array.forEach(([header, value]) =>
 			xhr.setRequestHeader(header, value)
 		);
 	};
 
-	static #XHROnLoad = (xhr, resolve, reject) => {
+	static _XHROnLoad = (xhr, resolve, reject) => {
 		try {
 			if (xhr.status >= 400) {
 				if (xhr.responseText && xhr.responseText != "") {
@@ -49,14 +49,14 @@ class AsyncRequest {
 	 */
 	static get(url, headers = null) {
 		return new Promise((resolve, reject) => {
-			const xhr = AsyncRequest.#XHRInstance();
+			const xhr = AsyncRequest._XHRInstance();
 
 			xhr.open("GET", url, true);
 			if (headers) {
-				AsyncRequest.#XHRSetHeaders(xhr, headers);
+				AsyncRequest._XHRSetHeaders(xhr, headers);
 			}
 
-			xhr.onload = () => AsyncRequest.#XHROnLoad(xhr, resolve, reject);
+			xhr.onload = () => AsyncRequest._XHROnLoad(xhr, resolve, reject);
 
 			xhr.send(null);
 		});
@@ -69,14 +69,14 @@ class AsyncRequest {
 	 */
 	static post(url, data, headers = null) {
 		return new Promise((resolve, reject) => {
-			const xhr = AsyncRequest.#XHRInstance();
+			const xhr = AsyncRequest._XHRInstance();
 
 			xhr.open("POST", url, true);
 			if (headers) {
-				AsyncRequest.#XHRSetHeaders(xhr, headers);
+				AsyncRequest._XHRSetHeaders(xhr, headers);
 			}
 
-			xhr.onload = () => AsyncRequest.#XHROnLoad(xhr, resolve, reject);
+			xhr.onload = () => AsyncRequest._XHROnLoad(xhr, resolve, reject);
 
 			const json = JSON.stringify(data);
 			xhr.send("data=" + json);
@@ -90,14 +90,14 @@ class AsyncRequest {
 	 */
 	static put(url, data, headers = null) {
 		return new Promise((resolve, reject) => {
-			const xhr = AsyncRequest.#XHRInstance();
+			const xhr = AsyncRequest._XHRInstance();
 
 			xhr.open("PUT", url, true);
 			if (headers) {
-				AsyncRequest.#XHRSetHeaders(xhr, headers);
+				AsyncRequest._XHRSetHeaders(xhr, headers);
 			}
 
-			xhr.onload = () => AsyncRequest.#XHROnLoad(xhr, resolve, reject);
+			xhr.onload = () => AsyncRequest._XHROnLoad(xhr, resolve, reject);
 
 			const json = JSON.stringify(data);
 			xhr.send("data=" + json);
@@ -110,14 +110,14 @@ class AsyncRequest {
 	 */
 	static delete(url, headers = null) {
 		return new Promise((resolve, reject) => {
-			const xhr = AsyncRequest.#XHRInstance();
+			const xhr = AsyncRequest._XHRInstance();
 
 			xhr.open("DELETE", url, true);
 			if (headers) {
-				AsyncRequest.#XHRSetHeaders(xhr, headers);
+				AsyncRequest._XHRSetHeaders(xhr, headers);
 			}
 
-			xhr.onload = () => AsyncRequest.#XHROnLoad(xhr, resolve, reject);
+			xhr.onload = () => AsyncRequest._XHROnLoad(xhr, resolve, reject);
 
 			xhr.send(null);
 		});
