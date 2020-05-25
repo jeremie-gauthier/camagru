@@ -60,15 +60,13 @@ const addPicturesToDOM = (element, pictures) => {
 
 		if (currentUser !== null && currentUser.id === diUsers) {
 			const cardActions = clone.getElementById("card-owner-actions");
-			const [updateBtn, delBtn, fbBtn] = cardActions.children;
+			const [updateBtn, delBtn] = cardActions.children;
 			const card = clone.getElementById("card");
 
 			updateBtn.onclick = () => openLegend(cardLegend, idPictures);
 			delBtn.onclick = () => delPicture(card, idPictures);
-			fbBtn["data-href"] += `${idPictures}.png`;
 			updateBtn.hidden = false;
 			delBtn.hidden = false;
-			fbBtn.hidden = false;
 		}
 
 		clone.getElementById("card-img-date").innerHTML = regDate;
