@@ -29,23 +29,6 @@
         <div id="card-owner-actions">
           <button class="btn btn-primary" id="action-update" hidden>Modifier</button>
           <button class="btn btn-danger" id="action-delete" hidden>Supprimer</button>
-          <!-- <div id="fb-root"></div> -->
-
-          <!-- Your share button code -->
-          <div
-            hidden
-            class="fb-share-button"
-            id="fb-share-button"
-            data-href="http://localhost:8888/assets/users/23.png"
-            data-layout="button"
-            data-size="large"
-          >
-            <a
-              target="_blank"
-              href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A8888%2Fassets%2Fusers%2F23.png&amp;src=sdkpreparse"
-              class="fb-xfbml-parse-ignore"
-            >Partager</a>
-          </div>
         </div>
         <!-- Date -->
         <div id="card-img-date"></div>
