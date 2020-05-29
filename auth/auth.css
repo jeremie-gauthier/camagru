@@ -12,6 +12,7 @@ form {
 
 .btn {
 	margin-bottom: 10px;
+	font-weight: bold;
 }
 
 .btn-link {
@@ -19,4 +20,5 @@ form {
 	padding: 0;
 	text-decoration: underline;
 	background-color: inherit;
+	font-weight: bold;
 }

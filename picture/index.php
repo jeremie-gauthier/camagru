@@ -6,8 +6,20 @@
   }
   require_once $_SERVER['DOCUMENT_ROOT'] . "/components/layouts/header.php";
 ?>
-<link rel="stylesheet" type="text/css" href="/picture/styles/main.css" />
-<link rel="stylesheet" type="text/css" href="/picture/styles/overlay.css" />
+<link
+  rel="preload"
+  as="style"
+  type="text/css"
+  href="/picture/styles/main.css"
+  onload="this.rel='stylesheet'"
+/>
+<link
+  rel="preload"
+  as="style"
+  type="text/css"
+  href="/picture/styles/overlay.css"
+  onload="this.rel='stylesheet'"
+/>
 
 <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/components/layouts/navbar.php" ?>
 
@@ -75,13 +87,13 @@
 
 <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/components/layouts/footer.php" ?>
 
-<script type="text/javascript" src="/utils/scripts/AsyncRequest.js"></script>
-<script type="text/javascript" src="/utils/scripts/promises/fileReader.js"></script>
-<script type="text/javascript" src="/utils/scripts/promises/imgLoader.js"></script>
-<script type="text/javascript" src="/utils/scripts/DOM.js"></script>
-<script type="text/javascript" src="/utils/scripts/navs.js"></script>
+<script defer type="text/javascript" src="/utils/scripts/AsyncRequest.js"></script>
+<script defer type="text/javascript" src="/utils/scripts/promises/fileReader.js"></script>
+<script defer type="text/javascript" src="/utils/scripts/promises/imgLoader.js"></script>
+<script defer type="text/javascript" src="/utils/scripts/DOM.js"></script>
+<script defer type="text/javascript" src="/utils/scripts/navs.js"></script>
+<script defer type="text/javascript" src="/picture/scripts/overlay.js"></script>
+<script defer type="text/javascript" src="/picture/scripts/filters.js"></script>
+<script defer type="text/javascript" src="/picture/scripts/stickers.js"></script>
 <script type="text/javascript" src="/picture/scripts/picture.js"></script>
-<script type="text/javascript" src="/picture/scripts/overlay.js"></script>
-<script type="text/javascript" src="/picture/scripts/filters.js"></script>
-<script type="text/javascript" src="/picture/scripts/stickers.js"></script>
 <script type="text/javascript" src="/picture/scripts/controls.js"></script>

@@ -28,14 +28,24 @@ const addPicturesToDOM = (element, pictures) => {
 			regDate,
 		} = picture;
 
-		clone.getElementById("card-img").src = `/assets/users/${idPictures}.png`;
+		const card = clone.getElementById("card");
+		card.id += idPictures;
 
-		clone.getElementById("card-title").innerHTML = author;
+		const img = clone.getElementById("card-img");
+		img.src = `/assets/users/${idPictures}.png`;
+		img.alt = "Photo prise par un utilisateur.";
+		img.id += idPictures;
+
+		const title = clone.getElementById("card-title");
+		title.innerHTML = author;
+		title.id += idPictures;
 
 		const likeCounter = clone.getElementById("sum-likes-card");
 		likeCounter.innerHTML = likes;
+		likeCounter.id += idPictures;
 
 		const like = clone.getElementById("like-card");
+		like.id += idPictures;
 		if (alreadyLiked === "0") like.innerHTML = "favorite_border";
 		else if (alreadyLiked === "1") like.innerHTML = "favorite";
 		like.onclick = () =>
@@ -47,29 +57,34 @@ const addPicturesToDOM = (element, pictures) => {
 
 		const comment = clone.getElementById("comment-card");
 		comment.onclick = () => isUserLogged(openComment)(idPictures);
+		comment.id += idPictures;
 
 		const cardLegend = clone.getElementById("legend-card");
 		cardLegend.id += idPictures;
 		cardLegend.innerHTML = legend;
 
 		const btnComments = clone.getElementById("comments-toggler");
+		btnComments.id += idPictures;
 		const commentsContainer = clone.getElementById("list-comments");
 		commentsContainer.id += idPictures;
 		btnComments.onclick = () =>
 			toggleComments(commentsContainer, btnComments.children[1], idPictures);
 
+		const cardActions = clone.getElementById("card-owner-actions");
+		const [updateBtn, delBtn] = cardActions.children;
 		if (currentUser !== null && currentUser.id === diUsers) {
-			const cardActions = clone.getElementById("card-owner-actions");
-			const [updateBtn, delBtn] = cardActions.children;
-			const card = clone.getElementById("card");
-
 			updateBtn.onclick = () => openLegend(cardLegend, idPictures);
 			delBtn.onclick = () => delPicture(card, idPictures);
 			updateBtn.hidden = false;
 			delBtn.hidden = false;
 		}
+		cardActions.id += idPictures;
+		updateBtn.id += idPictures;
+		delBtn.id += idPictures;
 
-		clone.getElementById("card-img-date").innerHTML = regDate;
+		const date = clone.getElementById("card-img-date");
+		date.innerHTML = regDate;
+		date.id += idPictures;
 
 		element.appendChild(clone);
 	});

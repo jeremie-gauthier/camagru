@@ -6,7 +6,7 @@
   }
 ?>
 <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/components/layouts/header.php" ?>
-<link rel="stylesheet" type="text/css" href="/auth/auth.css">
+<link rel="preload" as="style" type="text/css" href="/auth/auth.css" onload="this.rel='stylesheet'">
 
 <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/components/layouts/navbar.php" ?>
 

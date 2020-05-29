@@ -6,8 +6,8 @@
   }
 ?>
 <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/components/layouts/header.php" ?>
-<link rel="stylesheet" type="text/css" href="/auth/auth.css">
-<link rel="stylesheet" type="text/css" href="/auth/login/overlay.css">
+<link rel="preload" as="style" type="text/css" href="/auth/auth.css" onload="this.rel='stylesheet'">
+<link rel="preload" as="style" type="text/css" href="/auth/login/overlay.css" onload="this.rel='stylesheet'">
 
 <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/components/layouts/navbar.php" ?>
 
@@ -48,7 +48,9 @@
 
   <div id="overlay-container" hidden>
     <div class="overlay-content">
-      <h1 class="overlay-title">Indiquez votre adresse mail</h1>
+      <label for="overlay-input">
+        <h1 class="overlay-title">Indiquez votre adresse mail</h1>
+      </label>
       <div id="overlay-feedback"></div>
       <input
         type="email"

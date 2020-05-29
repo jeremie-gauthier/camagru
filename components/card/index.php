@@ -1,6 +1,6 @@
 <template id="template-card">
   <div class="card" id="card">
-    <img src="" class="card-img-top" id="card-img" />
+    <img src="" class="card-img-top" id="card-img" alt="" />
     <div class="card-body">
       <div class="inline">
         <h5 class="card-title" id="card-title"></h5>

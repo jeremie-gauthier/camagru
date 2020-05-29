@@ -6,8 +6,20 @@
   }
 ?>
 <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/components/layouts/header.php" ?>
-<link rel="stylesheet" type="text/css" href="/gallery/styles/gallery.css">
-<link rel="stylesheet" type="text/css" href="/gallery/styles/overlay.css">
+<link
+  rel="preload"
+  as="style"
+  type="text/css"
+  href="/gallery/styles/gallery.css"
+  onload="this.rel='stylesheet'"
+/>
+<link
+  rel="preload"
+  as="style"
+  type="text/css"
+  href="/gallery/styles/overlay.css"
+  onload="this.rel='stylesheet'"
+/>
 
 <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/components/layouts/navbar.php" ?>
 
@@ -74,11 +86,11 @@
 
 <?php require $_SERVER['DOCUMENT_ROOT'] . "/components/layouts/footer.php" ?>
 
-<script type="text/javascript" src="/utils/scripts/DOM.js"></script>
+<script defer type="text/javascript" src="/utils/scripts/DOM.js"></script>
+<script defer type="text/javascript" src="/gallery/scripts/overlay.js"></script>
+<script defer type="text/javascript" src="/gallery/scripts/main.js"></script>
 <script type="text/javascript" src="/utils/scripts/throttle.js"></script>
 <script type="text/javascript" src="/utils/scripts/AsyncRequest.js"></script>
-<script type="text/javascript" src="/gallery/scripts/overlay.js"></script>
-<script type="text/javascript" src="/gallery/scripts/main.js"></script>
 
 <script type="text/javascript">
   const listDiv = document.getElementById("list-pictures");
@@ -103,5 +115,4 @@
   
   document.addEventListener("DOMContentLoaded", throttledLoading);
   window.addEventListener("scroll", loadPicturesOnScroll);
-
 </script>

@@ -9,14 +9,18 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
   <link rel="manifest" href="/assets/favicon/site.webmanifest">
   <link
-    rel="stylesheet"
+    rel="preload"
+    as="style"
     href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
     crossorigin="anonymous"
+    onload="this.rel='stylesheet'"
   />
   <link 
-    rel="stylesheet"
+    rel="preload"
+    as="style"
     href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    onload="this.rel='stylesheet'"
   />
   <style>
     .fullpage {
