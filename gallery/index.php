@@ -7,18 +7,14 @@
 ?>
 <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/components/layouts/header.php" ?>
 <link
-  rel="preload"
-  as="style"
+  rel="stylesheet"
   type="text/css"
   href="/gallery/styles/gallery.css"
-  onload="this.rel='stylesheet'"
 />
 <link
-  rel="preload"
-  as="style"
+  rel="stylesheet"
   type="text/css"
   href="/gallery/styles/overlay.css"
-  onload="this.rel='stylesheet'"
 />
 
 <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/components/layouts/navbar.php" ?>

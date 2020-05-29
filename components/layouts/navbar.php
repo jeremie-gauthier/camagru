@@ -2,11 +2,9 @@
   require_once $_SERVER['DOCUMENT_ROOT'] . "/utils/class/Session.php"
 ?>
 <link
-  rel="preload"
-  as="style"
+  rel="stylesheet"
   type="text/css"
   href="/components/layouts/navbar.css"
-  onload="this.rel='stylesheet'"
 />
 
 <nav class="navbar navbar-expand-lg sticky-top navbar-light navbar-bg" id="navbar">

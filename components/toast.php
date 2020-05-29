@@ -1,9 +1,7 @@
 <link
-  rel="preload"
-  as="style"
+  rel="stylesheet"
   type="text/css"
   href="/components/toast.css"
-  onload="this.rel='stylesheet'"
 />
 
 <div class="camagru-toast" id="toast" hidden>
