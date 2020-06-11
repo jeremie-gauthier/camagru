@@ -1,6 +1,7 @@
 <?php
 
 class Mail {
+  const HOST = "86.247.50.28:9000";
   const CAMAGRU_EMAIL = "camagru.jergauth.42@gmail.com";
   const HEADERS = [
     'From' => self::CAMAGRU_EMAIL,
@@ -15,7 +16,7 @@ class Mail {
   
   function newAccount($to, $hash) {
     $subject = "Confirmation de votre compte";
-    $link = "127.0.0.1:8888/auth/register/confirmation.php?key=" . $hash . "&email=" . $to;
+    $link = self::HOST . "/auth/register/confirmation.php?key=" . $hash . "&email=" . $to;
     $message = "
       <html>
         <body>
@@ -30,7 +31,7 @@ class Mail {
   
   function newPassword($to, $hash) {
     $subject = "Reinitialisation de votre mot de passe";
-    $link = "127.0.0.1:8888/account/password?key=" . $hash;
+    $link = self::HOST . "/account/password?key=" . $hash;
     $message = "
       <html>
         <body>
