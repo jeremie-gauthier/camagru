@@ -1,4 +1,8 @@
 <?PHP
+ini_set("SMTP", "smtp.gmail.com");
+ini_set("sendmail_from", "camagru.jergauth.42@gmail.com");
+ini_set("smtp_port", "587");
+
 $sender = "camagru.jergauth.42@gmail.com";
 $recipient = "jeremiegthr@gmail.com";
 
