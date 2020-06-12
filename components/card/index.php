@@ -52,7 +52,7 @@
   function isUserLogged(wrapped) {
     return function() {
       if (currentUser === null) {
-		    window.location.href = "http://127.0.0.1:8888/auth/login";
+		    window.location.href = "http://86.247.50.28:9000/auth/login";
       } else {
         const result = wrapped.apply(this, arguments);
         return result;
