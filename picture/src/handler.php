@@ -32,6 +32,9 @@
     $pic_cls = new Pictures($DB_DSN, $DB_USER, $DB_PASSWORD);
     $imgId = $pic_cls->create(Session::get("userId"), $legend);
 
+    if (!is_dir($baseURL)) {
+      mkdir($baseURL, 0700);
+    }
     file_put_contents($baseURL . $imgId . $ext, base64_decode($img));
 
     $response = (object) [
