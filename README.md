@@ -66,3 +66,13 @@ As there is no certificate for this website, you must trust it manually to be ab
 
   Put `http://86.247.50.28:9000` on the textarea and restart Chrome to take effect
 
+## Bonus
+
+- AJAX
+- Live camera edition
+- Infinite scroll
+- Deployed on internet
+- REST API
+- Filters on pictures
+- Clickable/Removable elements
+- Check my score on Lighthouse
