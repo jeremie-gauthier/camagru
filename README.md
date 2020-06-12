@@ -52,6 +52,17 @@ GRANT ALL PRIVILEGES ON database_name.* TO 'db_user'@'localhost'
 
 This new account now have all privileges on `database_name`
 
-## TODO
+## Usage
 
-- Mail on Mac
+This project is deployed on my Raspberry Pi.
+
+As there is no certificate for this website, you must trust it manually to be able to use the camera.
+
+- For Chrome
+
+  `chrome://flags/#unsafely-treat-insecure-origin-as-secure`
+  
+  Toggle the dropdown to **Enabled**
+
+  Put `http://86.247.50.28:9000` on the textarea and restart Chrome to take effect
+
